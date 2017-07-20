@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+	<widget xmlns = "http://www.w3.org/ns/widgets"
+		xmlns:gap = "http://phonegap.com/ns/1.0"
+		xmlns:android = "http://schemas.android.com/apk/res/android"
+		id        = "com.connarstone.sstrt"
+		versionCode="1.0.0"
+		version   = "1.0.0">
+		<name>SSTRT		</name>
+		<description>Start Stop Team Relay Timer records contestant times for team relay running. Initially built for the benefit of the Notheastern Oregon Elkhorn Relay.		</description>
+		<author href="https://github.com/tarstarkes" email="stonec2@eou.edu">Connar Stone		</author>
+		<feature name="http://api.phonegap.com/1.0/battery" />
+		<feature name="http://api.phonegap.com/1.0/camera" />
+		<feature name="http://api.phonegap.com/1.0/contacts" />
+		<feature name="http://api.phonegap.com/1.0/file" />
+		<feature name="http://api.phonegap.com/1.0/geolocation" />
+		<feature name="http://api.phonegap.com/1.0/media" />
+		<feature name="http://api.phonegap.com/1.0/network" />
+		<feature name="http://api.phonegap.com/1.0/notification" />
+		<preference name="phonegap-version" value="cli-6.3.0" />
+		<preference name="android-build-tool" value="gradle" />
+		<preference name="orientation" value="default" />
+		<preference name="fullscreen" value="false" />
+		<preference name="target-device" value="universal" />
+		<preference name="webviewbounce" value="true" />
+		<preference name="prerendered-icon" value="false" />
+		<preference name="stay-in-webview" value="true" />
+		<preference name="ios-statusbarstyle" value="default" />
+		<preference name="detect-data-types" value="true" />
+		<preference name="exit-on-suspend" value="false" />
+		<preference name="show-splash-screen-spinner" value="true" />
+		<preference name="auto-hide-splash-screen" value="true" />
+		<preference name="FadeSplashScreen " value="true" />
+		<preference name="EnableViewportScale" value="false" />
+		<preference name="MediaPlaybackRequiresUserAction" value="false" />
+		<preference name="AllowInlineMediaPlayback" value="true" />
+		<preference name="BackupWebStorage" value="none" />
+		<preference name="TopActivityIndicator" value="white" />
+		<preference name="KeyboardDisplayRequiresUserAction" value="true" />
+		<preference name="KeyboardShrinksView " value="true" />
+		<preference name="HideKeyboardFormAccessoryBar" value="true" />
+		<preference name="SuppressesIncrementalRendering" value="false" />
+		<preference name="windows-identity-name" value="" />
+		<preference name="android-installLocation" value="auto" />
+		<preference name="SplashScreenDelay" value="2000" />
+		<preference name="ErrorUrl" value="null" />
+		<preference name="BackgroundColor" value="0x000000" />
+		<preference name="DisallowOverscroll" value="true" />
+		<preference name="LoadingDialog" value="," />
+		<preference name="LoadUrlTimeoutValue" value="null" />
+		<platform name="ios">
+		<icon src="file://C:\Users\GRMW\Documents\GitHub\SSTRT\www\img\logos\SSTRT_57.png" width="57" height="57" />
+		<icon src="file://C:\Users\GRMW\Documents\GitHub\SSTRT\www\img\logos\SSTRT144.png" width="144" height="144" />
+		<icon src="file://C:\Users\GRMW\Documents\GitHub\SSTRT\www\img\logos\SSTRT_72.png" width="72" height="72" />
+		<icon src="file://C:\Users\GRMW\Documents\GitHub\SSTRT\www\img\logos\SSTRT_114.png" width="114" height="114" />
+		<icon src="file://C:\Users\GRMW\Documents\GitHub\SSTRT\www\img\logos\SSTRT_60.png" width="60" height="60" />
+		<icon src="file://C:\Users\GRMW\Documents\GitHub\SSTRT\www\img\logos\SSTRT_120.png" width="120" height="120" />
+		<icon src="file://C:\Users\GRMW\Documents\GitHub\SSTRT\www\img\logos\SSTRT_180.png" width="180" height="180" />
+		<icon src="file://C:\Users\GRMW\Documents\GitHub\SSTRT\www\img\logos\SSTRT_76.png" width="76" height="76" />
+		<icon src="file://C:\Users\GRMW\Documents\GitHub\SSTRT\www\img\logos\SSTRT_152.png" width="152" height="152" />
+		<splash src="file://C:\Users\GRMW\Documents\GitHub\SSTRT\www\img\logos\SSTRT_SPLASH_1242x2208.png" width="1242" height="2208" /> 
+		<splash src="file://C:\Users\GRMW\Documents\GitHub\SSTRT\www\img\logos\SSTRT_SPLASH_750x1334.png" width="750" height="1334" /> 
+		<splash src="file://C:\Users\GRMW\Documents\GitHub\SSTRT\www\img\logos\SSTRT_SPLASH_640x1136.png" width="640" height="1136" /> 
+		<splash src="file://C:\Users\GRMW\Documents\GitHub\SSTRT\www\img\logos\SSTRT_SPLASH_640x960.png" width="640" height="960" /> 
+		<splash src="file://C:\Users\GRMW\Documents\GitHub\SSTRT\www\img\logos\SSTRT_SPLASH_320x480.png" width="320" height="480" /> 
+		</platform>
+		<platform name="android">
+		<icon src="file://C:\Users\GRMW\Documents\GitHub\SSTRT\www\img\logos\SSTRT_36.png" qualifier="ldpi" />
+		<icon src="file://C:\Users\GRMW\Documents\GitHub\SSTRT\www\img\logos\SSTRT_48.png" qualifier="mdpi" />
+		<icon src="file://C:\Users\GRMW\Documents\GitHub\SSTRT\www\img\logos\SSTRT_72.png" qualifier="hdpi" />
+		<icon src="file://C:\Users\GRMW\Documents\GitHub\SSTRT\www\img\logos\SSTRT_96.png" qualifier="xhdpi" />
+		<icon src="file://C:\Users\GRMW\Documents\GitHub\SSTRT\www\img\logos\SSTRT144.png" qualifier="xxhdpi" />
+		<icon src="file://C:\Users\GRMW\Documents\GitHub\SSTRT\www\img\logos\SSTRT_192.png" qualifier="xxxhdpi" />
+		<splash src="file://C:\Users\GRMW\Documents\GitHub\SSTRT\www\img\logos\SSTRT_SPLASH_240X320.png" qualifier="" />
+		<splash src="file://C:\Users\GRMW\Documents\GitHub\SSTRT\www\img\logos\SSTRT_SPLASH_320x480.png" qualifier="" />
+		<splash src="file://C:\Users\GRMW\Documents\GitHub\SSTRT\www\img\logos\SSTRT_SPLASH_420x800.png" qualifier="" />
+		<splash src="file://C:\Users\GRMW\Documents\GitHub\SSTRT\www\img\logos\SSTRT_SPLASH_720x1280.png" qualifier="" />
+		<splash src="file://C:\Users\GRMW\Documents\GitHub\SSTRT\www\img\logos\SSTRT_SPLASH_960x1600.png" qualifier="" />
+		<splash src="file://C:\Users\GRMW\Documents\GitHub\SSTRT\www\img\logos\SSTRT_SPLASH_1280x1920.png" qualifier="" />
+		</platform>
+		<platform name="winphone">
+		</platform>
+		 <icon src="icon.png" />
+	</widget>
