@@ -1,18 +1,34 @@
 body{
 	margin: 0;
 }
-.footer{
-	position:absolute;
-	bottom:0;
+#footer{
+	width: 100vw;
+	height:7vh;
 }
 .menu_button{
 	width: 25%;
 	position:relative;
 	text-align:center;
 	border: 1px solid black;
-	padding:2vw;
-	height:8vw;
-	font-size: 4vw;
+	padding:1vh;
+	font-size: 3vw;
 	color:white;
 	background: black;
+}
+#header{
+	width: 100vw;
+	background: gray;
+	border-bottom: 1px solid black;
+}
+#header h3{
+	font-size: 3vw;
+	margin:0;
+	padding:1vh;
+	color: white;
+}
+#body{
+	width: 100vw;
+	overflow-y: scroll;
+	padding-left:2vw;
+	padding-right:2vw;
 }
