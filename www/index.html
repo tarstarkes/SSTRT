@@ -7,34 +7,21 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
 </head>
-<body>
-	<div>
-		<div id="header">
-			<center>
-				<h3>Timer</h3>
-			</center>
-		</div>
-		<div id="body">
-			<p>To begin using this application, please create some teams and add runners to those teams using the "TEAMS" button below. Once you have added teams and runners, you will see each team's timer here. Legs run for each team in sequence, by tapping the "Leg Complete" button the timer will lap and record a time for the corresponding team's leg. </p>
-		</div>
-		<table id="footer">
-			<tr>
-				<td id="start_stop" class="menu_button">TIMER</td>
-				<td id="teams&members" class="menu_button">TEAMS</td>
-				<td id="results" class="menu_button">RESULTS</td>
-				<td id="settings" class="menu_button">SETTINGS</td>
-			</tr>
-		</table>
+<body id="doc_body">
+	<div id="content">
 	</div>
+	<table id="footer">
+		<tr>
+			<td id="timer" class="menu_button">TIMER</td>
+			<td id="teams" class="menu_button">TEAMS</td>
+			<td id="results" class="menu_button">RESULTS</td>
+			<td id="imp_exp" class="menu_button">IMPORT/EXPORT</td>
+		</tr>
+	</table>
 	<script>
 		$(document).ready(function(){
 			// Parse.initialize("ctdokDdZUkkDBdaKzRC5MJrx3t2hbXRQeiq2QWu4", "TitmnxPJ8jpt0WrvOsEGoZXmcgo1KAQIYCReRmWN");
 			// Parse.serverURL = 'https://parseapi.back4app.com';
-
-			body_height = $(window).height() - $('#header').height() - $('#footer').height() - 2;
-			$("#body").css('height', body_height);
-			var date = new Date(Date.now());
-			console.log(date.toLocaleString());
 
 			// Parse.initialize('ctdokDdZUkkDBdaKzRC5MJrx3t2hbXRQeiq2QWu4', 'TitmnxPJ8jpt0WrvOsEGoZXmcgo1KAQIYCReRmWN', '3zf5ywzy3xeiONvk4UsYm56fRUS3zM3TzMBRjgiS');
 
@@ -51,8 +38,50 @@
 			// 	}
 			// });
 
-			console.log(runner);
+			//start of application
+			$.get( "./templates/timer.html", function( data ) {
+			  $('#content').html( data );
+			});
+			$('#timer').addClass('pressed');
+
+			//switch screens bottom menu
+			$('#timer').on('click', function(e){
+				$("#footer td").removeClass('pressed');
+				$('#timer').addClass('pressed');
+				$.get( "./templates/timer.html", function( data ) {
+				  $('#content').html( data );
+				});
+			});
+			$('#teams').on('click', function(e){
+				$("#footer td").removeClass('pressed');
+				$('#teams').addClass('pressed');
+				$.get( "./templates/teams.html", function( data ) {
+				  $('#content').html( data );
+				});
+			});
+			$('#results').on('click', function(e){
+				$("#footer td").removeClass('pressed');
+				$('#results').addClass('pressed');
+				$.get( "./templates/results.html", function( data ) {
+				  $('#content').html( data );
+				});
+			});
+			$('#imp_exp').on('click', function(e){
+				$("#footer td").removeClass('pressed');
+				$('#imp_exp').addClass('pressed');
+				$.get( "./templates/import_export.html", function( data ) {
+				  $('#content').html( data );
+				});
+			});
+
 		});
+		function click_feedback(e){
+			$(e).css('opacity', '.5');
+			window.setTimeout(function(){
+				$(e).css('opacity', '1');
+			}, 100);
+		}
+
 	</script>
 </body>
 </html>

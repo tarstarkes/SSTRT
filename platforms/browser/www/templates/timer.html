@@ -1,0 +1,69 @@
+<div id="header">
+	<center>
+		<h3>Timer</h3>
+	</center>
+</div>
+<div id="body">
+	<center>
+		<div id="clock">
+			<h3 style="font-size: 3vw; margin:0;margin-top:2vw;">Current Time</h3>
+			<p></p>
+		</div>
+	</center>
+	<div id="all_teams">
+		
+	</div>
+</div>
+<script>
+	// while(true){
+	// 	window.setTimeout(function(){
+	// 		date = new Date(Date.now());
+	// 		time = date.toLocaleString();
+	// 		$("#clock p").html(time);
+	// 	}, 100);
+	// }
+
+	if(window.localStorage.getItem('teams') != null){
+		teams = window.localStorage.getItem('teams');
+		teams = JSON.parse("["+window.localStorage.getItem('teams')+"]");
+
+		for(var i=0; i < teams.length; i++){
+			t_name = teams[i].team_name;
+			t_bib = teams[i].bib_number;
+			$('#all_teams').append("<div class='team_box'><center><p class='team_title'>"+t_name+"</p><p class='team_bib_number'>"+t_bib+"</p></center></div>")
+		}
+		//SELECT TEAMS
+		$('.team_box').click(function(e){
+			if($(e.target).closest('div').css('opacity') == .5){
+				$(e.target).closest('div').removeClass('selected');
+			}
+			else{
+				$(e.target).closest('div').addClass('selected');
+			}
+			
+		});
+		$('#body').append('<p>To start a timer select one or multiple teams and then click the START timer</p>');
+	}
+	else{
+		$('#body').append('<p>To begin using this application, you need to add some teams or import teams from the cloud. If someone has already set up some teams using another device, click the "IMPORT CLOUD DATA TO DEVICE" button on the IMPORT/EXPORT screen. Otherwise, create some new teams using the TEAMS screen.</p>');
+	}
+	$(document).ready(function(){
+		function check_time(){
+			window.setTimeout(function(){
+				var date = new Date(Date.now());
+				var time = date.toLocaleString();
+				$("#clock p").html(time);
+				check_time();
+			}, 100);
+		}
+		function start_clock(){
+			var date = new Date(Date.now());
+			var time = date.toLocaleString();
+			$("#clock p").html(time);
+			check_time();
+		}
+		start_clock();
+
+	});
+
+</script>
