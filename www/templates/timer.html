@@ -10,8 +10,8 @@
 			<p></p>
 			<h3 style="font-size: 3vw; margin:0;margin-top:2vw;">Race Start Time</h3>
 			<input id="race_time" type="datetime-local">
-			<h3 style="font-size: 3vw; margin:0;margin-top:2vw;">Race Duration</h3>
-			<h4 style="font-size: 2.5vw; margin:0;">--:--</h4>
+			<h3 style="font-size: 3vw; margin:0;margin-top:2vw;">Race Duration<br>days:hrs:mins:sec</h3>
+			<h4 id="race_duration" style="font-size: 2.5vw; margin:0;">--:--</h4>
 		</div>
 		<select id="leg" style="margin-top:2vw;">
 			<option val="">Transition Station #</option>
@@ -64,30 +64,106 @@
 		}
 	</style>
 <script>
-	if(window.localStorage.getItem('teams') != null){
-		teams = window.localStorage.getItem('teams');
-		teams = JSON.parse(window.localStorage.getItem('teams'));
-
-		for(var i=0; i < teams.length; i++){
-			t_bib = teams[i].bib_number;
-			$('#all_teams').append("<div class='team_box' id='"+t_bib+"'><center><p class='team_bib_number'>"+t_bib+"</p><p class='leg_time'>--:--</p></center></div>")
-		}
-		//SELECT TEAMS
-		$('.team_box').click(function(e){
-			if($(e.target).closest('div').css('opacity') == .5){
-				$(e.target).closest('div').removeClass('selected');
-			}
-			else{
-				$(e.target).closest('div').addClass('selected');
-			}
-			
-		});
-		$('#body').append('<p>To record a team time select one or multiple teams and then click the LEG COMPLETE button. To clear a leg time (in the event of a mistake) select one or multiple teams and click the CLEAR TIME button. </p>');
-	}
-	else{
-		$('#body').append('<p>To begin using this application, you need to add some teams or import teams from the cloud. If someone has already set up some teams using another device, click the "IMPORT CLOUD DATA TO DEVICE" button on the IMPORT/EXPORT screen. Otherwise, create some new teams using the TEAMS screen.</p>');
-	}
 	$(document).ready(function(){
+		race_object = window.localStorage.getItem('race')
+		if(race_object != null && race_object.race_time != null){
+			var race = JSON.parse(window.localStorage.getItem('race'));
+			var datetime = race.race_time.split(', ');
+			//DATE
+			var date = datetime[0].split('/');
+			var month = date[0];
+			if(parseInt(month) < 10){
+				month = "0"+month;
+			}
+			var day = date[1];
+			if(parseInt(day) < 10){
+				day = "0"+day;
+			}
+			var year = date[2];
+			//TIME
+			var time = datetime[1].split(':');
+			var hour = time[0];
+			if(parseInt(hour) < 10){
+				hour = "0"+hour;
+			}
+			var minute = time[1];
+			var second = time[2].split(' ')[0];
+			var am_pm = time[2].split(' ')[1];
+			if(parseInt(hour) == 12 && am_pm == "AM"){
+				hour = "00";
+			}
+			else if(am_pm == "PM"){
+				hour = parseInt(hour) + 12;
+			}
+			final_date = year+"-"+month+"-"+day+"T"+hour+":"+minute+":"+second;
+			$('#race_time').val(final_date);
+			check_duration();
+		}
+
+		if(window.localStorage.getItem('race') == null){
+			race_key = ""
+			dict="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*";
+			for(var i =0; i < 16; i++){
+				r_val = Math.round(Math.random()*dict.length);
+				race_key = race_key+dict[r_val];
+			}
+			race = {
+				'race_key': race_key,
+			};
+			debugger;
+			race = JSON.stringify(race);
+			window.localStorage.setItem('race', race);
+		};
+
+		if(window.localStorage.getItem('teams') != null){
+			teams = window.localStorage.getItem('teams');
+			teams = JSON.parse(window.localStorage.getItem('teams'));
+
+			for(var i=0; i < teams.length; i++){
+				t_bib = teams[i].bib_number;
+				$('#all_teams').append("<div class='team_box' id='"+t_bib+"'><center><p class='team_bib_number'>"+t_bib+"</p><p class='leg_time'>--:--</p></center></div>")
+			}
+			//SELECT TEAMS
+			$('.team_box').click(function(e){
+				if($(e.target).closest('div').css('opacity') == .5){
+					$(e.target).closest('div').removeClass('selected');
+				}
+				else{
+					$(e.target).closest('div').addClass('selected');
+				}
+				
+			});
+			$('#body').append('<p>To record a team time select one or multiple teams and then click the LEG COMPLETE button. To clear a leg time (in the event of a mistake) select one or multiple teams and click the CLEAR TIME button. </p>');
+		}
+		else{
+			$('#body').append('<p>To begin using this application, you need to add some teams or import teams from the cloud. If someone has already set up some teams using another device, click the "IMPORT CLOUD DATA TO DEVICE" button on the IMPORT/EXPORT screen. Otherwise, create some new teams using the TEAMS screen.</p>');
+		}
+		function check_duration(){
+			window.setTimeout(function(){
+				var datenow = Date.now();
+				var start_time = new Date($('#race_time').val());
+				start_time = Date.parse(start_time);
+				if (datenow > start_time){
+					duration = datenow - start_time
+				}
+				else{
+					duration = start_time - datenow
+				}
+
+			    var seconds = parseInt((duration/1000)%60);
+			    var minutes = parseInt((duration/(1000*60))%60);
+			    var hours = parseInt((duration/(1000*60*60))%24);
+			    var days = parseInt((duration/(1000*60*60*24)));
+
+			    hours = (hours < 10) ? "0" + hours : hours;
+			    minutes = (minutes < 10) ? "0" + minutes : minutes;
+			    seconds = (seconds < 10) ? "0" + seconds : seconds;
+
+				$("#race_duration").html(days + ":" + hours + ":" + minutes + ":" + seconds);
+				check_duration();
+			}, 100);
+		}
+
 		function check_time(){
 			window.setTimeout(function(){
 				var date = new Date(Date.now());
@@ -118,7 +194,6 @@
 				for(var i=0; i < $('.team_box.selected').length; i++){
 					$('.team_box.selected').children()[i].children[1].innerHTML = time;
 					bib = $($('.team_box.selected')[i]).attr('id');
-					console.log(bib);
 					//SAVE TIME TO LOCALSTORAGE
 					for(var j=0; j < teams.length; j++){
 						if(teams[j].bib_number != ""){
@@ -157,7 +232,6 @@
 
 			teams = window.localStorage.getItem('teams');
 			teams = JSON.parse(window.localStorage.getItem('teams'));
-			console.log(JSON.stringify(teams[0].leg_time[1]))
 			for(var i=0; i < teams.length; i++){
 				if(teams[i].leg_time != undefined){
 					if(teams[i].leg_time[leg] != undefined && teams[i].leg_time[leg] != null){
@@ -166,7 +240,24 @@
 				}
 			}
 
+			window.localStorage.setItem('current_leg', $('#leg option:selected').val()); 
+
 		});
+
+		$('#race_time').on('change', function(e){
+			var date = new Date($('#race_time').val());
+			var time = date.toLocaleString();
+			//set the race time
+			race = JSON.parse(window.localStorage.getItem('race'));
+			race = {'race_key': race.race_key, 'race_time': time};
+			window.localStorage.setItem('race', JSON.stringify(race));
+			check_duration();
+		});
+
+		if(window.localStorage.getItem('current_leg') != null){
+			$('#leg option[val="'+window.localStorage.getItem('current_leg')+'"]').attr('selected', 'selected');
+			$('#leg').trigger("change");
+		}
 
 	});
 

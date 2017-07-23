@@ -24,7 +24,7 @@
 			for(var i=0; i < teams.length; i++){
 				t_name = teams[i].team_name;
 				t_bib = teams[i].bib_number;
-				$('#all_teams').append("<div class='team_box'><center><p class='team_title'>"+t_name+"</p><p class='team_bib_number'>"+t_bib+"</p></center></div>")
+				$('#all_teams').append("<div class='team_box' id='"+t_bib+"'><center><p class='team_title'>"+t_name+"</p><p class='team_bib_number'>"+t_bib+"</p></center></div>")
 			}
 		}
 		else{
@@ -38,7 +38,8 @@
 				$('#new_team_form').hide();
 			}
 		});
-		$("#team_form_submit").click(function(e){
+		//$("#team_form_submit").click(function(e){
+		$('#new_team_form').on('submit', function(e){
 			e.preventDefault();
 			teams = JSON.parse(window.localStorage.getItem('teams'));
 
@@ -54,6 +55,7 @@
 
 			//reset form and hide it
 			$("#teams").trigger('click');
+			return false;
 		});
 
 		//SELECT TEAMS
@@ -67,7 +69,20 @@
 		});
 
 		$('#delete_team').click(function(e){
-			console.log('click');
+			teams = JSON.parse(window.localStorage.getItem('teams'));
+			for(var j=0; j < $(".team_box.selected").length; j++){
+				console.log($(".team_box.selected").length);
+				for(var i=0; i < teams.length; i++){
+					console.log(teams[i].bib_number.toString(), $($('.team_box.selected')[j]).attr('id').toString())
+					if(teams[i].bib_number.toString() == $($('.team_box.selected')[j]).attr('id').toString()){
+						console.log('deleted');
+						teams.splice(parseInt(i), 1);
+					}
+				}
+			}
+			$('.team_box.selected').remove()
+
+			window.localStorage.setItem('teams', JSON.stringify(teams));
 		});
 
 	</script>

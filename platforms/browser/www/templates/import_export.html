@@ -7,17 +7,95 @@
 	<p>This is the Import/Export page</p>
 
 	<center>
+		<h3 id="race_id_label">Race ID:</h3>
+		<p id="race_id"></p>
 		<button id="import" class="ui_button" onclick="click_feedback(this);">IMPORT CLOUD DATA TO DEVICE</button>
 		<button id="export" class="ui_button" onclick="click_feedback(this);">EXPORT DATA TO CLOUD</button>
-		<button id="clear" class="ui_button" onclick="click_feedback(this);">CLEAR ALL DEVICE DATA</button>
-		<button id="clear" class="ui_button" onclick="click_feedback(this);">CLEAR ALL CLOUD DATA</button>
+		<button id="clear_device" class="ui_button" onclick="click_feedback(this);">CLEAR ALL DEVICE DATA</button>
 	</center>
 	<style>
-		#clear,
+		#clear_device,
 		#import,
 		#export{
 			display: block;
-			margin-top:2vw;
+			margin-top: 4vw;
+			margin-bottom: 4vw; 
+			padding: 4vw;
+			font-size: 5vw
+		}
+		#race_id_label{
+			margin-top:4vw;
+			margin-bottom:0;
+			font-size:4vw;
+		}
+		#race_id{
+			margin-bottom:4vw;
+			font-size: 6vw;
 		}
 	</style>
 </div>
+<script>
+	$(document).ready(function(){
+		var race = JSON.parse(window.localStorage.getItem('race'));
+
+		$('#race_id').html(race.race_key);
+		$('#clear_device').click(function(e){
+			var answer = confirm("Are you sure you want to clear the current race data for this device?");
+			if(answer == true){
+				window.localStorage.removeItem('teams');
+				window.localStorage.removeItem('current_leg');
+				window.localStorage.removeItem('race');
+				$('#race_id').remove();
+			}
+		});
+
+		$('#export').click(function(e){
+			//flags = ['race_key', 'race_time', 'team', 'leg']
+			var flags = [0, 0, 0, 0];
+			var Race = Parse.Object.extend("race");
+			var race = new Race();
+			var r = JSON.parse(window.localStorage.getItem('race'));
+
+			//EXPORT RACE OBJECT
+			//Test 1. Do we have data to upload?
+			//Test 2. Is there currently data on the server?
+			//Teat 3. Does the user wish to overwrite the data if there is any already saved
+			var race_query = new Parse.Query(Race);
+			race_query.equalTo("race_key", r.race_key);
+			race_query.find({
+			success: function(results){
+				if(results.length > 0){
+					for (var i = 0; i < results.length; i++) {
+						var object = results[i];
+						race_time = object.get('race_start_time');
+						alert(race_time);
+						debugger;
+				    }
+					flags[0] = 1;
+				}else{
+
+					alert("Data exported successfully!");
+				}
+			},
+			error: function(error){
+				alert('failed to export data: '+error.message);
+			}});
+
+			//------------- RACE ---------------
+			//Test 1. Do we have data to upload?
+			//Test 2. Is there currently data on the server?
+			//Teat 3. Does the user wish to overwrite the data if there is any already saved
+			// if(flags[0] == 1){
+			// 	race.set('race_key', r.race_key);
+			// 	race.save(null, {
+			// 		success: function(results){
+			// 			alert("Data successfully exported to cloud!");
+			// 		},
+			// 		error: function(results, error){
+			// 			alert('failed to export data: '+error.message);
+			// 		}
+			// 	});
+			// }
+		});
+	});
+</script>
