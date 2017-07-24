@@ -65,7 +65,7 @@
 	</style>
 <script>
 	$(document).ready(function(){
-		race_object = window.localStorage.getItem('race')
+		race_object = JSON.parse(window.localStorage.getItem('race'));
 		if(race_object != null && race_object.race_time != null){
 			var race = JSON.parse(window.localStorage.getItem('race'));
 			var datetime = race.race_time.split(', ');
