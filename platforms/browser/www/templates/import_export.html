@@ -63,6 +63,9 @@
 			var leg = new Leg();
 
 			leg_query = new Parse.Query(Leg);
+			leg_query.equalTo('leg_time', t.leg_time[parseInt(leg_number]);
+			leg_query.equalTo('team_name', t.team_name);
+			leg_query.equalTo('station_number', leg_number);
 			//CONTINUE HERE
 
 		}
