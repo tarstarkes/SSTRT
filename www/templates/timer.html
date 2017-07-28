@@ -103,7 +103,7 @@
 		if(window.localStorage.getItem('race') == null){
 			race_key = ""
 			dict="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*";
-			for(var i =0; i < 16; i++){
+			for(var i =0; i < 8; i++){
 				r_val = Math.round(Math.random()*dict.length);
 				race_key = race_key+dict[r_val];
 			}

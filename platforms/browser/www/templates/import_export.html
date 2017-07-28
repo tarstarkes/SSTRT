@@ -10,10 +10,121 @@
 		<h3 id="race_id_label">Race ID:</h3>
 		<p id="race_id"></p>
 		<button id="import" class="ui_button" onclick="click_feedback(this);">IMPORT CLOUD DATA TO DEVICE</button>
+
+		<form id="import_key_form" style="display: none;">
+			<center>
+				<input id="race_key_field" placeholder="Enter Race Key" required>
+			</center>
+			<button type="submit">Import</button>
+		</form>
 		<button id="export" class="ui_button" onclick="click_feedback(this);">EXPORT DATA TO CLOUD</button>
 		<button id="clear_device" class="ui_button" onclick="click_feedback(this);">CLEAR ALL DEVICE DATA</button>
 	</center>
+	<div id="load_bar" style="display:none;margin:2vw;">
+		<center>
+			<h3 id="load_bar_label">EXPORTING</h3>
+		</center>
+		<div style="width:0; height: 10vw;background-color:#009d9f;"><center><p id="percent">0%</p></center></div>
+		<center>
+			<div class="lds-css">
+				<div class="lds-gear" style="100%;height:50%; margin-top:5vw;">
+					<div>
+					  <div></div>
+					  <div></div>
+					  <div></div>
+					  <div></div>
+					  <div></div>
+					  <div></div>
+					  <div></div>
+					  <div></div>
+					</div>
+				</div>
+			</div>
+		</center>
+	</div>
 	<style>
+		@keyframes lds-gear {
+		  0% {
+		    -webkit-transform: rotate(0deg);
+		    transform: rotate(0deg);
+		  }
+		  50% {
+		    -webkit-transform: rotate(180deg);
+		    transform: rotate(180deg);
+		  }
+		  100% {
+		    -webkit-transform: rotate(360deg);
+		    transform: rotate(360deg);
+		  }
+		}
+		@-webkit-keyframes lds-gear {
+		  0% {
+		    -webkit-transform: rotate(0deg);
+		    transform: rotate(0deg);
+		  }
+		  50% {
+		    -webkit-transform: rotate(180deg);
+		    transform: rotate(180deg);
+		  }
+		  100% {
+		    -webkit-transform: rotate(360deg);
+		    transform: rotate(360deg);
+		  }
+		}
+		.lds-gear > div {
+		  -webkit-transform-origin: 100px 100px;
+		  transform-origin: 100px 100px;
+		  -webkit-animation: lds-gear 1s infinite linear;
+		  animation: lds-gear 1s infinite linear;
+		  position: relative;
+		}
+		.lds-gear > div div {
+		  position: absolute;
+		  width: 26px;
+		  height: 192px;
+		  background: #ef5902;
+		  left: 100px;
+		  top: 100px;
+		  -webkit-transform: translate(-50%, -50%);
+		  transform: translate(-50%, -50%);
+		}
+		.lds-gear > div div:nth-child(1) {
+		  width: 152px;
+		  height: 152px;
+		  border-radius: 50%;
+		}
+		.lds-gear > div div:nth-child(3) {
+		  -webkit-transform: translate(-50%, -50%) rotate(30deg);
+		  transform: translate(-50%, -50%) rotate(30deg);
+		}
+		.lds-gear > div div:nth-child(4) {
+		  -webkit-transform: translate(-50%, -50%) rotate(60deg);
+		  transform: translate(-50%, -50%) rotate(60deg);
+		}
+		.lds-gear > div div:nth-child(5) {
+		  -webkit-transform: translate(-50%, -50%) rotate(90deg);
+		  transform: translate(-50%, -50%) rotate(90deg);
+		}
+		.lds-gear > div div:nth-child(6) {
+		  -webkit-transform: translate(-50%, -50%) rotate(120deg);
+		  transform: translate(-50%, -50%) rotate(120deg);
+		}
+		.lds-gear > div div:nth-child(7) {
+		  -webkit-transform: translate(-50%, -50%) rotate(150deg);
+		  transform: translate(-50%, -50%) rotate(150deg);
+		}
+		.lds-gear > div div:nth-child(8) {
+		  width: 80px;
+		  height: 80px;
+		  background: #fff;
+		  border-radius: 50%;
+		}
+		.lds-gear {
+		  width: 59px !important;
+		  height: 59px !important;
+		  -webkit-transform: translate(-29.5px, -29.5px) scale(0.295) translate(29.5px, 29.5px);
+		  transform: translate(-29.5px, -29.5px) scale(0.295) translate(29.5px, 29.5px);
+		}
 		#clear_device,
 		#import,
 		#export{
@@ -23,6 +134,7 @@
 			padding: 4vw;
 			font-size: 5vw
 		}
+		#load_bar_label,
 		#race_id_label{
 			margin-top:4vw;
 			margin-bottom:0;
@@ -32,6 +144,24 @@
 			margin-bottom:4vw;
 			font-size: 6vw;
 		}
+		#percent{
+			color: white;
+		}
+		#import_key_form{
+			background: lightgray;
+			padding:4vw;
+		}
+		#import_key_form input{
+			font-size: 6vw;
+			padding: 2vw;
+		}
+		#import_key_form button{
+			margin-top:2vw;
+			font-size: 6vw;
+			padding: 2vw;
+			background: black;
+			color: white;
+		}
 	</style>
 </div>
 <script>
@@ -39,40 +169,137 @@
 		var race = JSON.parse(window.localStorage.getItem('race'));
 
 		$('#race_id').html(race.race_key);
-		$('#clear_device').click(function(e){
-			var answer = confirm("Are you sure you want to clear the current race data for this device?");
-			if(answer == true){
-				window.localStorage.removeItem('teams');
-				window.localStorage.removeItem('current_leg');
-				window.localStorage.removeItem('race');
-				$('#race_id').remove();
+
+		function load_bar_width(val){
+			$($('#load_bar div')[0]).animate({
+			    width: val,
+			  }, 500, function() {
+			    // Animation complete.
+			});
+			$('#percent').html(val);
+		}
+		function add_final_call(p){
+			var width = ( 100 * parseFloat($($('#load_bar div')[0]).css('width')) / parseFloat($($('#load_bar div')[0]).parent().css('width')) );
+			width = parseInt(width);
+			var total = width+p;
+			if(total > 100){
+				total = 100;
 			}
-		});
+			width = total+"%"
+			$($('#load_bar div')[0]).css('width', width);
+			$('#percent').html(width);
+		}
+
+		function check_leg(){
+			current_legs = parseInt(window.localStorage.getItem('current_legs_reported'));
+			all_legs = parseInt(window.localStorage.getItem('legs_to_export'));
+			if(current_legs == all_legs){
+				load_bar_width('100%');
+				alert("Data successfully exported!");
+				window.setTimeout(function(){
+					$('#percent').html('0%');
+					$($('#load_bar div')[0]).css('width', 0);
+					$('#load_bar').hide();
+				}, 1000);
+			}
+		}
+
+		function increment_leg(){
+			current_legs = window.localStorage.getItem('current_legs_reported');
+			current_legs = parseInt(current_legs)+1;
+			window.localStorage.setItem('current_legs_reported', current_legs);
+			check_leg();
+		}
 
 		//LEG EXPORT FUNCTIONS---------------------------------------------
 
-		function export_leg(t, team_object, leg_number){
-
-		}
-		function leg_export_call(t, team_object, leg_number){
+		function export_leg(t, team_object, leg_number, leg_object=false){
 			var Team = Parse.Object.extend("team");
 			var team = new Team();
-			race.id = team_object['id'];
+			team.id = team_object['id'];
+
+			if(leg_object == false){
+				var Leg = Parse.Object.extend("leg");
+				var leg = new Leg();
+			}
+			else{
+				var Leg = Parse.Object.extend("leg");
+				var leg = new Leg();
+				leg.id = leg_object['id'];
+			}
+
+			leg.set('station_number', leg_number);
+			leg.set('leg_time', t.leg_time[parseInt(leg_number)]);
+			leg.set('team_id', team);
+			leg.save(null, {
+				success: function(results){
+					console.log('Leg data exported leg: '+t.leg_time[parseInt(leg_number)]+", team: "+t.team_name);
+				},
+				error: function(results, error){
+					console.log('failed to export team data: '+error.message);
+				}
+			});
+		}
+		function leg_export_call(t, team_object, leg_number, percentage){
+			var Team = Parse.Object.extend("team");
+			var team = new Team();
+			team.id = team_object['id'];
 
 			var Leg = Parse.Object.extend('leg');
 			var leg = new Leg();
 
 			leg_query = new Parse.Query(Leg);
-			leg_query.equalTo('leg_time', t.leg_time[parseInt(leg_number]);
-			leg_query.equalTo('team_name', t.team_name);
-			leg_query.equalTo('station_number', leg_number);
-			//CONTINUE HERE
-
+			leg_query.equalTo('station_number', parseInt(leg_number));
+			leg_query.equalTo('team_id', team);
+			
+			leg_query.find({
+				success: function(results){
+					var object;
+					if(results.length > 0){
+						for (var i = 0; i < results.length; i++) {
+							object = results[i];
+							if(object.attributes.leg_time != t.leg_time[parseInt(leg_number)]){
+								yes_no = confirm(t.team_name+" already has a time time recorded for leg "+leg_number+", do you wish to overwrite this team's data?");
+								if(yes_no == true){
+									export_leg(t, team_object, leg_number, object);
+								}
+							}
+						}
+						add_final_call(percentage);
+					}
+					else{
+						export_leg(t, team_object, leg_number);
+						add_final_call(percentage);
+					}
+					increment_leg();
+				},
+				error: function(error){
+					console.log('failed to export leg data: '+error.message);
+					add_final_call(percentage);
+				}
+			});
+		}
+		function run_secondary_loop(t, team_object, i){
+			var all_teams = JSON.parse(window.localStorage.getItem('teams'));
+			var percentage = parseInt(25/i);
+			for(var x=0; x < t.leg_time.length; x++){
+				if(t.leg_time[x] != null && t.leg_time[x] != undefined){
+					leg_export_call(t, team_object, x, percentage);
+				}
+			}
+			load_bar_width('75%');
 		}
 		function legs_export(t, team_object){
-			for(var x; x < t.leg_time.length; x++){
-				if(t.leg_time[x] != null && t.leg_time[x] != undefined){
-					leg_export_call(t, team_object, leg_number);
+			var i=0;
+			for(var j=0; j < t.leg_time.length; j++){
+				if(t.leg_time[j] != null && t.leg_time[j] != undefined){
+					i=i+1;
+					all_legs = window.localStorage.getItem('legs_to_export');
+					all_legs = parseInt(all_legs)+1;
+					window.localStorage.setItem('legs_to_export', all_legs);
+				}
+				if(j == (t.leg_time.length-1)){
+					run_secondary_loop(t, team_object, i)
 				}
 			}
 		}
@@ -93,17 +320,15 @@
 					console.log('TEAM data exported');
 				},
 				error: function(results, error){
-					alert('failed to export team data: '+error.message);
+					console.log('failed to export team data: '+error.message);
 				}
 			});
 		}
 
 		function team_export_call(race_object, i){
-			debugger;
-
 			var Race = Parse.Object.extend("race");
 			var race = new Race();
-			race.id = race_object['id']
+			race.id = race_object['id'];
 
 			var Teams = Parse.Object.extend("team");
 			var team = new Teams();
@@ -118,10 +343,6 @@
 				if(results.length > 0){
 					for (var j = 0; j < results.length; j++) {
 						object = results[j];
-						yes_no = confirm("A team with the name "+t[i].team_name+" already exists in the database, do you want to overwrite that team?");
-						if(yes_no == true){
-							export_team(t[i], object, race_object);
-						}
 				    }
 				}else{
 					export_team(t[i], team, race_object);
@@ -129,15 +350,23 @@
 				legs_export(t[i], object);
 			},
 			error: function(error){
-				alert('failed to export team data: '+error.message);
+				console.log('failed to export data: '+error.message);
 			}});
 		}
 
 		function teams_export(race_object){
+			load_bar_width('50%');
 			var t = JSON.parse(window.localStorage.getItem('teams'));
-			for(var i=0; i < t.length; i++){
-				debugger;
-				team_export_call(race_object, i);
+			if(t != null){
+				for(var i=0; i < t.length; i++){
+					team_export_call(race_object, i);
+				}
+				if(t.length == 0){
+					check_leg();
+				}
+			}
+			else{
+				check_leg();
 			}
 		}
 		//END TEAM EXPORT ---------------------------------------------
@@ -149,19 +378,22 @@
 			race.set('race_start_time', r.race_time);
 			race.save(null, {
 				success: function(results){
-					alert("Export Operation Complete!");
+					console.log("Export Operation Complete!");
+					load_bar_width('25%');
 				},
 				error: function(results, error){
-					alert('failed to export data: '+error.message);
+					console.log('Failed to export data: '+error.message);
 				}
 			});
 		}
 
 		$('#export').click(function(e){
+			window.localStorage.setItem('legs_to_export', 0);
+			window.localStorage.setItem('current_legs_reported', 0);
 			var Race = Parse.Object.extend("race");
 			var race = new Race();
 			var r = JSON.parse(window.localStorage.getItem('race'));
-
+			$('#load_bar').show();
 			//EXPORT RACE OBJECT
 			//Test 1. Do we have data to upload?
 			//Test 2. Does some/all of this data already exist on the server?
@@ -169,28 +401,232 @@
 			var race_query = new Parse.Query(Race);
 			race_query.equalTo("race_key", r.race_key);
 			race_query.find({
-			success: function(results){
-				var object;
-				if(results.length > 0){
-					for (var i = 0; i < results.length; i++) {
-						object = results[i];
-						race_time = object.get('race_start_time');
-						race_key = object.get('race_key');
-						yes_no = confirm("There is already a race with that key listed on the server, do you wish to overwrite the following data? race_start_time: "+race_time+", race_key: "+race_key);
-						if(yes_no == true){
-							export_race(r, object);
-						}
-				    }
-				}else{
-					export_race(r, race);
+				success: function(results){
+					var object;
+					if(results.length > 0){
+						for (var i = 0; i < results.length; i++){
+							object = results[i];
+					    }
+					    if(object.attributes.race_start_time != r.race_time){
+					    	yes_no = confirm('There is already a starting race time set for this race, would you like to overwrite it?');
+					    	export_race(r, object);
+					    }
+					}else{
+						export_race(r, race);
+					}
+					teams_export(object);
+					console.log("Export Operation Successful!");
+				},
+				error: function(error){
+					alert('Failed to export data: '+error.message);
+					$('#percent').html('0%');
+					$($('#load_bar div')[0]).css('width', 0);
+					$('#load_bar').hide();
 				}
-				teams_export(object);
-			},
-			error: function(error){
-				alert('failed to export data: '+error.message);
-			}});
+			});
 		});
 
 		//END RACE EXPORT ---------------------------------------------
+
+
+
+		//IMPORT DATA ---------------------------------------------
+		function check_total_callbacks(){
+			calls = parseInt(window.localStorage.getItem('total_import_calls'));
+			callbacks = parseInt(window.localStorage.getItem('total_import_callbacks'));
+			window.setTimeout(function(){
+				if(calls == callbacks){
+					close_loader();
+				}
+				else{
+					width = parseInt(calls/callbacks*100);
+					load_bar_width(width+"%");
+					check_total_callbacks();
+				}
+			}, 500);
+		}
+		function add_total_import_call(val){
+			calls = parseInt(window.localStorage.getItem('total_import_calls'));
+			calls = calls+val;
+			window.localStorage.setItem('total_import_calls', calls);
+		}
+		function increment_total_import_callbacks(){
+			callbacks = parseInt(window.localStorage.getItem('total_import_callbacks'));
+			callbacks = callbacks+1;
+			window.localStorage.setItem('total_import_callbacks', callbacks);
+			check_total_callbacks();
+		}
+		function close_loader(){
+			load_bar_width('100%');
+			window.setTimeout(function(){
+				$('#percent').html('0%');
+				$($('#load_bar div')[0]).css('width', 0);
+				$('#load_bar').hide();
+				$('#imp_exp').trigger('click');
+			}, 1000);
+		}
+		function import_legs(team_object, i){
+			var Team = Parse.Object.extend("team");
+			var team = new Team();
+			team.id = team_object['id'];
+
+			var Leg = Parse.Object.extend("leg");
+
+			leg_query = new Parse.Query(Leg);
+			leg_query.equalTo('team_id', team);
+			leg_query.find({
+				success: function(results){
+					var object;
+					add_total_import_call(results.length);
+					if(results.length > 0){
+						for (var j = 0; j < results.length; j++) {
+							object = results[j];
+							t = JSON.parse(window.localStorage.getItem('teams'));
+							if(t[i].leg_time == undefined){
+								t[i].leg_time = [];
+							}
+							t[i].leg_time[object.attributes.station_number] = object.attributes.leg_time;
+							window.localStorage.setItem('teams', JSON.stringify(t));
+							increment_total_import_callbacks();
+					    }
+					}else{
+						console.log('No times for '+team_object['attributes']['team_name']+' - id: '+team_object['id']);
+					}
+				},
+				error: function(error){
+					console.log('failed to import data: '+error.message);
+				}
+			});
+		}
+		function import_teams(race_object){
+			var Race = Parse.Object.extend("race");
+			var race = new Race();
+			race.id = race_object['id'];
+			t = JSON.parse(window.localStorage.getItem('teams'));
+			t=[];
+			window.localStorage.setItem('teams', JSON.stringify(t));
+
+			var Teams = Parse.Object.extend("team");
+
+			team_query = new Parse.Query(Teams);
+			team_query.equalTo('race_id', race);
+			team_query.find({
+				success: function(results){
+					var object;
+					add_total_import_call(results.length);
+					if(results.length > 0){
+						for (var j = 0; j < results.length; j++) {
+							object = results[j];
+							t = JSON.parse(window.localStorage.getItem('teams'));
+							if(t == null){
+								t = [];
+							}
+							console.log(object);
+							t.push({'team_name': object.attributes.team_name, 'bib_number': object.attributes.bib});
+							window.localStorage.setItem('teams', JSON.stringify(t));
+							import_legs(object, j);
+							increment_total_import_callbacks();
+					    }
+					}else{
+						alert('There were no teams to import');
+					}
+				},
+				error: function(error){
+					console.log('failed to import data: '+error.message);
+				}
+			});
+		}
+		function import_data(race_key){
+			$('#load_bar').show();
+			window.localStorage.setItem('total_import_calls', 0);
+			window.localStorage.setItem('total_import_callbacks', 0);
+
+			//IMPORT RACE
+			var Race = Parse.Object.extend("race");
+
+			race_query = new Parse.Query(Race);
+			race_query.equalTo('race_key', race_key);
+			race_query.find({
+				success: function(results){
+					var object;
+					add_total_import_call(results.length);
+					if(results.length > 0){
+						for (var j = 0; j < results.length; j++) {
+							object = results[j];
+							race = JSON.parse(window.localStorage.getItem('race'));
+							race.race_key = object.attributes.race_key;
+							race.race_time = object.attributes.race_start_time;
+							window.localStorage.setItem('race', JSON.stringify(race));
+							increment_total_import_callbacks();
+							import_teams(object);
+					    }
+					}else{
+						alert('Invalid Race Key - please re-enter your race key and try again. No data was erased from your device.');
+						close_loader();
+					}
+				},
+				error: function(error){
+					console.log('failed to import data: '+error.message);
+				}
+			});
+		}
+		$('#import').click(function(){
+			$('#import_key_form').animate({
+			    height: 'toggle',
+			  }, 500, function() {
+			    // Animation complete.
+			});
+		});
+		$('#import_key_form').on('submit', function(e){
+			e.preventDefault();
+			race_key = $('#race_key_field').val();
+			$('#import_key_form').animate({
+			    height: 'toggle',
+			  }, 500, function() {
+			    // Animation complete.
+			});
+			$('#race_key_field').val('');
+			yes_no = confirm('Are you sure you want to import data from the cloud? Importing data to your device will erase all current data.');
+			if(yes_no == true){
+				import_data(race_key);
+			}
+		});
+
+
+
+		//END IMPORT DATA ---------------------------------------------
+
+
+
+		//CLEAR ALL DATA ---------------------------------------------
+		function set_new_race_key(){
+			if(window.localStorage.getItem('race') == null){
+				race_key = ""
+				dict="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*";
+				for(var i =0; i < 8; i++){
+					r_val = Math.round(Math.random()*dict.length);
+					race_key = race_key+dict[r_val];
+				}
+				race = {
+					'race_key': race_key,
+				};
+				race = JSON.stringify(race);
+				window.localStorage.setItem('race', race);
+			}
+		}
+		$('#clear_device').click(function(e){
+			yes_no = confirm("Are you sure you want to clear this device of all current data? This will not clear any data you have exported from this device.");
+			window.localStorage.removeItem('teams');
+			window.localStorage.removeItem('race');
+			window.localStorage.removeItem('current_leg');
+			set_new_race_key();
+			alert("Data Cleared!");
+			var race = JSON.parse(window.localStorage.getItem('race'));
+			$('#race_id').html(race.race_key);
+
+		});
+		//END CLEAR ALL DATA ---------------------------------------------
+
+
 	});
 </script>
