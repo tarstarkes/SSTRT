@@ -3,7 +3,7 @@
     <name>SSTRT</name>
     <description>Start Stop Team Relay Timer records contestant times for team relay running. Initially built for the benefit of the Notheastern Oregon Elkhorn Relay.</description>
     <author email="stonec2@eou.edu" href="https://github.com/tarstarkes">Connar Stone</author>
-    <feature name="http://api.phonegap.com/1.0/battery" />
+    <!-- <feature name="http://api.phonegap.com/1.0/battery" />
     <feature name="http://api.phonegap.com/1.0/camera" />
     <feature name="http://api.phonegap.com/1.0/contacts" />
     <feature name="http://api.phonegap.com/1.0/file" />
@@ -41,7 +41,7 @@
     <preference name="BackgroundColor" value="0x000000" />
     <preference name="DisallowOverscroll" value="true" />
     <preference name="LoadingDialog" value="," />
-    <preference name="LoadUrlTimeoutValue" value="null" />
+    <preference name="LoadUrlTimeoutValue" value="null" /> -->
     <platform name="ios">
         <!-- <icon height="57" src="/www/img/logos/SSTRT_57.png" width="57" />
         <icon height="144" src="/www/img/logos/SSTRT144.png" width="144" />
