@@ -74,8 +74,8 @@
     </platform>
     <platform name="winphone">
     </platform>
-    <icon src="icon.png" />
+<!--     <icon src="icon.png" /> -->
     <plugin name="cordova-plugin-file" spec="~4.3.3" />
-    <preference name="AndroidPersistentFileLocation" value="Compatibility" />
-    <preference name="iosPersistentFileLocation" value="Compatibility" />
+    <preference name="AndroidPersistentFileLocation" value="Internal" />
+    <preference name="iosPersistentFileLocation" value="Library" />
 </widget>
