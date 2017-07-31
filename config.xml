@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.connarstone.sstrt" version="1.0.0" versionCode="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:android="http://schemas.android.com/apk/res/android" xmlns:gap="http://phonegap.com/ns/1.0">
-    <name>SSTRT		</name>
-    <description>Start Stop Team Relay Timer records contestant times for team relay running. Initially built for the benefit of the Notheastern Oregon Elkhorn Relay.		</description>
-    <author email="stonec2@eou.edu" href="https://github.com/tarstarkes">Connar Stone		</author>
+<widget id="com.connarstone.sstrt" version="1.0.0" versionCode="10" xmlns="http://www.w3.org/ns/widgets" xmlns:android="http://schemas.android.com/apk/res/android" xmlns:gap="http://phonegap.com/ns/1.0">
+    <name>SSTRT</name>
+    <description>Start Stop Team Relay Timer records contestant times for team relay running. Initially built for the benefit of the Notheastern Oregon Elkhorn Relay.</description>
+    <author email="stonec2@eou.edu" href="https://github.com/tarstarkes">Connar Stone</author>
     <feature name="http://api.phonegap.com/1.0/battery" />
     <feature name="http://api.phonegap.com/1.0/camera" />
     <feature name="http://api.phonegap.com/1.0/contacts" />
@@ -43,34 +43,34 @@
     <preference name="LoadingDialog" value="," />
     <preference name="LoadUrlTimeoutValue" value="null" />
     <platform name="ios">
-        <icon height="57" src="./www/img/logos/SSTRT_57.png" width="57" />
-        <icon height="144" src="./www/img/logos/SSTRT144.png" width="144" />
-        <icon height="72" src="./www/img/logos/SSTRT_72.png" width="72" />
-        <icon height="114" src="./www/img/logos/SSTRT_114.png" width="114" />
-        <icon height="60" src="./www/img/logos/SSTRT_60.png" width="60" />
-        <icon height="120" src="./www/img/logos/SSTRT_120.png" width="120" />
-        <icon height="180" src="./www/img/logos/SSTRT_180.png" width="180" />
-        <icon height="76" src="./www/img/logos/SSTRT_76.png" width="76" />
-        <icon height="152" src="./www/img/logos/SSTRT_152.png" width="152" />
-        <splash height="2208" src="./www/img/logos/SSTRT_SPLASH_1242x2208.png" width="1242" />
-        <splash height="1334" src="./www/img/logos/SSTRT_SPLASH_750x1334.png" width="750" />
-        <splash height="1136" src="./www/img/logos/SSTRT_SPLASH_640x1136.png" width="640" />
-        <splash height="960" src="./www/img/logos/SSTRT_SPLASH_640x960.png" width="640" />
-        <splash height="480" src="./www/img/logos/SSTRT_SPLASH_320x480.png" width="320" />
+        <icon height="57" src="/www/img/logos/SSTRT_57.png" width="57" />
+        <icon height="144" src="/www/img/logos/SSTRT144.png" width="144" />
+        <icon height="72" src="/www/img/logos/SSTRT_72.png" width="72" />
+        <icon height="114" src="/www/img/logos/SSTRT_114.png" width="114" />
+        <icon height="60" src="/www/img/logos/SSTRT_60.png" width="60" />
+        <icon height="120" src="/www/img/logos/SSTRT_120.png" width="120" />
+        <icon height="180" src="/www/img/logos/SSTRT_180.png" width="180" />
+        <icon height="76" src="/www/img/logos/SSTRT_76.png" width="76" />
+        <icon height="152" src="/www/img/logos/SSTRT_152.png" width="152" />
+        <splash height="2208" src="/www/img/logos/SSTRT_SPLASH_1242x2208.png" width="1242" />
+        <splash height="1334" src="/www/img/logos/SSTRT_SPLASH_750x1334.png" width="750" />
+        <splash height="1136" src="/www/img/logos/SSTRT_SPLASH_640x1136.png" width="640" />
+        <splash height="960" src="/www/img/logos/SSTRT_SPLASH_640x960.png" width="640" />
+        <splash height="480" src="/www/img/logos/SSTRT_SPLASH_320x480.png" width="320" />
     </platform>
     <platform name="android">
-        <icon qualifier="ldpi" src="./www/img/logos/SSTRT_36.png" />
-        <icon qualifier="mdpi" src="./www/img/logos/SSTRT_48.png" />
-        <icon qualifier="hdpi" src="./www/img/logos/SSTRT_72.png" />
-        <icon qualifier="xhdpi" src="./www/img/logos/SSTRT_96.png" />
-        <icon qualifier="xxhdpi" src="./www/img/logos/SSTRT144.png" />
-        <icon qualifier="xxxhdpi" src="./www/img/logos/SSTRT_192.png" />
-        <splash qualifier="" src="./www/img/logos/SSTRT_SPLASH_240X320.png" />
+        <icon qualifier="ldpi" src="/www/img/logos/SSTRT_36.png" />
+        <icon qualifier="mdpi" src="/www/img/logos/SSTRT_48.png" />
+        <icon qualifier="hdpi" src="/www/img/logos/SSTRT_72.png" />
+        <icon qualifier="xhdpi" src="/www/img/logos/SSTRT_96.png" />
+        <icon qualifier="xxhdpi" src="/www/img/logos/SSTRT144.png" />
+        <icon qualifier="xxxhdpi" src="/www/img/logos/SSTRT_192.png" />
+        <!-- <splash qualifier="" src="./www/img/logos/SSTRT_SPLASH_240X320.png" />
         <splash qualifier="" src="./www/img/logos/SSTRT_SPLASH_320x480.png" />
         <splash qualifier="" src="./www/img/logos/SSTRT_SPLASH_420x800.png" />
         <splash qualifier="" src="./www/img/logos/SSTRT_SPLASH_720x1280.png" />
         <splash qualifier="" src="./www/img/logos/SSTRT_SPLASH_960x1600.png" />
-        <splash qualifier="" src="./www/img/logos/SSTRT_SPLASH_1280x1920.png" />
+        <splash qualifier="" src="./www/img/logos/SSTRT_SPLASH_1280x1920.png" /> -->
     </platform>
     <platform name="winphone">
     </platform>
