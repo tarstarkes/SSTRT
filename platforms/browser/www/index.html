@@ -6,6 +6,8 @@
 	<link type="text/css" rel="stylesheet" href="./css/index.css">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<script type="text/javascript" src="./js/jquery.json.min.js"></script>
+	<link rel="icon" href="data:;base64,=">
+	<script src="cordova.js"></script>
 
 </head>
 <body id="doc_body">
@@ -20,6 +22,53 @@
 		</tr>
 	</table>
 	<script>
+		$(document).on("deviceready", function() {
+			console.log('device is ready');
+			window.onErrorReadFile = function onErrorReadFile(){
+				console.log('onErrorReadFile Fired!')
+			}
+			window.read_file = function readFile(fileEntry) {
+			    fileEntry.file(function (file) {
+			        var reader = new FileReader();
+			        reader.onloadend = function() {
+			            console.log("Successful file read: " + this.result);
+			        };
+			        reader.readAsText(file);
+			        window.saved_file = file;
+			    }, window.onErrorReadFile);
+			}
+			window.onErrorCreateFile = function onErrorCreateFile(){
+				console.log('onErrorCreateFile Fired!');
+			};
+			window.onErrorLoadFs = function onErrorLoadFs(){
+				console.log('onErrorLoadFs Fired!');
+			};
+			window.write_file = function writeFile(fileEntry, dataObj) {
+			    // Create a FileWriter object for our FileEntry (log.txt).
+			    fileEntry.createWriter(function (fileWriter) {
+
+			        fileWriter.onwriteend = function() {
+			            console.log("Successful file write...");
+			            window.read_file(fileEntry);
+			        };
+
+			        fileWriter.onerror = function (e) {
+			            console.log("Failed file write: " + e.toString());
+			        };
+
+			        // If data object is not passed in,
+			        // create a new Blob instead.
+			        if (!dataObj) {
+			            dataObj = new Blob([dataObj], { type: 'text/plain'});
+			        }
+			        fileWriter.write(dataObj);
+			        return dataObj;
+			    });
+			};
+			window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function (fs) {
+			   	window.file_system = fs;
+			}, window.onErrorLoadFs);
+		});
 		$(document).ready(function(){
 			Parse.initialize("ctdokDdZUkkDBdaKzRC5MJrx3t2hbXRQeiq2QWu4", "TitmnxPJ8jpt0WrvOsEGoZXmcgo1KAQIYCReRmWN");
 			Parse.serverURL = 'https://parseapi.back4app.com';

@@ -92,7 +92,7 @@
 			if(parseInt(hour) == 12 && am_pm == "AM"){
 				hour = "00";
 			}
-			else if(am_pm == "PM"){
+			else if(am_pm == "PM" && parseInt(hour) < 12){
 				hour = parseInt(hour) + 12;
 			}
 			final_date = year+"-"+month+"-"+day+"T"+hour+":"+minute+":"+second;

@@ -35,4 +35,6 @@
     <preference name="DisallowOverscroll" value="true" />
     <preference name="LoadingDialog" value="," />
     <preference name="LoadUrlTimeoutValue" value="null" />
+    <preference name="AndroidPersistentFileLocation" value="Compatibility" />
+    <preference name="iosPersistentFileLocation" value="Compatibility" />
 </widget>
