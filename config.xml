@@ -3,45 +3,21 @@
     <name>SSTRT</name>
     <description>Start Stop Team Relay Timer records contestant times for team relay running. Initially built for the benefit of the Notheastern Oregon Elkhorn Relay.</description>
     <author email="stonec2@eou.edu" href="https://github.com/tarstarkes">Connar Stone</author>
-    <!--<feature name="http://api.phonegap.com/1.0/battery" />
-    <feature name="http://api.phonegap.com/1.0/camera" />
-    <feature name="http://api.phonegap.com/1.0/contacts" /> -->
     <feature name="http://api.phonegap.com/1.0/file" />
-    <!-- <feature name="http://api.phonegap.com/1.0/geolocation" /> -->
     <feature name="http://api.phonegap.com/1.0/media" />
     <feature name="http://api.phonegap.com/1.0/network" />
-    <!-- <feature name="http://api.phonegap.com/1.0/notification" /> -->
     <preference name="phonegap-version" value="cli-6.3.0" />
     <preference name="android-build-tool" value="gradle" />
     <preference name="orientation" value="default" />
     <preference name="fullscreen" value="false" />
     <preference name="target-device" value="universal" />
     <preference name="webviewbounce" value="true" />
-    <!-- <preference name="prerendered-icon" value="false" />
-    <preference name="stay-in-webview" value="true" /> -->
     <preference name="ios-statusbarstyle" value="default" />
-    <!-- <preference name="detect-data-types" value="true" /> -->
     <preference name="exit-on-suspend" value="false" />
-    <!-- <preference name="show-splash-screen-spinner" value="true" />
-    <preference name="auto-hide-splash-screen" value="true" /> -->
-   <!--  <preference name="FadeSplashScreen " value="true" /> -->
     <preference name="EnableViewportScale" value="false" />
-    <!-- <preference name="MediaPlaybackRequiresUserAction" value="false" /> -->
-    <!-- <preference name="AllowInlineMediaPlayback" value="true" /> -->
     <preference name="BackupWebStorage" value="none" />
-    <!-- <preference name="TopActivityIndicator" value="white" />
-    <preference name="KeyboardDisplayRequiresUserAction" value="true" />
-    <preference name="KeyboardShrinksView " value="true" />
-    <preference name="HideKeyboardFormAccessoryBar" value="true" />
-    <preference name="SuppressesIncrementalRendering" value="false" />
-    <preference name="windows-identity-name" value="" /> -->
     <preference name="android-installLocation" value="auto" />
-    <!-- <preference name="SplashScreenDelay" value="2000" />
-    <preference name="ErrorUrl" value="null" />
-    <preference name="BackgroundColor" value="0x000000" /> -->
     <preference name="DisallowOverscroll" value="true" />
-    <!-- <preference name="LoadingDialog" value="," />
-    <preference name="LoadUrlTimeoutValue" value="null" /> -->
     <platform name="ios">
         <icon height="57" src="/www/img/logos/SSTRT_57.png" width="57" />
         <icon height="144" src="/www/img/logos/SSTRT144.png" width="144" />
@@ -68,23 +44,15 @@
     </platform>
     <platform name="winphone">
     </platform>
-<!--     <icon src="icon.png" /> -->
     <plugin name="cordova-plugin-file" spec="~4.3.3" />
     <preference name="AndroidPersistentFileLocation" value="Internal" />
     <preference name="iosPersistentFileLocation" value="Library" />
-
-
     <gap:plugin name="cordova-plugin-whitelist" source="npm" />
-    <access origin="*" /> 
-    <!-- Wildcards are allowed for the protocol, as a prefix
-     to the host, or as a suffix to the path -->
+    <access origin="*" />
     <allow-intent href="*" />
-    <!-- A wildcard can be used to whitelist the entire network,
-     over HTTP and HTTPS.
-     *NOT RECOMMENDED* -->
     <allow-navigation href="*" />
-
-    <gap:config-file platform="android" parent="/manifest">
-      <application android:debuggable="true" />
+    <gap:config-file parent="/manifest" platform="android">
+        <application android:debuggable="true" />
     </gap:config-file>
+    <plugin name="cordova-plugin-file-transfer" spec="~1.6.4-dev" />
 </widget>

@@ -9,6 +9,9 @@
     "installed_plugins": {
         "cordova-plugin-file": {
             "PACKAGE_NAME": "com.connarstone.sstrt"
+        },
+        "cordova-plugin-file-transfer": {
+            "PACKAGE_NAME": "com.connarstone.sstrt"
         }
     },
     "dependent_plugins": {

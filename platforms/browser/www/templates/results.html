@@ -13,6 +13,11 @@
 		</div>
 	</center>
 </div>
+<style>
+	#link_box a{
+		margin-top:6vw;
+	}
+</style>
 <script>
 	$(document).ready(function(){
 		function export_to_csv(results){
@@ -41,18 +46,34 @@
 			$('#link_box').html(link);*/
 
 
-			// window.file_system.root.getFile(filename, { create: true, exclusive: false }, function (fileEntry) {
+			window.file_system.root.getFile(filename, { create: true, exclusive: false }, function (fileEntry) {
 
-			//         console.log("fileEntry is file?" + fileEntry.isFile.toString());
-			//         // fileEntry.name == 'someFile.txt'
-			//         // fileEntry.fullPath == '/someFile.txt'
-			//         window.write_file(fileEntry, results);
+			        console.log("fileEntry is file?" + fileEntry.isFile.toString());
+			        // fileEntry.name == 'someFile.txt'
+			        // fileEntry.fullPath == '/someFile.txt'
+			        window.write_file(fileEntry, results);
 
-		 //    }, window.onErrorCreateFile);
+		    }, window.onErrorCreateFile);
 
-			// if(window.saved_file.localURL != undefined){
-			// 	$('#link_box').html('<a href="'+window.saved_file+' download">'+window.saved_file.name+'</a>');
-			// }
+			$('#link_box').html('<a href="javascript:void(0);" id="file_download">'+filename+'</a>');
+			
+			$('#file_download').click(function(){
+				var fileTransfer = new FileTransfer();
+				var url = cordova.file.dataDirectory;
+
+				fileTransfer.download(
+					window.saved_file.localURL,
+					url,
+					function(entry){
+						alert('Download Complete '+entry.toURL());
+					},
+					function(error){
+						alert('Error occured while downloading! '+error.code);
+					},
+					false,
+					{}
+				);
+			});
 
 		}
 
