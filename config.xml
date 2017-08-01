@@ -79,5 +79,8 @@
     <preference name="AndroidPersistentFileLocation" value="Internal" />
     <preference name="iosPersistentFileLocation" value="Library" />
 
-    <access origin="*" subdomains="true" /> 
+    <access origin="*" /> 
+    <!-- Wildcards are allowed for the protocol, as a prefix
+     to the host, or as a suffix to the path -->
+    <allow-intent href="*://*.parseapi.back4app.com/*" />
 </widget>
