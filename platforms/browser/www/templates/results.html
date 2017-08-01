@@ -70,9 +70,9 @@
 			        
 			        fileWriter.seek(fileWriter.length);
 			        
-			        var blob = new Blob([log], {type:'text/csv'});
-			        console.log(blob);
-			        fileWriter.write(blob);
+			        // var blob = new Blob([log], {type:'text/csv'});
+			        // console.log(blob);
+			        fileWriter.write(log);
 			        alert("ok, in theory i worked");
 			    }, function(){alert('createWriter Failed')});
 			}
