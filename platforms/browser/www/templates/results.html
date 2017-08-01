@@ -79,7 +79,7 @@
 			$('#file_download').click(function(){
 				window.resolveLocalFileSystemURL(cordova.file.dataDirectory, function(dir){
 			        alert("got main dir",dir);
-			        dir.getFile("download/log.csv", {create:true}, function(file) {
+			        dir.getFile("log.csv", {create:true}, function(file) {
 			            alert("got the file", file);
 			            logOb = file;
 			            writeLog("App started");          
