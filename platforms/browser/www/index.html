@@ -56,6 +56,16 @@
 			};
 			window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function (fs) {
 			   	window.file_system = fs;
+			   	function onRequestFileSystemSuccess(fileSystem) { 
+			        var entry=fileSystem.root; 
+			        entry.getDirectory(cordova.file.dataDirectory, {create: true, exclusive: false}, function(){
+			        		console.log('Directory Created')
+			        	}, 
+			        	function(){
+			        		console.log('Could not create directory');
+			        	}	
+			        ); 
+				} 
 			}, window.onErrorLoadFs);
 		});
 		$(document).ready(function(){

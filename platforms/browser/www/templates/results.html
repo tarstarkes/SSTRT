@@ -22,7 +22,7 @@
 	$(document).ready(function(){
 		function export_to_csv(results){
 			var race = JSON.parse(window.localStorage.getItem('race'))
-			var filename = "Results-"+race.race_key+'.csv';
+			var filename = "Results"+race.race_key+'.csv';
 			var file;
 			var data;
 			var link;
