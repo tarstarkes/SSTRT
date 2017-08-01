@@ -45,7 +45,6 @@
 			link.innerHTML = filename;
 			$('#link_box').html(link);*/
 
-
 			window.file_system.root.getFile(filename, { create: true, exclusive: false }, function (fileEntry) {
 
 			        console.log("fileEntry is file?" + fileEntry.isFile.toString());
@@ -62,7 +61,7 @@
 				var url = cordova.file.dataDirectory;
 
 				fileTransfer.download(
-					window.saved_file.localURL,
+					encodeURI(window.saved_file.localURL),
 					url,
 					function(entry){
 						alert('Download Complete '+entry.toURL());
