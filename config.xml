@@ -65,12 +65,6 @@
         <icon qualifier="xhdpi" src="/www/img/logos/SSTRT_96.png" />
         <icon qualifier="xxhdpi" src="/www/img/logos/SSTRT144.png" />
         <icon qualifier="xxxhdpi" src="/www/img/logos/SSTRT_192.png" />
-        <!-- <splash qualifier="" src="./www/img/logos/SSTRT_SPLASH_240X320.png" />
-        <splash qualifier="" src="./www/img/logos/SSTRT_SPLASH_320x480.png" />
-        <splash qualifier="" src="./www/img/logos/SSTRT_SPLASH_420x800.png" />
-        <splash qualifier="" src="./www/img/logos/SSTRT_SPLASH_720x1280.png" />
-        <splash qualifier="" src="./www/img/logos/SSTRT_SPLASH_960x1600.png" />
-        <splash qualifier="" src="./www/img/logos/SSTRT_SPLASH_1280x1920.png" /> -->
     </platform>
     <platform name="winphone">
     </platform>
@@ -79,6 +73,8 @@
     <preference name="AndroidPersistentFileLocation" value="Internal" />
     <preference name="iosPersistentFileLocation" value="Library" />
 
+
+    <gap:plugin name="cordova-plugin-whitelist" source="npm" />
     <access origin="*" /> 
     <!-- Wildcards are allowed for the protocol, as a prefix
      to the host, or as a suffix to the path -->
