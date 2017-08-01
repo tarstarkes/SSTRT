@@ -3,9 +3,13 @@
     <name>SSTRT</name>
     <description>Start Stop Team Relay Timer records contestant times for team relay running. Initially built for the benefit of the Notheastern Oregon Elkhorn Relay.</description>
     <author email="stonec2@eou.edu" href="https://github.com/tarstarkes">Connar Stone</author>
+    <gap:plugin name="cordova-plugin-whitelist" source="npm" />
     <access origin="*" />
     <allow-intent href="*" />
     <allow-navigation href="*" />
+    <gap:config-file parent="/manifest" platform="android">
+        <application android:debuggable="true" />
+    </gap:config-file>
     <preference name="phonegap-version" value="cli-6.3.0" />
     <preference name="android-build-tool" value="gradle" />
     <preference name="orientation" value="default" />

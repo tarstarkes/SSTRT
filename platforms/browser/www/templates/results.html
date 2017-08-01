@@ -39,15 +39,11 @@
 			        // fileEntry.fullPath == '/someFile.txt'
 			        window.write_file(fileEntry, results);
 
-			    }, window.onErrorCreateFile);
+		    }, window.onErrorCreateFile);
 
-			var reader = new FileReader();
-			reader.onloadend = function(evt){
-				//reader.readAsDataURL(window.saved_file);
-				console.log('READ SUCCESS!');
-				file = this.result;
+			if(window.saved_file.localURL != undefined){
+				$('#link_box').html('<a href="'+window.saved_file.localURL+' download">'+window.saved_file.name+'</a>');
 			}
-			$('#link_box').append(reader.readAsText(window.saved_file));
 
 		}
 
