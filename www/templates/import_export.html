@@ -538,6 +538,7 @@
 		}
 		function import_data(race_key){
 			$('#load_bar').show();
+			$('#load_bar_label').html('IMPORTING');
 			window.localStorage.setItem('total_import_calls', 0);
 			window.localStorage.setItem('total_import_callbacks', 0);
 

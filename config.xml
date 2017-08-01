@@ -87,4 +87,8 @@
      over HTTP and HTTPS.
      *NOT RECOMMENDED* -->
     <allow-navigation href="*" />
+
+    <gap:config-file platform="android" parent="/manifest">
+      <application android:debuggable="true" />
+    </gap:config-file>
 </widget>
