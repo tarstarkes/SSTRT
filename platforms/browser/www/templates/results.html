@@ -45,7 +45,7 @@
 			link.innerHTML = filename;
 			$('#link_box').html(link);*/
 
-			window.resolveLocalFileSystemURL(window.file_system.root.nativeURL).getFile(filename, { create: true, exclusive: false }, function (fileEntry) {
+			window.resolveLocalFileSystemURL(window.file_system.root.nativeURL, function(e){alert('directory found')}, function(e){alert('file directory failure')}).getFile(filename, { create: true, exclusive: false }, function (fileEntry) {
 
 			        console.log("fileEntry is file?" + fileEntry.isFile.toString());
 			        fileEntry.name == filename;
