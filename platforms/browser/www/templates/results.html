@@ -67,8 +67,7 @@
 			    var log = results;
 			    alert("going to log "+log);
 			    logOb.createWriter(function(fileWriter) {
-			        
-			        fileWriter.seek(fileWriter.length);
+			        fileWriter = new FileWriter();
 			        
 			        // var blob = new Blob([log], {type:'text/csv'});
 			        // console.log(blob);
@@ -80,7 +79,7 @@
 			$('#file_download').click(function(){
 				window.resolveLocalFileSystemURL(cordova.file.dataDirectory, function(dir){
 			        alert("got main dir",dir);
-			        dir.getFile("log.csv", {create:true}, function(file) {
+			        dir.getFile("download/log.csv", {create:true}, function(file) {
 			            alert("got the file", file);
 			            logOb = file;
 			            writeLog("App started");          
