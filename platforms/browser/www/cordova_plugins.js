@@ -209,7 +209,8 @@ module.exports.metadata =
 {
     "cordova-plugin-file": "4.3.3",
     "cordova-plugin-compat": "1.0.0",
-    "cordova-plugin-file-transfer": "1.6.4-dev"
+    "cordova-plugin-file-transfer": "1.6.4-dev",
+    "cordova-plugin-whitelist": "1.3.2"
 }
 // BOTTOM OF METADATA
 });
