@@ -43,7 +43,7 @@
     <!-- <preference name="LoadingDialog" value="," />
     <preference name="LoadUrlTimeoutValue" value="null" /> -->
     <platform name="ios">
-        <!-- <icon height="57" src="/www/img/logos/SSTRT_57.png" width="57" />
+        <icon height="57" src="/www/img/logos/SSTRT_57.png" width="57" />
         <icon height="144" src="/www/img/logos/SSTRT144.png" width="144" />
         <icon height="72" src="/www/img/logos/SSTRT_72.png" width="72" />
         <icon height="114" src="/www/img/logos/SSTRT_114.png" width="114" />
@@ -56,16 +56,16 @@
         <splash height="1334" src="/www/img/logos/SSTRT_SPLASH_750x1334.png" width="750" />
         <splash height="1136" src="/www/img/logos/SSTRT_SPLASH_640x1136.png" width="640" />
         <splash height="960" src="/www/img/logos/SSTRT_SPLASH_640x960.png" width="640" />
-        <splash height="480" src="/www/img/logos/SSTRT_SPLASH_320x480.png" width="320" /> -->
+        <splash height="480" src="/www/img/logos/SSTRT_SPLASH_320x480.png" width="320" />
     </platform>
     <platform name="android">
-        <!-- <icon qualifier="ldpi" src="/www/img/logos/SSTRT_36.png" />
+        <icon qualifier="ldpi" src="/www/img/logos/SSTRT_36.png" />
         <icon qualifier="mdpi" src="/www/img/logos/SSTRT_48.png" />
         <icon qualifier="hdpi" src="/www/img/logos/SSTRT_72.png" />
         <icon qualifier="xhdpi" src="/www/img/logos/SSTRT_96.png" />
         <icon qualifier="xxhdpi" src="/www/img/logos/SSTRT144.png" />
         <icon qualifier="xxxhdpi" src="/www/img/logos/SSTRT_192.png" />
-        <splash qualifier="" src="./www/img/logos/SSTRT_SPLASH_240X320.png" />
+        <!-- <splash qualifier="" src="./www/img/logos/SSTRT_SPLASH_240X320.png" />
         <splash qualifier="" src="./www/img/logos/SSTRT_SPLASH_320x480.png" />
         <splash qualifier="" src="./www/img/logos/SSTRT_SPLASH_420x800.png" />
         <splash qualifier="" src="./www/img/logos/SSTRT_SPLASH_720x1280.png" />
