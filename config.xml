@@ -82,5 +82,5 @@
     <access origin="*" /> 
     <!-- Wildcards are allowed for the protocol, as a prefix
      to the host, or as a suffix to the path -->
-    <allow-intent href="*://*.parseapi.back4app.com/*" />
+    <allow-intent href="*" />
 </widget>
