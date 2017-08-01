@@ -78,4 +78,6 @@
     <plugin name="cordova-plugin-file" spec="~4.3.3" />
     <preference name="AndroidPersistentFileLocation" value="Internal" />
     <preference name="iosPersistentFileLocation" value="Library" />
+
+    <access origin="http://phonegap.com" subdomains="true" /> 
 </widget>
