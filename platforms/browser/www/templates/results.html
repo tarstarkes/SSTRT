@@ -20,6 +20,7 @@
 			var filename = "Results-"+race.race_key+'.csv';
 			var file;
 			var data;
+			var link;
 
 			if(results == null || results == ""){
 				return(alert('Could not export CSV - the result string is empty'));
@@ -32,18 +33,26 @@
 				data = encodeURI(results);
 			}
 
-			window.file_system.root.getFile(filename, { create: true, exclusive: false }, function (fileEntry) {
+			link = document.createElement('a');
+			link.setAttribute('href', data);
+			link.setAttribute('download', filename);
+			link.innerHTML = filename;
+			debugger;
+			$('#link_box').html(link);
 
-			        console.log("fileEntry is file?" + fileEntry.isFile.toString());
-			        // fileEntry.name == 'someFile.txt'
-			        // fileEntry.fullPath == '/someFile.txt'
-			        window.write_file(fileEntry, results);
 
-		    }, window.onErrorCreateFile);
+			// window.file_system.root.getFile(filename, { create: true, exclusive: false }, function (fileEntry) {
 
-			if(window.saved_file.localURL != undefined){
-				$('#link_box').html('<a href="'+window.saved_file.localURL+' download">'+window.saved_file.name+'</a>');
-			}
+			//         console.log("fileEntry is file?" + fileEntry.isFile.toString());
+			//         // fileEntry.name == 'someFile.txt'
+			//         // fileEntry.fullPath == '/someFile.txt'
+			//         window.write_file(fileEntry, results);
+
+		 //    }, window.onErrorCreateFile);
+
+			// if(window.saved_file.localURL != undefined){
+			// 	$('#link_box').html('<a href="'+window.saved_file+' download">'+window.saved_file.name+'</a>');
+			// }
 
 		}
 
