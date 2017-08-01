@@ -54,5 +54,5 @@
     <gap:config-file parent="/manifest" platform="android">
         <application android:debuggable="true" />
     </gap:config-file>
-    <plugin name="cordova-plugin-file-transfer" spec="~1.6.4-dev" />
+    <plugin name="cordova-plugin-file-transfer" source="npm" spec="~1.6.4-dev" />
 </widget>
