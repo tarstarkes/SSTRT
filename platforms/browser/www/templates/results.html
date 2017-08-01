@@ -60,25 +60,54 @@
 			// 		alert('file directory failure')
 			// 	});
 
+
 			$('#link_box').html('<a href="javascript:void(0);" id="file_download">'+filename+'</a>');
-			
+			function writeLog(str) {
+			    if(!logOb) return;
+			    var log = results;
+			    alert("going to log "+log);
+			    logOb.createWriter(function(fileWriter) {
+			        
+			        fileWriter.seek(fileWriter.length);
+			        
+			        var blob = new Blob([log], {type:'text/csv'});
+			        console.log(blob);
+			        fileWriter.write(blob);
+			        alert("ok, in theory i worked");
+			    }, function(){alert('createWriter Failed')});
+			}
+
 			$('#file_download').click(function(){
-				var fileTransfer = new FileTransfer();
-				var url = cordova.file.dataDirectory+filename;
-				console.log(results);
-				fileTransfer.download(
-					results,
-					url,
-					function(entry){
-						alert('Download Complete '+entry.toURL());
-					},
-					function(error){
-						alert('Error occured while downloading! '+error.code);
-					},
-					false,
-					{}
-				);
+				window.resolveLocalFileSystemURL(cordova.file.dataDirectory, function(dir){
+			        alert("got main dir",dir);
+			        dir.getFile("log.csv", {create:true}, function(file) {
+			            alert("got the file", file);
+			            logOb = file;
+			            writeLog("App started");          
+			        });
+			    });
 			});
+
+			// $('#link_box').html('<a href="javascript:void(0);" id="file_download">'+filename+'</a>');
+			
+			// $('#file_download').click(function(){
+			// 	var fileTransfer = new FileTransfer();
+			// 	var url = cordova.file.dataDirectory+filename;
+			// 	console.log(url);
+			// 	fileTransfer.download(
+			// 		results,
+			// 		url,
+			// 		function(entry){
+			// 			console.log(entry);
+			// 			alert('Download Complete '+entry.toURL());
+			// 		},
+			// 		function(error){
+			// 			alert('Error occured while downloading! '+error.code);
+			// 		},
+			// 		false,
+			// 		{}
+			// 	);
+			// });
 
 		}
 
