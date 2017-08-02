@@ -40,7 +40,7 @@
 			        // If data object is not passed in,
 			        // create a new Blob instead.
 			        if (!dataObj) {
-			            dataObj = new Blob([dataObj], { type: 'text/plain' });
+			            dataObj = new Blob([dataObj], { type: 'text/csv' });
 			        }
 
 			        fileWriter.write(dataObj);
