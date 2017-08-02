@@ -58,7 +58,7 @@
 			window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function (fs) {
 			   	window.file_system = fs;
 		        var entry=cordova.file.dataDirectory; 
-		        window.resolveLocalFileSystemURL(cordova.file.dataDirectory, function(entry){
+		        window.resolveLocalFileSystemURL(cordova.file.cacheDirectory, function(entry){
 		        	window.write_file = function write_file(filename, blob){
 				        entry.getFile(filename, { create: true, exclusive: false }, function (fileEntry) {
 
