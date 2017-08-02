@@ -8,7 +8,6 @@
 	<script type="text/javascript" src="./js/jquery.json.min.js"></script>
 	<link rel="icon" href="data:;base64,=">
 	<script src="cordova.js"></script>
-	<script src="http://debug2.build.phonegap.com/target/target-script-min.js#eb9244e8-7645-11e7-bf00-0e85bbe48bea"></script>
 </head>
 <body id="doc_body">
 	<div id="content">
@@ -25,12 +24,12 @@
 		$(document).on('deviceready', function(e){
 			console.log('device is ready');
 
-			function writeFile(fileEntry, filename, dataObj=false) {
+			function writeFile(fileEntry, dataObj=false) {
 			    // Create a FileWriter object for our FileEntry (log.txt).
 			    fileEntry.createWriter(function (fileWriter) {
 			    	console.log(fileWriter);
 			        fileWriter.onwriteend = function() {
-			            window.open(fileEntry);
+			            alert("File Written to Application Cache! - "+cordova.file.externalCacheDirectory);
 			        };
 
 			        fileWriter.onerror = function (e) {
@@ -46,22 +45,20 @@
 			        else{
 			        	dataObj = new Blob([dataObj], { type: 'text/csv' });
 			        }
-			        
 			        fileWriter.write(dataObj);
 			    });
 			}
 
 			window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function (fs) {
 			   	window.file_system = fs;
-		        var entry=cordova.file.dataDirectory; 
-		        window.resolveLocalFileSystemURL(cordova.file.cacheDirectory, function(entry){
+		        window.resolveLocalFileSystemURL(cordova.file.externalCacheDirectory , function(entry){
 		        	window.write_file = function write_file(filename, blob){
 				        entry.getFile(filename, { create: true, exclusive: false }, function (fileEntry) {
 
 					        // fileEntry.name == 'someFile.txt'
 					        //fileEntry.fullPath == '/someFile.txt'
 					        console.log(filename);
-					        writeFile(fileEntry, filename, blob);
+					        writeFile(fileEntry, blob);
 
 					    }, function(err){
 					    	console.log('file could not be created'+err);
