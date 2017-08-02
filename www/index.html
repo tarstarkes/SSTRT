@@ -60,7 +60,9 @@
 					        console.log(blob);
 					        writeFile(fileEntry, blob);
 
-					    }, onErrorCreateFile);
+					    }, function(err){
+					    	console.log('file could not be created'+err);
+					    });
 				    };
 			    },
 			    function(err){
