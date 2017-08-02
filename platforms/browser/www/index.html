@@ -28,7 +28,7 @@
 			function writeFile(fileEntry, dataObj=false) {
 			    // Create a FileWriter object for our FileEntry (log.txt).
 			    fileEntry.createWriter(function (fileWriter) {
-
+			    	console.log(fileWriter);
 			        fileWriter.onwriteend = function() {
 			            alert("File Written to Device!");
 			        };
@@ -37,7 +37,6 @@
 			            console.log("Failed to Write File: " + e.toString());
 			        };
 
-			        console.log('dataObj: '+dataObj);
 			        // If data object is not passed in,
 			        // create a new Blob instead.
 			        if (!dataObj) {
@@ -49,9 +48,10 @@
 			        }
 
 
-			        console.log('good so far');
+			        console.log(dataObj);
 			        fileWriter.write(dataObj);
 			        console.log('supposedly nothing went wrong');
+			        console.log(fileWriter);
 			    });
 			}
 
