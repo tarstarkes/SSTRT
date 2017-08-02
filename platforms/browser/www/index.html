@@ -30,13 +30,7 @@
 			    fileEntry.createWriter(function (fileWriter) {
 			    	console.log(fileWriter);
 			        fileWriter.onwriteend = function() {
-			            fileEntry.getFile(filename, { create: false }, function (file) {
-					        window.open(fileEntry);
-
-					    }, function(err){
-					    	console.log('could not file file'+err);
-					    });
-
+			            window.open(fileEntry);
 			        };
 
 			        fileWriter.onerror = function (e) {
