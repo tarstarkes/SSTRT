@@ -37,13 +37,21 @@
 			            console.log("Failed to Write File: " + e.toString());
 			        };
 
+			        console.log('dataObj: '+dataObj);
 			        // If data object is not passed in,
 			        // create a new Blob instead.
 			        if (!dataObj) {
-			            dataObj = new Blob([dataObj], { type: 'text/csv' });
+			        	console.log('creating blob because blob did not exist');
+			            dataObj = new Blob(['BLOB'], { type: 'text/csv' });
+			        }
+			        else{
+			        	dataObj = new Blob([dataObj], { type: 'text/csv' });
 			        }
 
+
+			        console.log('good so far');
 			        fileWriter.write(dataObj);
+			        console.log('supposedly nothing went wrong');
 			    });
 			}
 
@@ -52,12 +60,11 @@
 		        var entry=cordova.file.dataDirectory; 
 		        window.resolveLocalFileSystemURL(cordova.file.dataDirectory, function(entry){
 		        	window.write_file = function write_file(filename, blob){
-				        entry.getFile("newPersistentFile.txt", { create: true, exclusive: false }, function (fileEntry) {
+				        entry.getFile(filename, { create: true, exclusive: false }, function (fileEntry) {
 
 					        // fileEntry.name == 'someFile.txt'
-					        // fileEntry.fullPath == '/someFile.txt'
+					        //fileEntry.fullPath == '/someFile.txt'
 					        console.log(filename);
-					        console.log(blob);
 					        writeFile(fileEntry, blob);
 
 					    }, function(err){
@@ -66,7 +73,7 @@
 				    };
 			    },
 			    function(err){
-			    	alert("Could not retrieve device filesystem");
+			    	console.log("Could not retrieve device filesystem");
 			    });
 			}, function(){console.log('fs load error')});
 		});
