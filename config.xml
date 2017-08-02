@@ -45,8 +45,7 @@
     <platform name="winphone">
     </platform>
     <plugin name="cordova-plugin-file" spec="~4.3.3" />
-    <preference name="AndroidPersistentFileLocation" value="Compatibility" />
-	<preference name="AndroidExtraFilesystems" value="files,cache, sdcard, cache-external, files-external" />
+    <preference name="AndroidPersistentFileLocation" value="Internal" />
 	<preference name="iosPersistentFileLocation" value="Library" />
     <plugin name="cordova-plugin-whitelist" spec="~1.3.2" />
     <access origin="*" />
