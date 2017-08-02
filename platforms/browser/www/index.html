@@ -25,12 +25,18 @@
 		$(document).on('deviceready', function(e){
 			console.log('device is ready');
 
-			function writeFile(fileEntry, dataObj=false) {
+			function writeFile(fileEntry, filename, dataObj=false) {
 			    // Create a FileWriter object for our FileEntry (log.txt).
 			    fileEntry.createWriter(function (fileWriter) {
 			    	console.log(fileWriter);
 			        fileWriter.onwriteend = function() {
-			            alert("File Written to Device!");
+			            fileEntry.getFile(filename, { create: false }, function (file) {
+					        window.open(fileEntry);
+
+					    }, function(err){
+					    	console.log('could not file file'+err);
+					    });
+
 			        };
 
 			        fileWriter.onerror = function (e) {
@@ -46,12 +52,8 @@
 			        else{
 			        	dataObj = new Blob([dataObj], { type: 'text/csv' });
 			        }
-
-
-			        console.log(dataObj);
+			        
 			        fileWriter.write(dataObj);
-			        console.log('supposedly nothing went wrong');
-			        console.log(fileWriter);
 			    });
 			}
 
@@ -65,7 +67,7 @@
 					        // fileEntry.name == 'someFile.txt'
 					        //fileEntry.fullPath == '/someFile.txt'
 					        console.log(filename);
-					        writeFile(fileEntry, blob);
+					        writeFile(fileEntry, filename, blob);
 
 					    }, function(err){
 					    	console.log('file could not be created'+err);
