@@ -42,6 +42,14 @@
 </style>
 <script>
 	$(document).ready(function(){
+		function download_csv(filename, blob){
+			if(window.write_file != undefined){
+				window.write_file(filename, blob);
+			}
+			else{
+				alert("Could not write file to device - filesystem structure error");
+			}
+		}
 		function show_table(results){
 			console.log(results);
 			results = results.replace('\n', ';');
@@ -85,19 +93,21 @@
 				data = encodeURI(results);
 			}
 
-			//THINK ABOUT MAYBE TRYING TO USE THE FILE TRANSFER PLUGIN INSTEAD
-			link = document.createElement('a');
-			link.setAttribute('href', data);
-			link.setAttribute('download', filename);
-			link.innerHTML = filename;
-			$('#link_box').html(link);
+			// link = document.createElement('a');
+			// link.setAttribute('href', data);
+			// link.setAttribute('download', filename);
+			// link.innerHTML = filename;
+			// $('#link_box').html(link);
 
 
 
-			$('#link_box').html('<a href="mailto:?subject=SSTRT CSV File&body='+link+'" target="_blank" id="file_download">Send CSV via email</a>');
+			$('#link_box').html('<a href="javascript:void(0)" id="file_download">Save to device as .csv</a>');
 
 			show_table(string_data);
 
+			$('#file_download').click(function(){
+				download_csv(filename, data);
+			});
 
 		}
 

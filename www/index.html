@@ -22,54 +22,51 @@
 		</tr>
 	</table>
 	<script>
-		$(document).on("deviceready", function() {
+		$(document).on('deviceready', function(e){
 			console.log('device is ready');
-			window.onErrorCreateFile = function onErrorCreateFile(){
-				console.log('onErrorCreateFile Fired!');
-			};
-			window.onErrorLoadFs = function onErrorLoadFs(){
-				console.log('onErrorLoadFs Fired!');
-			};
-			window.write_file = function writeFile(fileEntry, dataObj) {
+
+			function writeFile(fileEntry, dataObj=false) {
 			    // Create a FileWriter object for our FileEntry (log.txt).
 			    fileEntry.createWriter(function (fileWriter) {
 
-			        fileWriter.onwriteend = function(evt) {
-			            alert("File Written: "+evt);
-			            debugger;
-			            window.file_writer = fileWriter;
-			            window.write_file_event = evt;
+			        fileWriter.onwriteend = function() {
+			            alert("File Written to Device!");
 			        };
 
 			        fileWriter.onerror = function (e) {
-			            console.log("Failed file write: " + e.toString());
+			            console.log("Failed to Write File: " + e.toString());
 			        };
 
 			        // If data object is not passed in,
 			        // create a new Blob instead.
 			        if (!dataObj) {
-			            dataObj = new Blob([dataObj], { type: 'text/plain'});
+			            dataObj = new Blob([dataObj], { type: 'text/plain' });
 			        }
+
 			        fileWriter.write(dataObj);
-			        return dataObj;
 			    });
-			};
+			}
+
 			window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function (fs) {
 			   	window.file_system = fs;
-			}, window.onErrorLoadFs);
+		        var entry=cordova.file.dataDirectory; 
+		        window.resolveLocalFileSystemURL(cordova.file.dataDirectory, function(entry){
+		        	window.write_file = function write_file(filename, blob){
+				        entry.getFile("newPersistentFile.txt", { create: true, exclusive: false }, function (fileEntry) {
 
-			window.resolveLocalFileSystemURL(cordova.file.dataDirectory, function(fs){
-				fs.getDirectory('', {create: true, exclusive: false}, 
-				function(){
-					alert('directory created!')
-				},
-				function(){
-					alert('directory could not be created!')
-				});
-			}, 
-			function(err){
-				console.log(err);
-			});
+					        // fileEntry.name == 'someFile.txt'
+					        // fileEntry.fullPath == '/someFile.txt'
+					        console.log(filename);
+					        console.log(blob);
+					        writeFile(fileEntry, blob);
+
+					    }, onErrorCreateFile);
+				    };
+			    },
+			    function(err){
+			    	alert("Could not retrieve device filesystem");
+			    });
+			}, function(){console.log('fs load error')});
 		});
 		$(document).ready(function(){
 			Parse.initialize("ctdokDdZUkkDBdaKzRC5MJrx3t2hbXRQeiq2QWu4", "TitmnxPJ8jpt0WrvOsEGoZXmcgo1KAQIYCReRmWN");
