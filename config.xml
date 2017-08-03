@@ -51,8 +51,8 @@
     <access origin="*" />
     <allow-intent href="*" />
     <allow-navigation href="*" />
-    <gap:config-file parent="/manifest" platform="android">
+    <!-- <gap:config-file parent="/manifest" platform="android">
         <application android:debuggable="true" />
-    </gap:config-file>
+    </gap:config-file> -->
     <plugin name="cordova-plugin-file-transfer" source="npm" />
 </widget>
