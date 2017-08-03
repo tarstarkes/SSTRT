@@ -104,7 +104,7 @@
 			race_key = ""
 			dict="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*";
 			for(var i =0; i < 8; i++){
-				r_val = Math.round(Math.random()*dict.length);
+				r_val = Math.round(Math.random()*(dict.length-1));
 				race_key = race_key+dict[r_val];
 			}
 			race = {
