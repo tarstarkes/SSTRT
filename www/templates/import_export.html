@@ -289,16 +289,21 @@
 		}
 		function legs_export(t, team_object){
 			var i=0;
-			for(var j=0; j < t.leg_time.length; j++){
-				if(t.leg_time[j] != null && t.leg_time[j] != undefined){
-					i=i+1;
-					all_legs = window.localStorage.getItem('legs_to_export');
-					all_legs = parseInt(all_legs)+1;
-					window.localStorage.setItem('legs_to_export', all_legs);
+			if(t.leg_time.length > 0){
+				for(var j=0; j < t.leg_time.length; j++){
+					if(t.leg_time[j] != null && t.leg_time[j] != undefined){
+						i=i+1;
+						all_legs = window.localStorage.getItem('legs_to_export');
+						all_legs = parseInt(all_legs)+1;
+						window.localStorage.setItem('legs_to_export', all_legs);
+					}
+					if(j == (t.leg_time.length-1)){
+						run_secondary_loop(t, team_object, i);
+					}
 				}
-				if(j == (t.leg_time.length-1)){
-					run_secondary_loop(t, team_object, i)
-				}
+			}
+			else{
+				check_leg();
 			}
 		}
 		//END LEG EXPORT ---------------------------------------------

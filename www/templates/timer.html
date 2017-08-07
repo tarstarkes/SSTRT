@@ -10,8 +10,8 @@
 			<p></p>
 			<h3 style="font-size: 3vw; margin:0;margin-top:2vw;">Race Start Time</h3>
 			<input id="race_time" type="datetime-local">
-			<h3 style="font-size: 3vw; margin:0;margin-top:2vw;">Race Duration<br>days:hrs:mins:sec</h3>
-			<h4 id="race_duration" style="font-size: 2.5vw; margin:0;">--:--</h4>
+			<h3 id="race_duration_title" style="margin:0;margin-top:2vw;">Race Duration<br>days:hrs:mins:sec</h3>
+			<h4 id="race_duration" style="margin:0;margin-bottom:2vw;">--:--</h4>
 		</div>
 		<select id="leg" style="margin-top:2vw;">
 			<option val="">Transition Station #</option>
@@ -61,6 +61,13 @@
 	<style>
 		.leg_time{
 			font-size: 3vw;
+		}
+		#leg{
+			font-size: 5vw;
+		}
+		#race_duration,
+		#race_duration_title{
+			font-size: 4vw;
 		}
 	</style>
 <script>
@@ -208,11 +215,12 @@
 					}
 				}
 			window.localStorage.setItem('teams', JSON.stringify(teams));
-
-
 			}
 			else{
 				alert("You must select a 'transition station #' and a team before you can record a leg time.")
+			}
+			for(var i=0; i < $('.team_box.selected').length; i++){
+				$('.team_box.selected').removeClass('selected');
 			}
 		});
 
