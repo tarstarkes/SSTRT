@@ -18,31 +18,49 @@
     <preference name="BackupWebStorage" value="none" />
     <preference name="android-installLocation" value="auto" />
     <preference name="DisallowOverscroll" value="true" />
+    <splash src="splash.png" />
     <platform name="ios">
-        <icon height="50" src="/www/img/logos/SSTRT_50.png" width="50" />
-        <icon height="57" src="/www/img/logos/SSTRT_57.png" width="57" />
-        <icon height="144" src="/www/img/logos/SSTRT144.png" width="144" />
-        <icon height="72" src="/www/img/logos/SSTRT_72.png" width="72" />
-        <icon height="114" src="/www/img/logos/SSTRT_114.png" width="114" />
-        <icon height="60" src="/www/img/logos/SSTRT_60.png" width="60" />
-        <icon height="120" src="/www/img/logos/SSTRT_120.png" width="120" />
-        <icon height="180" src="/www/img/logos/SSTRT_180.png" width="180" />
-        <icon height="76" src="/www/img/logos/SSTRT_76.png" width="76" />
-        <icon height="152" src="/www/img/logos/SSTRT_152.png" width="152" />
-        <icon height="512" src="/www/img/logos/SSTRT_512x512.png" width="512" />
-        <splash height="2208" src="/www/img/logos/SSTRT_SPLASH_1242x2208.png" width="1242" />
-        <splash height="1334" src="/www/img/logos/SSTRT_SPLASH_750x1334.png" width="750" />
-        <splash height="1136" src="/www/img/logos/SSTRT_SPLASH_640x1136.png" width="640" />
-        <splash height="960" src="/www/img/logos/SSTRT_SPLASH_640x960.png" width="640" />
-        <splash height="480" src="/www/img/logos/SSTRT_SPLASH_320x480.png" width="320" />
+        <!-- iPhone 6 / 6+ -->
+        <icon src="icon-60@3x.png" platform="ios" width="180" height="180" />
+
+        <!-- iPhone / iPod Touch  -->
+        <icon src="icon-60.png" platform="ios" width="60" height="60" />
+        <icon src="icon-60@2x.png" platform="ios" width="120" height="120" />
+
+        <!-- iPad -->
+        <icon src="icon-76.png" platform="ios" width="76" height="76" />
+        <icon src="icon-76@2x.png" platform="ios" width="152" height="152" />
+        <icon src="icon-83.5@2x.png" platform="ios" width="167" height="167" />
+
+        <!-- Settings Icon -->
+        <icon src="icon-small.png" platform="ios" width="29" height="29" />
+        <icon src="icon-small@2x.png" platform="ios" width="58" height="58" />
+        <icon src="icon-small@3x.png" platform="ios" width="87" height="87" />
+
+        <!-- Spotlight Icon -->
+        <icon src="icon-40.png" platform="ios" width="40" height="40" />
+        <icon src="icon-40@2x.png" platform="ios" width="80" height="80" />
+        <icon src="icon-40@3x.png" platform="ios" width="120" height="120" />
+
+        <!-- iPhone / iPod Touch -->
+        <icon src="icon.png" platform="ios" width="57" height="57" />
+        <icon src="icon@2x.png" platform="ios" width="114" height="114" />
+
+        <!-- iPad -->
+        <icon src="icon-72.png" platform="ios" width="72" height="72" />
+        <icon src="icon-72@2x.png" platform="ios" width="144" height="144" />
+
+        <!-- iPad Spotlight and Settings Icon -->
+        <icon src="icon-50.png" platform="ios" width="50" height="50" />
+        <icon src="icon-50@2x.png" platform="ios" width="100" height="100" />
     </platform>
     <platform name="android">
-        <icon qualifier="ldpi" src="/www/img/logos/SSTRT_36.png" />
-        <icon qualifier="mdpi" src="/www/img/logos/SSTRT_48.png" />
-        <icon qualifier="hdpi" src="/www/img/logos/SSTRT_72.png" />
-        <icon qualifier="xhdpi" src="/www/img/logos/SSTRT_96.png" />
-        <icon qualifier="xxhdpi" src="/www/img/logos/SSTRT144.png" />
-        <icon qualifier="xxxhdpi" src="/www/img/logos/SSTRT_192.png" />
+        <icon qualifier="ldpi" src="ldpi.png" />
+        <icon qualifier="mdpi" src="mdpi.png" />
+        <icon qualifier="hdpi" src="hdpi.png" />
+        <icon qualifier="xhdpi" src="xhdpi.png" />
+        <icon qualifier="xxhdpi" src="xxhdpi.png" />
+        <icon qualifier="xxxhdpi" src="xxxhdpi.png" />
     </platform>
     <platform name="winphone">
     </platform>
