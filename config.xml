@@ -6,7 +6,7 @@
     <feature name="http://api.phonegap.com/1.0/file" />
     <feature name="http://api.phonegap.com/1.0/media" />
     <feature name="http://api.phonegap.com/1.0/network" />
-    <preference name="phonegap-version" value="cli-6.3.0" />
+    <preference name="phonegap-version" value="cli-6.5.0" />
     <preference name="android-build-tool" value="gradle" />
     <preference name="orientation" value="portrait" />
     <preference name="fullscreen" value="false" />
@@ -38,6 +38,18 @@
         <icon height="40" src="icon-40.png" width="40" />
         <icon height="80" src="icon-40@2x.png" width="80" />
         <icon height="120" src="icon-40@3x.png" width="120" />
+
+        <!-- iPhone / iPod Touch -->
+        <icon src="icon.png" width="57" height="57" />
+        <icon src="icon@2x.png" width="114" height="114" />
+
+        <!-- iPad -->
+        <icon src="icon-72.png" width="72" height="72" />
+        <icon src="icon-72@2x.png" width="144" height="144" />
+
+        <!-- iPad Spotlight and Settings Icon -->
+        <icon src="icon-50.png" width="50" height="50" />
+        <icon src="icon-50@2x.png" width="100" height="100"/>
     </platform>
     <platform name="android">
         <icon qualifier="ldpi" src="ldpi.png" />
