@@ -1,0 +1,56 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget id="com.connarstone.sstrt" version="1.0.5" versionCode="10" xmlns="http://www.w3.org/ns/widgets" xmlns:android="http://schemas.android.com/apk/res/android" xmlns:gap="http://phonegap.com/ns/1.0">
+    <feature name="File">
+        <param name="android-package" value="org.apache.cordova.file.FileUtils" />
+        <param name="onload" value="true" />
+    </feature>
+    <allow-navigation href="cdvfile:*" />
+    <feature name="FileTransfer">
+        <param name="android-package" value="org.apache.cordova.filetransfer.FileTransfer" />
+    </feature>
+    <feature name="StatusBar">
+        <param name="android-package" value="org.apache.cordova.statusbar.StatusBar" />
+        <param name="onload" value="true" />
+    </feature>
+    <feature name="Whitelist">
+        <param name="android-package" value="org.apache.cordova.whitelist.WhitelistPlugin" />
+        <param name="onload" value="true" />
+    </feature>
+    <name>SSTRT</name>
+    <description>Start Stop Team Relay Timer records contestant times for team relay running. Initially built for the benefit of the Notheastern Oregon Elkhorn Relay.</description>
+    <author email="stonec2@eou.edu" href="https://github.com/tarstarkes">Connar Stone</author>
+    <splash height="480" platform="ios" src="Default.png" width="320" />
+    <splash height="960" platform="ios" src="Default@2x.png" width="640" />
+    <splash height="1136" platform="ios" src="Default-568h@2x.png" width="640" />
+    <splash height="1334" platform="ios" src="Default-667h@2x.png" width="750" />
+    <splash height="2208" platform="ios" src="Default-Portrait-736h@3x.png" width="1242" />
+    <splash height="1024" platform="ios" src="Default-Portrait.png" width="768" />
+    <splash height="2048" platform="ios" src="Default-Portrait@2x.png" width="1536" />
+    <access origin="*" />
+    <allow-intent href="*" />
+    <allow-navigation href="*" />
+    <icon qualifier="ldpi" src="ldpi.png" />
+    <icon qualifier="mdpi" src="mdpi.png" />
+    <icon qualifier="hdpi" src="hdpi.png" />
+    <icon qualifier="xhdpi" src="xhdpi.png" />
+    <icon qualifier="xxhdpi" src="xxhdpi.png" />
+    <icon qualifier="xxxhdpi" src="xxxhdpi.png" />
+    <preference name="loglevel" value="DEBUG" />
+    <preference name="phonegap-version" value="cli-6.3.0" />
+    <preference name="android-build-tool" value="gradle" />
+    <preference name="orientation" value="portrait" />
+    <preference name="fullscreen" value="false" />
+    <preference name="target-device" value="universal" />
+    <preference name="webviewbounce" value="true" />
+    <preference name="ios-statusbarstyle" value="default" />
+    <preference name="exit-on-suspend" value="false" />
+    <preference name="EnableViewportScale" value="false" />
+    <preference name="BackupWebStorage" value="none" />
+    <preference name="android-installLocation" value="auto" />
+    <preference name="DisallowOverscroll" value="true" />
+    <preference name="AndroidPersistentFileLocation" value="Internal" />
+    <preference name="iosPersistentFileLocation" value="Library" />
+    <preference name="StatusBarOverlaysWebView" value="false" />
+    <preference name="StatusBarBackgroundColor" value="#000000" />
+    <preference name="StatusBarStyle" value="lightcontent" />
+</widget>

@@ -1,0 +1,272 @@
+<div id="header">
+	<center>
+		<h3>Timer</h3>
+	</center>
+</div>
+<div id="body">
+	<center>
+		<div id="clock">
+			<h3 style="font-size: 3vw; margin:0;margin-top:2vw;">Current Time</h3>
+			<p></p>
+			<h3 style="font-size: 3vw; margin:0;margin-top:2vw;">Race Start Time</h3>
+			<input id="race_time" type="datetime-local">
+			<h3 id="race_duration_title" style="margin:0;margin-top:2vw;">Race Duration<br>days:hrs:mins:sec</h3>
+			<h4 id="race_duration" style="margin:0;margin-bottom:2vw;">--:--</h4>
+		</div>
+		<select id="leg" style="margin-top:2vw;">
+			<option val="">Transition Station #</option>
+			<option val="1">1</option>
+			<option val="2">2</option>
+			<option val="3">3</option>
+			<option val="4">4</option>
+			<option val="5">5</option>
+			<option val="6">6</option>
+			<option val="7">7</option>
+			<option val="8">8</option>
+			<option val="9">9</option>
+			<option val="10">10</option>
+			<option val="11">11</option>
+			<option val="12">12</option>
+			<option val="13">13</option>
+			<option val="14">14</option>
+			<option val="15">15</option>
+			<option val="16">16</option>
+			<option val="17">17</option>
+			<option val="18">18</option>
+			<option val="19">19</option>
+			<option val="20">20</option>
+			<option val="21">21</option>
+			<option val="22">22</option>
+			<option val="23">23</option>
+			<option val="24">24</option>
+			<option val="25">25</option>
+			<option val="26">26</option>
+			<option val="27">27</option>
+			<option val="28">28</option>
+			<option val="29">29</option>
+			<option val="30">30</option>
+			<option val="31">31</option>
+			<option val="32">32</option>
+			<option val="33">33</option>
+			<option val="34">34</option>
+			<option val="35">35</option>
+			<option val="36">36</option>
+		</select>
+	<div id="all_teams">
+		
+	</div>
+	<button id="record_leg" class="ui_button" style="margin-top: 4vw;margin-bottom: 4vw; padding: 4vw;font-size: 5vw" onclick="click_feedback(this);">LEG COMPLETE</button>
+	<button id="clear_leg" class="ui_button" style="margin-top: 4vw;margin-bottom: 4vw; padding: 4vw;font-size: 5vw" onclick="click_feedback(this);">CLEAR TIME</button>
+	</center>
+	<style>
+		.leg_time{
+			font-size: 3vw;
+		}
+		#leg{
+			font-size: 5vw;
+		}
+		#race_duration,
+		#race_duration_title{
+			font-size: 4vw;
+		}
+	</style>
+<script>
+	$(document).ready(function(){
+		race_object = JSON.parse(window.localStorage.getItem('race'));
+		if(race_object != null && race_object.race_time != null){
+			var race = JSON.parse(window.localStorage.getItem('race'));
+			var datetime = race.race_time.split(', ');
+			//DATE
+			var date = datetime[0].split('/');
+			var month = date[0];
+			if(parseInt(month) < 10){
+				month = "0"+month;
+			}
+			var day = date[1];
+			if(parseInt(day) < 10){
+				day = "0"+day;
+			}
+			var year = date[2];
+			//TIME
+			var time = datetime[1].split(':');
+			var hour = time[0];
+			if(parseInt(hour) < 10){
+				hour = "0"+hour;
+			}
+			var minute = time[1];
+			var second = time[2].split(' ')[0];
+			var am_pm = time[2].split(' ')[1];
+			if(parseInt(hour) == 12 && am_pm == "AM"){
+				hour = "00";
+			}
+			else if(am_pm == "PM" && parseInt(hour) < 12){
+				hour = parseInt(hour) + 12;
+			}
+			final_date = year+"-"+month+"-"+day+"T"+hour+":"+minute+":"+second;
+			$('#race_time').val(final_date);
+			check_duration();
+		}
+
+		if(window.localStorage.getItem('race') == null){
+			race_key = ""
+			dict="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*";
+			for(var i =0; i < 8; i++){
+				r_val = Math.round(Math.random()*(dict.length-1));
+				race_key = race_key+dict[r_val];
+			}
+			race = {
+				'race_key': race_key,
+			};
+			debugger;
+			race = JSON.stringify(race);
+			window.localStorage.setItem('race', race);
+		};
+
+		if(window.localStorage.getItem('teams') != null){
+			teams = window.localStorage.getItem('teams');
+			teams = JSON.parse(window.localStorage.getItem('teams'));
+
+			for(var i=0; i < teams.length; i++){
+				t_bib = teams[i].bib_number;
+				$('#all_teams').append("<div class='team_box' id='"+t_bib+"'><center><p class='team_bib_number'>"+t_bib+"</p><p class='leg_time'>--:--</p></center></div>")
+			}
+			//SELECT TEAMS
+			$('.team_box').click(function(e){
+				if($(e.target).closest('div').css('opacity') == .5){
+					$(e.target).closest('div').removeClass('selected');
+				}
+				else{
+					$(e.target).closest('div').addClass('selected');
+				}
+				
+			});
+			$('#body').append('<p>To record a team time select one or multiple teams and then click the LEG COMPLETE button. To clear a leg time (in the event of a mistake) select one or multiple teams and click the CLEAR TIME button. </p>');
+		}
+		else{
+			$('#body').append('<p>To begin using this application, you need to add some teams or import teams from the cloud. If someone has already set up some teams using another device, click the "IMPORT CLOUD DATA TO DEVICE" button on the IMPORT/EXPORT screen. Otherwise, create some new teams using the TEAMS screen.</p>');
+		}
+		function check_duration(){
+			window.setTimeout(function(){
+				var datenow = Date.now();
+				var start_time = new Date($('#race_time').val());
+				start_time = Date.parse(start_time);
+				if (datenow > start_time){
+					duration = datenow - start_time
+				}
+				else{
+					duration = start_time - datenow
+				}
+
+			    var seconds = parseInt((duration/1000)%60);
+			    var minutes = parseInt((duration/(1000*60))%60);
+			    var hours = parseInt((duration/(1000*60*60))%24);
+			    var days = parseInt((duration/(1000*60*60*24)));
+
+			    hours = (hours < 10) ? "0" + hours : hours;
+			    minutes = (minutes < 10) ? "0" + minutes : minutes;
+			    seconds = (seconds < 10) ? "0" + seconds : seconds;
+
+				$("#race_duration").html(days + ":" + hours + ":" + minutes + ":" + seconds);
+				check_duration();
+			}, 100);
+		}
+
+		function check_time(){
+			window.setTimeout(function(){
+				var date = new Date(Date.now());
+				var time = date.toLocaleString();
+				$("#clock p").html(time);
+				check_time();
+			}, 100);
+		}
+		function start_clock(){
+			var date = new Date(Date.now());
+			var time = date.toLocaleString();
+			$("#clock p").html(time);
+			check_time();
+		}
+		start_clock();
+
+		$('#record_leg').click(function(){
+			teams = window.localStorage.getItem('teams');
+			teams = JSON.parse(window.localStorage.getItem('teams'));
+			if ($('#leg option:selected').val() != "Transition Station #"){
+				leg = parseInt($('#leg option:selected').val());
+			}
+
+			if($('#leg option:selected').val() != "Transition Station #" && $('.team_box.selected').length > 0){
+				var date = new Date(Date.now());
+				var time = date.toLocaleString();
+				var bib;
+				for(var i=0; i < $('.team_box.selected').length; i++){
+					$('.team_box.selected').children()[i].children[1].innerHTML = time;
+					bib = $($('.team_box.selected')[i]).attr('id');
+					//SAVE TIME TO LOCALSTORAGE
+					for(var j=0; j < teams.length; j++){
+						if(teams[j].bib_number != ""){
+							if(parseInt(teams[j].bib_number) == bib){
+								if(teams[j].leg_time == undefined){
+									teams[j].leg_time = [];
+								}
+								teams[j].leg_time[leg] = date.toLocaleString();
+
+							}
+						}
+					}
+				}
+			window.localStorage.setItem('teams', JSON.stringify(teams));
+			}
+			else{
+				alert("You must select a 'transition station #' and a team before you can record a leg time.")
+			}
+			for(var i=0; i < $('.team_box.selected').length; i++){
+				$('.team_box.selected').removeClass('selected');
+			}
+		});
+
+		$('#clear_leg').click(function(){
+			for(var i=0; i < $('.team_box.selected').length; i++){
+				$('.team_box.selected').children()[i].children[1].innerHTML = "--:--";
+			}
+		});
+
+		$('#leg').on('change', function(e){
+			if ($('#leg option:selected').val() != "Transition Station #"){
+				leg = parseInt($('#leg option:selected').val());
+			}
+			for(var i=0; i < $('.team_box').length; i++){
+				$('.team_box').children()[i].children[1].innerHTML = "--:--";
+			}
+
+			teams = window.localStorage.getItem('teams');
+			teams = JSON.parse(window.localStorage.getItem('teams'));
+			for(var i=0; i < teams.length; i++){
+				if(teams[i].leg_time != undefined){
+					if(teams[i].leg_time[leg] != undefined && teams[i].leg_time[leg] != null){
+						$("#"+teams[i].bib_number).children()[0].children[1].innerHTML = teams[i].leg_time[leg];
+					};
+				}
+			}
+
+			window.localStorage.setItem('current_leg', $('#leg option:selected').val()); 
+
+		});
+
+		$('#race_time').on('change', function(e){
+			var date = new Date($('#race_time').val());
+			var time = date.toLocaleString();
+			//set the race time
+			race = JSON.parse(window.localStorage.getItem('race'));
+			race = {'race_key': race.race_key, 'race_time': time};
+			window.localStorage.setItem('race', JSON.stringify(race));
+			check_duration();
+		});
+
+		if(window.localStorage.getItem('current_leg') != null){
+			$('#leg option[val="'+window.localStorage.getItem('current_leg')+'"]').attr('selected', 'selected');
+			$('#leg').trigger("change");
+		}
+
+	});
+
+</script>

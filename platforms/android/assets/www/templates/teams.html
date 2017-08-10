@@ -1,0 +1,89 @@
+<div id="header">
+	<center>
+		<h3>Teams</h3>
+	</center>
+</div>
+<div id="body">
+	<center>
+		<div id="all_teams">
+		
+		</div>
+		<button id="add_team" class="ui_button" style="margin-top: 4vw;margin-bottom: 4vw; padding: 4vw;font-size: 5vw" onclick="click_feedback(this);">ADD NEW TEAM</button>
+		<button id="delete_team" class="ui_button" style="margin-top: 4vw;margin-bottom: 4vw; padding: 4vw;font-size: 5vw" onclick="click_feedback(this);">DELETE TEAM</button>
+		<form id="new_team_form" style="display: none;">
+			<input id="team_name" name="team_name" class="form_input" placeholder="Team Name" required>
+			<input id="team_bib" name="team_bib" class="form_input" placeholder="Team Bib Number" required>
+			<input type="submit" id="team_form_submit" name="team_submit" placeholder="Team Name" value="Submit" class="inline ui_button">
+		</form>
+	</center>
+	<script>
+		if(window.localStorage.getItem('teams') != null){
+			teams = window.localStorage.getItem('teams');
+			teams = JSON.parse(window.localStorage.getItem('teams'));
+
+			for(var i=0; i < teams.length; i++){
+				t_name = teams[i].team_name;
+				t_bib = teams[i].bib_number;
+				$('#all_teams').append("<div class='team_box' id='"+t_bib+"'><center><p class='team_title'>"+t_name+"</p><p class='team_bib_number'>"+t_bib+"</p></center></div>");
+			}
+		}
+		else{
+			$('#body').prepend('<p>There are currently no teams</p>');
+		}
+		$("#add_team").click(function(){
+			if($("#new_team_form").css('display') == "none"){
+				$('#new_team_form').show();
+			}
+			else{
+				$('#new_team_form').hide();
+			}
+		});
+		//$("#team_form_submit").click(function(e){
+		$('#new_team_form').on('submit', function(e){
+			e.preventDefault();
+			teams = JSON.parse(window.localStorage.getItem('teams'));
+
+			if(window.localStorage.getItem('teams') == null){
+				teams = [];
+			}
+			teams.push({'team_name': $('#team_name').val(), 'bib_number': $('#team_bib').val()});
+			// 	teams = teams+'{"team_name": "'+$('#team_name').val()+'", "bib_number": "'+$('#team_bib').val()+'"}';
+			// }else{
+			// 	teams = teams+', {"team_name": "'+$('#team_name').val()+'", "bib_number": "'+$('#team_bib').val()+'"}';
+			// }
+			window.localStorage.setItem('teams', JSON.stringify(teams));
+
+			//reset form and hide it
+			$("#teams").trigger('click');
+			return false;
+		});
+
+		//SELECT TEAMS
+		$('.team_box').click(function(e){
+			if($(e.target).closest('div').css('opacity') == .5){
+				$(e.target).closest('div').removeClass('selected');
+			}
+			else{
+				$(e.target).closest('div').addClass('selected');
+			}
+		});
+
+		$('#delete_team').click(function(e){
+			teams = JSON.parse(window.localStorage.getItem('teams'));
+			for(var j=0; j < $(".team_box.selected").length; j++){
+				console.log($(".team_box.selected").length);
+				for(var i=0; i < teams.length; i++){
+					console.log(teams[i].bib_number.toString(), $($('.team_box.selected')[j]).attr('id').toString())
+					if(teams[i].bib_number.toString() == $($('.team_box.selected')[j]).attr('id').toString()){
+						console.log('deleted');
+						teams.splice(parseInt(i), 1);
+					}
+				}
+			}
+			$('.team_box.selected').remove()
+
+			window.localStorage.setItem('teams', JSON.stringify(teams));
+		});
+
+	</script>
+</div>

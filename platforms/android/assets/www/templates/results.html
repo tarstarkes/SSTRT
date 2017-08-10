@@ -1,0 +1,249 @@
+<div id="header">
+	<center>
+		<h3>Results</h3>
+	</center>
+</div>
+<div id="body">
+	<center>
+		<button id="results" class="ui_button" onclick="click_feedback(this);">GET FINAL RESULTS</button>
+
+		<div id="link_box">
+
+		</div>
+		<div id="table_container">
+			<table id="race_data">
+			</table>
+		</div>
+	</center>
+</div>
+<style>
+	#link_box{
+		margin-top:6vw;
+	}
+	#table_container{
+		width: 100vw;
+		overflow-x: scroll;
+	}
+	#race_data{
+		display: none;
+		width: 90vw;
+		text-align: left;
+		padding: 10vw;
+	}
+	#race_data th,
+	#race_data td{
+		border: 1px solid black;
+	    outline: 1px solid black;
+	    border-collapse: collapse;
+	    text-align: center;
+	    padding: 1vw;
+	}
+	#results{
+		margin-top:2vw;
+	}
+</style>
+<script>
+	$(document).ready(function(){
+		function download_csv(filename, blob){
+			if(window.write_file != undefined){
+				window.write_file(filename, blob);
+			}
+			else{
+				console.log("Could not write file to device - filesystem structure error");
+			}
+		}
+		function show_table(results){
+			console.log(results);
+			results = results.replace('\n', ';');
+			results = results.replace(/\n/ig, ';');
+			results = results.split(';');
+			table_string = ""
+
+			//gets rid of hanging index with empty value
+			if(results[results.length-1] == ""){ 
+				results.splice(results.length-1, 1);
+			}
+			for(var i=0; i < results.length; i++){
+				if(i == 0){
+					results[i] = results[i].replace(/,/g, '</th><th>');
+					table_string = table_string + "<tr><th>"+results[i]+"</th></tr>";
+				}
+				else{
+					results[i] = results[i].replace(/,/g, '</td><td>');
+					table_string = table_string + "<tr><td>"+results[i]+"</td></tr>";
+				}
+			}
+			$('#race_data').html(table_string);
+			$('#race_data').show();
+		}
+		function export_to_csv(results){
+			var race = JSON.parse(window.localStorage.getItem('race'))
+			var filename = "Results"+race.race_key+'.csv';
+			var file;
+			var data;
+			var link;
+			var string_data = results;
+
+			if(results == null || results == ""){
+				return(alert('Could not export CSV - the result string is empty'));
+			}
+			else{
+
+				if (!results.match(/^data:text\/csv/i)) {
+		        	results = 'data:text/csv;charset=utf-8,' + results;
+		        }
+				data = encodeURI(results);
+			}
+
+			// link = document.createElement('a');
+			// link.setAttribute('href', data);
+			// link.setAttribute('download', filename);
+			// link.innerHTML = filename;
+			// $('#link_box').html(link);
+
+
+
+			$('#link_box').html('<a href="javascript:void(0)" id="file_download">Save to device as .csv</a>');
+
+			show_table(string_data);
+
+			$('#file_download').click(function(){
+				download_csv(filename, string_data);
+			});
+
+		}
+
+		function get_time_object(time_string){
+			var datetime = time_string.split(', ');
+			//DATE
+			var date = datetime[0].split('/');
+			var month = date[0];
+			if(parseInt(month) < 10){
+				month = "0"+month;
+			}
+			var day = date[1];
+			if(parseInt(day) < 10){
+				day = "0"+day;
+			}
+			var year = date[2];
+			//TIME
+			var time = datetime[1].split(':');
+			var hour = time[0];
+			if(parseInt(hour) < 10){
+				hour = "0"+hour;
+			}
+			var minute = time[1];
+			var second = time[2].split(' ')[0];
+			var am_pm = time[2].split(' ')[1];
+			if(parseInt(hour) == 12 && am_pm == "AM"){
+				hour = "00";
+			}
+			else if(am_pm == "PM" && parseInt(hour) < 12){
+				hour = parseInt(hour) + 12;
+			}
+			var final_date = year+"-"+month+"-"+day+"T"+hour+":"+minute+":"+second;
+			var date = new Date(final_date);
+			return date;
+		}
+		function get_time_diff(end_time){
+			var race_data = JSON.parse(window.localStorage.getItem('race'));
+			var start_time = race_data.race_time;
+			var time_diff;
+
+			var start = get_time_object(start_time);
+			var end = get_time_object(end_time);
+
+			time_diff = (end.getTime() - start.getTime());
+
+
+			var seconds = parseInt((time_diff/1000)%60);
+		    var minutes = parseInt((time_diff/(1000*60))%60);
+		    var hours = parseInt((time_diff/(1000*60*60))%24);
+		    var days = parseInt((time_diff/(1000*60*60*24)));
+
+		    if(parseInt(seconds) < 10){
+				seconds = "0"+seconds;
+			}
+			if(parseInt(minutes) < 10){
+				minutes = "0"+minutes;
+			}
+			if(parseInt(hours) < 10){
+				hours = "0"+hours;
+			}
+			if(parseInt(days) < 10){
+				days = "0"+days;
+			}
+
+			if(parseInt(days) != 0){
+				time_diff = days+":"+hours+":"+minutes+":"+seconds;
+			}
+			else{
+				time_diff = hours+":"+minutes+":"+seconds;
+			}
+			return time_diff;
+		}
+
+		function get_results(){
+			var race_data = JSON.parse(window.localStorage.getItem('race'));
+			var team_data = JSON.parse(window.localStorage.getItem('teams'));
+			var result = "Leg,";
+			var race_start = race_data.race_time;
+
+			newLine = '\n';
+			columnDelimiter = ',';
+
+			//HEADER
+			for(var x=0; x < team_data.length;x++){
+				if(x != team_data.length-1){
+					result = result+team_data[x].team_name+columnDelimiter;
+				}
+				else {
+					result = result+team_data[x].team_name;
+				}
+			}
+			result=result+newLine;
+
+			//TEAM RACE RESULTS
+			for(var x=0; x < 36;x++){
+				result = result+(x+1)+columnDelimiter
+				for(var i=0; i < team_data.length;i++){
+					if(team_data[i].leg_time[x+1] != undefined){
+						result = result+get_time_diff(team_data[i].leg_time[x+1]);
+					}
+					else{
+						result = result+null;
+					}
+					
+					if(i != team_data.length-1){
+						result=result+columnDelimiter;
+					}
+				}
+				result = result+newLine;
+			}
+
+
+			//FINAL RACE RESULTS
+			result = result+"Final,"
+			for(var i=0; i < team_data.length;i++){
+				if(team_data[i].leg_time[36] != undefined){
+					result = result+get_time_diff(team_data[i].leg_time[36]);
+				}
+				else{
+					result = result+null;
+				}
+				
+				if(i != team_data.length-1){
+					result=result+columnDelimiter;
+				}
+			}
+			result = result+newLine;
+
+			export_to_csv(result);
+		};
+
+		$('#results').click(function(){
+			var csv = get_results();
+		});
+	});
+
+</script>

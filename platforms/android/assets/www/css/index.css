@@ -1,0 +1,88 @@
+body{
+	margin: 0;
+	height:100%;
+	padding:0;
+}
+#footer{
+	width: 100vw;
+	height:7vh;
+}
+.menu_button{
+	width: 25%;
+	position: relative;
+	text-align: center;
+	padding: 1vh;
+	font-size: 3vw;
+	color: white;
+	background: black;
+}
+#header{
+	width: 100vw;
+	background: gray;
+	height: 4vh;
+}
+#header h3{
+	font-size: 3vw;
+	margin: 0;
+	padding: 1vh;
+	color: white;
+}
+#body{
+	padding-left:2vw;
+	padding-right:2vw;
+	height: 89vh;
+	overflow-y: scroll;
+}
+#body p{
+	margin:0;
+	padding:1vw;
+}
+.pressed{
+	opacity: .5;
+}
+.ui_button{
+	background:black;
+	color: white;
+	border: none;
+	font-size: 3vw;
+	padding:2vw;
+}
+.inline{
+	display: inline-block;
+}
+.big_button{
+	font-size: 4vw;
+	padding: 3vw;
+}
+.team_box{
+	color: white;
+	background: gray;
+	width: 20vw;
+	height: 20vw;
+	margin: 2vw;
+	display: inline-block;
+	vertical-align: top;
+}
+#new_team_form{
+	margin-top:2vw;
+	background: lightgray;
+	padding:2vw;
+}
+.form_input{
+	display: block;
+	padding: .5vw;
+	font-size: 3vw;
+}
+#team_form_submit{
+	width: auto !important;
+	margin-top: 2vw;
+}
+p.team_bib_number {
+    font-size: 8vw;
+}
+p.team_title {
+    font-size: 2.5vw;
+}
+.selected{
+	opacity: .5;
+}
