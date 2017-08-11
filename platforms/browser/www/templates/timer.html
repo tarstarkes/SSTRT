@@ -145,10 +145,14 @@
 		else{
 			$('#body').append('<p>To begin using this application, you need to add some teams or import teams from the cloud. If someone has already set up some teams using another device, click the "IMPORT CLOUD DATA TO DEVICE" button on the IMPORT/EXPORT screen. Otherwise, create some new teams using the TEAMS screen.</p>');
 		}
+
 		function check_duration(){
 			window.setTimeout(function(){
 				var datenow = Date.now();
-				var start_time = new Date($('#race_time').val());
+				start = $('#race_time').val().split(/[- :T]/);
+
+				var start_time = new Date(start[0], start[1]-1, start[2], start[3], start[4], start[5]);
+
 				start_time = Date.parse(start_time);
 				if (datenow > start_time){
 					duration = datenow - start_time
@@ -168,7 +172,7 @@
 
 				$("#race_duration").html(days + ":" + hours + ":" + minutes + ":" + seconds);
 				check_duration();
-			}, 100);
+			}, 500);
 		}
 
 		function check_time(){

@@ -142,7 +142,7 @@
 				hour = parseInt(hour) + 12;
 			}
 			var final_date = year+"-"+month+"-"+day+"T"+hour+":"+minute+":"+second;
-			var date = new Date(final_date);
+			var date = new Date(year, month, day, hour, minute, second);
 			return date;
 		}
 		function get_time_diff(end_time){
