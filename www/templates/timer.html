@@ -10,11 +10,14 @@
 			<p></p>
 			<h3 style="font-size: 3vw; margin:0;margin-top:2vw;">Race Start Time</h3>
 			<input id="race_time" type="datetime-local">
-			<h3 id="race_duration_title" style="margin:0;margin-top:2vw;">Race Duration<br>days:hrs:mins:sec</h3>
-			<h4 id="race_duration" style="margin:0;margin-bottom:2vw;">--:--</h4>
+			<div style="margin-top:2vw; border: 3px solid black;">
+				<h3 id="race_duration_title" style="margin:0;margin-top:2vw;">Race Duration<br>days:hrs:mins:sec</h3>
+				<h4 id="race_duration" style="margin:0;margin-bottom:2vw;">--:--</h4>
+			</div>
 		</div>
-		<select id="leg" style="margin-top:2vw;">
-			<option val="">Transition Station #</option>
+		<p id="station_num_label" style="font-weight: bold;">Station Number</p>
+		<select id="leg" style="margin-top:2vw;text-align:center;">
+			<option val="">Station #</option>
 			<option val="1">1</option>
 			<option val="2">2</option>
 			<option val="3">3</option>
@@ -55,8 +58,8 @@
 	<div id="all_teams">
 		
 	</div>
-	<button id="record_leg" class="ui_button" style="margin-top: 4vw;margin-bottom: 4vw; padding: 4vw;font-size: 5vw" onclick="click_feedback(this);">LEG COMPLETE</button>
-	<button id="clear_leg" class="ui_button" style="margin-top: 4vw;margin-bottom: 4vw; padding: 4vw;font-size: 5vw" onclick="click_feedback(this);">CLEAR TIME</button>
+	<button id="record_leg" class="ui_button" style="margin-top: 4vw;margin-bottom: 4vw; padding: 4vw;font-size: 5vw" onclick="click_feedback(this);"><img class="button_icon" src="img/icons/png/005-racing-flag.png"/><br><p style="font-size:8pt">RECORD TIME</p></button>
+	<button id="clear_leg" class="ui_button" style="margin-top: 4vw;margin-bottom: 4vw; padding: 4vw;font-size: 5vw" onclick="click_feedback(this);"><img class="button_icon" src="img/icons/png/006-reset.png"/><p style="font-size:8pt">CLEAR TIME</p></button>
 	</center>
 	<style>
 		.leg_time{

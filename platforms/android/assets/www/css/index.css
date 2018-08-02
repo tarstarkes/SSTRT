@@ -7,6 +7,11 @@ body{
 	width: 100vw;
 	height:7vh;
 }
+#footer td img{
+	width: 6vw;
+    -webkit-filter: contrast(0%) brightness(200%);
+    opacity: 1;
+}
 .menu_button{
 	width: 25%;
 	position: relative;
@@ -56,12 +61,16 @@ body{
 }
 .team_box{
 	color: white;
-	background: gray;
+	background: black;
 	width: 20vw;
 	height: 20vw;
 	margin: 2vw;
 	display: inline-block;
 	vertical-align: top;
+	border-radius: 3vw;
+	-webkit-border-radius: 3vw;
+    -moz-border-radius: 3vw;
+    border: 2px solid orange;
 }
 #new_team_form{
 	margin-top:2vw;
@@ -85,4 +94,26 @@ p.team_title {
 }
 .selected{
 	opacity: .5;
+}
+#leg{
+	width:25vw;
+	font-size: 5vw;
+    border: 4px solid orange;
+    -webkit-appearance: none;
+    border-radius: 3vw;
+    -webkit-border-radius: 3vw;
+    -moz-border-radius: 3vw;
+    padding: 1vw;
+    text-align-last: center;
+}
+#leg option{
+	width:25vw;
+	text-align:center;
+}
+#station_num_label{
+	padding-bottom: 0 !important;
+}
+.button_icon{
+	width:8vw;
+	-webkit-filter: contrast(20%) brightness(200%);
 }
