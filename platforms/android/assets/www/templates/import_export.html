@@ -424,6 +424,10 @@
 						export_race(r, race);
 					}
 					teams_export(object);
+					load_bar_width('100%');
+					setTimeout(function(e){
+						$('#load_bar').hide();
+					}, 500)
 					console.log("Export Operation Successful!");
 				},
 				error: function(error){

@@ -5,6 +5,9 @@
 </div>
 <div id="body">
 	<center>
+		<p>Display time as duration from race start</p>
+		<input id="time_format" type="checkbox">
+		<br>
 		<button id="results" class="ui_button" onclick="click_feedback(this);">GET FINAL RESULTS</button>
 
 		<div id="link_box">
@@ -53,7 +56,6 @@
 			}
 		}
 		function show_table(results){
-			console.log(results);
 			results = results.replace('\n', ';');
 			results = results.replace(/\n/ig, ';');
 			results = results.split(';');
@@ -208,7 +210,13 @@
 				result = result+(x+1)+columnDelimiter
 				for(var i=0; i < team_data.length;i++){
 					if(team_data[i].leg_time[x+1] != undefined){
-						result = result+get_time_diff(team_data[i].leg_time[x+1]);
+						time_format = $('#time_format')[0].checked
+						if(time_format == true){
+							result = result+get_time_diff(team_data[i].leg_time[x+1]);
+						}
+						else{
+							result = result+(team_data[i].leg_time[x+1].replace(',', ''));
+						}
 					}
 					else{
 						result = result+null;
