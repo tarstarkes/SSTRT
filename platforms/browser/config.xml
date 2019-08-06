@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.connarstone.sstrt" version="1.0.7" versionCode="10" xmlns="http://www.w3.org/ns/widgets" xmlns:android="http://schemas.android.com/apk/res/android" xmlns:cdv="http://cordova.apache.org/ns/1.0" xmlns:gap="http://phonegap.com/ns/1.0">
+<widget id="com.connarstone.sstrt" version="1.1.1" versionCode="12" xmlns="http://www.w3.org/ns/widgets" xmlns:android="http://schemas.android.com/apk/res/android" xmlns:cdv="http://cordova.apache.org/ns/1.0" xmlns:gap="http://phonegap.com/ns/1.0">
     <name>SSTRT</name>
     <description>Start Stop Team Relay Timer records contestant times for team relay running. Initially built for the benefit of the Notheastern Oregon Elkhorn Relay.</description>
     <author email="stonec2@eou.edu" href="https://github.com/tarstarkes">Connar Stone</author>
@@ -30,4 +30,5 @@
     <preference name="StatusBarOverlaysWebView" value="false" />
     <preference name="StatusBarBackgroundColor" value="#000000" />
     <preference name="StatusBarStyle" value="lightcontent" />
+    <preference name="android-targetSdkVersion" value="26" />
 </widget>

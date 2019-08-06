@@ -181,15 +181,11 @@
 		function check_time(){
 			window.setTimeout(function(){
 				var date = new Date(Date.now());
-				var time = date.toLocaleString();
-				$("#clock p").html(time);
+				$("#clock p").html(date.toLocaleString());
 				check_time();
 			}, 100);
 		}
 		function start_clock(){
-			var date = new Date(Date.now());
-			var time = date.toLocaleString();
-			$("#clock p").html(time);
 			check_time();
 		}
 		start_clock();

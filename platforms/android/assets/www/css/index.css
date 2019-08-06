@@ -24,7 +24,7 @@ body{
 #header{
 	width: 100vw;
 	background: gray;
-	height: 4vh;
+	height: 3vh;
 }
 #header h3{
 	font-size: 3vw;
@@ -35,7 +35,7 @@ body{
 #body{
 	padding-left:2vw;
 	padding-right:2vw;
-	height: 89vh;
+	height: 88.5vh;
 	overflow-y: scroll;
 }
 #body p{
