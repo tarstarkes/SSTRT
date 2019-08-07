@@ -52,7 +52,7 @@ body{
 #body{
 	padding-left:2vw;
 	padding-right:2vw;
-	height: calc(90vh - 2vw);
+	height: calc(89vh - 2vw);
 	overflow-y: scroll;
 }
 #body p{
@@ -77,6 +77,11 @@ body{
 }
 #clear_leg{
 	background: #959595;
+}
+#set_tst{
+	background: #006699;
+	font-family: Roboto-Bold;
+	font-size: 5vw;
 }
 .inline{
 	display: inline-block;
@@ -113,10 +118,25 @@ body{
 	margin-top: 2vw;
 }
 p.team_bib_number {
-    font-size: 8vw;
+    font-size: 5vw;
+    padding:.5vw !important;
 }
 p.team_title {
     font-size: 2.5vw;
+    padding-bottom: 0 !important;
+}
+p#tst_label{
+	font-family: Roboto-Bold;
+	font-size: 1.5vw;
+	padding-bottom:0;
+	margin-bottom:0;
+}
+p#tst{
+	margin-top:0;
+	padding-top:0;
+	font-family: Roboto-Thin;
+	font-size: 1.75vw;
+	color: white;
 }
 .selected{
 	opacity: .5;

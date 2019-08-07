@@ -15,22 +15,27 @@
 			<input id="team_bib" name="team_bib" class="form_input" placeholder="Team Bib Number" required>
 			<input type="submit" id="team_form_submit" name="team_submit" placeholder="Team Name" value="Submit" class="inline ui_button">
 		</form>
+		<button id="set_tst" class="ui_button"><img class="button_icon" src="img/icons/png/015-start.png"/><br>SET TEAM START TIME</button>
 	</center>
 	<script>
 		if(window.localStorage.getItem('teams') != null){
+			//display teams in window
 			teams = window.localStorage.getItem('teams');
 			teams = JSON.parse(window.localStorage.getItem('teams'));
 
 			for(var i=0; i < teams.length; i++){
 				t_name = teams[i].team_name;
 				t_bib = teams[i].bib_number;
-				$('#all_teams').append("<div class='team_box' id='"+t_bib+"'><center><p class='team_title'>"+t_name+"</p><p class='team_bib_number'>"+t_bib+"</p></center></div>");
+				t_tst = teams[i].team_start_time;
+				$('#all_teams').append("<div class='team_box' id='"+t_bib+"'><center><p class='team_title'>"+t_name+"</p><p class='team_bib_number'>"+t_bib+"</p><p id='tst_label'>Team Start Time</p><p id='tst'>"+rtn_tst(t_tst)+"</p></center></div>");
 			}
 		}
 		else{
+			//logic error, there are no teams listed for the current race
 			$('#body').prepend('<p>There are currently no teams</p>');
 		}
 		$("#add_team").click(function(){
+			//display the new team form, if clicked again, hides form
 			if($("#new_team_form").css('display') == "none"){
 				$('#new_team_form').show();
 			}
@@ -38,7 +43,6 @@
 				$('#new_team_form').hide();
 			}
 		});
-		//$("#team_form_submit").click(function(e){
 		$('#new_team_form').on('submit', function(e){
 			e.preventDefault();
 			teams = JSON.parse(window.localStorage.getItem('teams'));
@@ -46,11 +50,7 @@
 			if(window.localStorage.getItem('teams') == null){
 				teams = [];
 			}
-			teams.push({'team_name': $('#team_name').val(), 'bib_number': $('#team_bib').val()});
-			// 	teams = teams+'{"team_name": "'+$('#team_name').val()+'", "bib_number": "'+$('#team_bib').val()+'"}';
-			// }else{
-			// 	teams = teams+', {"team_name": "'+$('#team_name').val()+'", "bib_number": "'+$('#team_bib').val()+'"}';
-			// }
+			teams.push({'team_name': $('#team_name').val(), 'bib_number': $('#team_bib').val(), 'team_start_time': null});
 			window.localStorage.setItem('teams', JSON.stringify(teams));
 
 			//reset form and hide it
@@ -84,6 +84,85 @@
 
 			window.localStorage.setItem('teams', JSON.stringify(teams));
 		});
+
+		$('#set_tst').click(function(){
+			teams = JSON.parse(window.localStorage.getItem('teams'));
+
+			if($('.team_box.selected').length > 0){
+				//create set time window and slide in
+				set_time_window();
+				
+				//set time when set is clicked
+				$('#set_time').click(function(){
+					var date = new Date($('#user_date').val()+'T'+$('#user_time').val());
+					var time = date.toLocaleString();
+					var bib;
+					//setting start time for the team based on user input
+					$('.team_box.selected #tst').html(time);
+					for(var i=0; i < $('.team_box.selected').length; i++){
+						bib = $($('.team_box.selected')[i]).attr('id');
+						//SAVE TIME TO LOCALSTORAGE
+						for(var j=0; j < teams.length; j++){
+							if(teams[j].bib_number != ""){
+								if(parseInt(teams[j].bib_number) == bib){
+									teams[j].team_start_time = time;
+								}
+							}
+						}
+					}
+
+					//update teams local storage
+					window.localStorage.setItem('teams', JSON.stringify(teams));
+
+					//animate slide out and remove window from body
+					$('#set_time_box').animate({
+						top: '-50vh',
+						opacity: '.25'
+					}, 500, function(){});
+					window.setTimeout(function(){
+						$('#set_time_box').remove();
+						//remove selected teams as selected
+						for(var i=0; i < $('.team_box.selected').length; i++){
+							$('.team_box.selected').removeClass('selected');
+						}
+					}, 500);
+				});
+			}
+			else{
+				alert('You must first select one or more teams to set the start time.');
+			}
+
+		});
+
+		function rtn_tst(t_tst){
+			if(t_tst == null){
+				return "No Start Time Set";
+			}
+			else{
+				return t_tst.toLocaleString();
+			}
+		}
+
+		function set_time_window(){
+			$("body").append("<div id='set_time_box' style='position:absolute;top:-50vh; left:12.5vw; width: 75vw; height: 25vh; background:lightgray; border:5px solid gray; border-radius: 5px;'><center><div style='vertical-align:center;'><label for='#user_date' style='margin-right:2vw;font-size: 3vw; font-family:`Roboto-Thin`;'>Date:</label><input id='user_date' style='margin-top:4vh;' type='date'><br><label for='#user_time' style='margin-right:2vw;font-size: 3vw; font-family:`Roboto-Thin`;'>Time:</label><input id='user_time' style='margin-top:2vh;' type='time' step='1'><br><button style='display: inline-block; margin-top:2vw; font-family: Roboto-Bold;' id='set_time'>SET</button><button style='display: inline-block; margin:2vw; font-family: Roboto-Bold;' id='cancel_set_time'>CANCEL</button></div></center></div>");
+
+				//animate slide in
+				$('#set_time_box').animate({
+					top: '35vh',
+					left: '12.5vw'
+				}, 500, function(){});
+
+				//Cancel button clicked
+				$('#cancel_set_time').click(function(){
+					$('#set_time_box').animate({
+						top: '-50vh',
+						opacity: '.25'
+					}, 500, function(){});
+					window.setTimeout(function(){
+						$('#set_time_box').remove();
+					}, 500);
+				});
+		}
 
 	</script>
 </div>

@@ -132,7 +132,6 @@
 		};
 
 		if(window.localStorage.getItem('teams') != null){
-			teams = window.localStorage.getItem('teams');
 			teams = JSON.parse(window.localStorage.getItem('teams'));
 
 			for(var i=0; i < teams.length; i++){
@@ -197,7 +196,6 @@
 		start_clock();
 
 		$('#record_leg_manual').click(function(){
-			teams = window.localStorage.getItem('teams');
 			teams = JSON.parse(window.localStorage.getItem('teams'));
 			if ($('#leg option:selected').val() != "Transition Station #"){
 				leg = parseInt($('#leg option:selected').val());
@@ -266,7 +264,7 @@
 				alert("You must select a 'transition station #' and a team before you can record a leg time.")
 			}
 
-		}); 
+		});
 
 		$('#record_leg').click(function(){
 			teams = window.localStorage.getItem('teams');

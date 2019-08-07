@@ -324,6 +324,7 @@
 			team.set('team_name', t.team_name);
 			team.set('bib', t.bib_number);
 			team.set('race_id', race);
+			team.set('team_start_time', t.team_start_time);
 			team.save(null, {
 				success: function(results){
 					console.log('TEAM data exported');
@@ -359,7 +360,7 @@
 				legs_export(t[i], object);
 			},
 			error: function(error){
-				console.log('failed to export data: '+error.message);
+				alert('failed to export data: '+error.message);
 			}});
 		}
 
@@ -535,7 +536,7 @@
 								t = [];
 							}
 							console.log(object);
-							t.push({'team_name': object.attributes.team_name, 'bib_number': object.attributes.bib});
+							t.push({'team_name': object.attributes.team_name, 'bib_number': object.attributes.bib, 'team_start_time': object.attribute.team_start_time});
 							window.localStorage.setItem('teams', JSON.stringify(t));
 							import_legs(object, j);
 							increment_total_import_callbacks();

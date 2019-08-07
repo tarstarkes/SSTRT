@@ -147,15 +147,13 @@
 			var date = new Date(year, month, day, hour, minute, second);
 			return date;
 		}
-		function get_time_diff(end_time){
+		function get_time_diff(end_time, start_time){
 			var race_data = JSON.parse(window.localStorage.getItem('race'));
-			var start_time = race_data.race_time;
-			var time_diff;
 
 			var start = get_time_object(start_time);
 			var end = get_time_object(end_time);
 
-			time_diff = (end.getTime() - start.getTime());
+			var time_diff = (end.getTime() - start.getTime());
 
 
 			var seconds = parseInt((time_diff/1000)%60);
@@ -212,7 +210,12 @@
 					if(team_data[i].leg_time[x+1] != undefined){
 						time_format = $('#time_format')[0].checked
 						if(time_format == true){
-							result = result+get_time_diff(team_data[i].leg_time[x+1]);
+							if(team_data[i].team_start_time != null){
+								result = result+get_time_diff(team_data[i].leg_time[x+1], team_data[i].team_start_time);
+							}
+							else{
+								result = result+get_time_diff(team_data[i].leg_time[x+1], race_start);
+							}
 						}
 						else{
 							result = result+(team_data[i].leg_time[x+1].replace(',', ''));
@@ -234,7 +237,13 @@
 			result = result+"Final,"
 			for(var i=0; i < team_data.length;i++){
 				if(team_data[i].leg_time[36] != undefined){
-					result = result+get_time_diff(team_data[i].leg_time[36]);
+					if(team_data[i].team_start_time != null){	
+						result = result+get_time_diff(team_data[i].leg_time[36], team_data[i].team_start_time);
+					}
+					else{
+						result = result+get_time_diff(team_data[i].leg_time[36], race_start);
+
+					}
 				}
 				else{
 					result = result+null;
