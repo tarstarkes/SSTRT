@@ -6,19 +6,25 @@
 <div id="body">
 	<center>
 		<div id="clock">
-			<h3 style="font-size: 3vw; margin:0;margin-top:2vw;">Current Time</h3>
-			<p></p>
-			<h3 style="font-size: 3vw; margin:0;margin-top:2vw;">Race Start Time</h3>
-			<input id="race_time" type="datetime-local">
+			<div style="background: #f2f2f2; font-family:Roboto-Bold; padding: 2vw; margin-top:2vw;">
+				<h3 style="font-size: 3vw; margin:0;margin-top:1vw;">Current Time</h3>
+				<p style="font-family: Roboto-Thin;"></p>
+			</div>
+			<div style="background: #f2f2f2; padding: 2vw; margin-top:2vw;">
+				<h3 style="font-size: 3vw; margin:0;margin-top:1vw; margin-bottom: 1vw; font-family: 'Roboto-Bold';">Race Start Time</h3>
+				<h3 style="font-family:Roboto-Thin; font-size: 3vw;">Please do NOT change this value if it is already set for your race.</h3>
+				<input id="race_time" type="datetime-local">
+			</div>
 			<div style="margin-top:2vw; background: #f2f2f2;padding-top: 2vw;padding-bottom:2vw;">
-				<h3 id="race_duration_title" style="margin:0;margin-top:2vw;"><span style="font-family:'Roboto-Bold';">Race Duration</span><br>days:hrs:mins:sec</h3>
-				<h4 id="race_duration" style="margin:0;margin-bottom:2vw;">--:--</h4>
+				<h3 id="race_duration_title" style="margin:0;margin-top:1vw;font-size: 3vw;"><span style="font-family:'Roboto-Bold';">Race Duration</span></h3>
+				<h4 id="race_duration" style="margin:0;font-size: 5vw;">--:--</h4>
+				<h3 style="margin:0;padding:0; font-size: 3vw; width: 100%; text-align:left;"><span style="margin-left:30vw;">day</span><span style="margin-left:5vw;">hrs</span><span style="margin-left:5.75vw;">min</span><span style="margin-left:5.5vw;">sec</span></h3>
 			</div>
 		</div>
 		<div style="font-family: Roboto-Bold; background:#f2f2f2; margin-top: 2vw; padding-top:2vw; padding-bottom:2vw;">
-			<p id="station_num_label">Station Number</p>
-			<p style="font-family:Roboto-Thin; font-size: 3vw;">This is the station number you are reporting for</p>
-			<select id="leg" style="margin-top:2vw;text-align:center;">
+			<p id="station_num_label" style="font-family: 'Roboto-Bold'; font-size: 3vw;">Station Number</p>
+			<h3 style="font-family:Roboto-Thin; font-size: 3vw;">This is the station number you are reporting for</h3>
+			<select id="leg" style="margin-top:2vw;text-align:center; font-family: 'Roboto';">
 				<option val="">Station #</option>
 				<option val="1">1</option>
 				<option val="2">2</option>
@@ -178,7 +184,7 @@
 			    minutes = (minutes < 10) ? "0" + minutes : minutes;
 			    seconds = (seconds < 10) ? "0" + seconds : seconds;
 
-				$("#race_duration").html(days + ":" + hours + ":" + minutes + ":" + seconds);
+				$("#race_duration").html(days + "&nbsp&nbsp&nbsp&nbsp" + hours + "&nbsp&nbsp&nbsp&nbsp" + minutes + "&nbsp&nbsp&nbsp&nbsp" + seconds);
 				check_duration();
 			}, 500);
 		}
