@@ -10,56 +10,62 @@
 			<p></p>
 			<h3 style="font-size: 3vw; margin:0;margin-top:2vw;">Race Start Time</h3>
 			<input id="race_time" type="datetime-local">
-			<div style="margin-top:2vw; border: 3px solid black;">
-				<h3 id="race_duration_title" style="margin:0;margin-top:2vw;">Race Duration<br>days:hrs:mins:sec</h3>
+			<div style="margin-top:2vw; background: #f2f2f2;padding-top: 2vw;padding-bottom:2vw;">
+				<h3 id="race_duration_title" style="margin:0;margin-top:2vw;"><span style="font-family:'Roboto-Bold';">Race Duration</span><br>days:hrs:mins:sec</h3>
 				<h4 id="race_duration" style="margin:0;margin-bottom:2vw;">--:--</h4>
 			</div>
 		</div>
-		<p id="station_num_label" style="font-weight: bold;">Station Number</p>
-		<select id="leg" style="margin-top:2vw;text-align:center;">
-			<option val="">Station #</option>
-			<option val="1">1</option>
-			<option val="2">2</option>
-			<option val="3">3</option>
-			<option val="4">4</option>
-			<option val="5">5</option>
-			<option val="6">6</option>
-			<option val="7">7</option>
-			<option val="8">8</option>
-			<option val="9">9</option>
-			<option val="10">10</option>
-			<option val="11">11</option>
-			<option val="12">12</option>
-			<option val="13">13</option>
-			<option val="14">14</option>
-			<option val="15">15</option>
-			<option val="16">16</option>
-			<option val="17">17</option>
-			<option val="18">18</option>
-			<option val="19">19</option>
-			<option val="20">20</option>
-			<option val="21">21</option>
-			<option val="22">22</option>
-			<option val="23">23</option>
-			<option val="24">24</option>
-			<option val="25">25</option>
-			<option val="26">26</option>
-			<option val="27">27</option>
-			<option val="28">28</option>
-			<option val="29">29</option>
-			<option val="30">30</option>
-			<option val="31">31</option>
-			<option val="32">32</option>
-			<option val="33">33</option>
-			<option val="34">34</option>
-			<option val="35">35</option>
-			<option val="36">36</option>
-		</select>
+		<div style="font-family: Roboto-Bold; background:#f2f2f2; margin-top: 2vw; padding-top:2vw; padding-bottom:2vw;">
+			<p id="station_num_label">Station Number</p>
+			<p style="font-family:Roboto-Thin; font-size: 3vw;">This is the station number you are reporting for</p>
+			<select id="leg" style="margin-top:2vw;text-align:center;">
+				<option val="">Station #</option>
+				<option val="1">1</option>
+				<option val="2">2</option>
+				<option val="3">3</option>
+				<option val="4">4</option>
+				<option val="5">5</option>
+				<option val="6">6</option>
+				<option val="7">7</option>
+				<option val="8">8</option>
+				<option val="9">9</option>
+				<option val="10">10</option>
+				<option val="11">11</option>
+				<option val="12">12</option>
+				<option val="13">13</option>
+				<option val="14">14</option>
+				<option val="15">15</option>
+				<option val="16">16</option>
+				<option val="17">17</option>
+				<option val="18">18</option>
+				<option val="19">19</option>
+				<option val="20">20</option>
+				<option val="21">21</option>
+				<option val="22">22</option>
+				<option val="23">23</option>
+				<option val="24">24</option>
+				<option val="25">25</option>
+				<option val="26">26</option>
+				<option val="27">27</option>
+				<option val="28">28</option>
+				<option val="29">29</option>
+				<option val="30">30</option>
+				<option val="31">31</option>
+				<option val="32">32</option>
+				<option val="33">33</option>
+				<option val="34">34</option>
+				<option val="35">35</option>
+				<option val="36">36</option>
+			</select>
+		</div>
 	<div id="all_teams">
 		
 	</div>
-	<button id="record_leg" class="ui_button" style="margin-top: 4vw;margin-bottom: 4vw; padding: 4vw;font-size: 5vw" onclick="click_feedback(this);"><img class="button_icon" src="img/icons/png/005-racing-flag.png"/><br><p style="font-size:8pt">RECORD TIME</p></button>
-	<button id="clear_leg" class="ui_button" style="margin-top: 4vw;margin-bottom: 4vw; padding: 4vw;font-size: 5vw" onclick="click_feedback(this);"><img class="button_icon" src="img/icons/png/006-reset.png"/><p style="font-size:8pt">CLEAR TIME</p></button>
+	<div style="margin-top:2vw; margin-bottom: 2vw;">
+		<button id="record_leg" class="ui_button" style="margin-top:2vw; padding: 4vw;font-size: 5vw" onclick="click_feedback(this);"><img class="button_icon" src="img/icons/png/005-racing-flag.png"/><br><p style="font-size:8pt">RECORD TIME (AUTO)</p></button>
+		<button id="record_leg_manual" class="ui_button" style="margin-top:2vw; padding: 4vw;font-size: 5vw" onclick="click_feedback(this);"><img class="button_icon" src="img/icons/png/005-racing-flag.png"/><br><p style="font-size:8pt">RECORD TIME (MANUAL)</p></button>
+		<button id="clear_leg" class="ui_button" style="margin-top:2vw; padding: 4vw;font-size: 5vw" onclick="click_feedback(this);"><img class="button_icon" src="img/icons/png/006-reset.png"/><p style="font-size:8pt">CLEAR TIME</p></button>
+	</div>
 	</center>
 	<style>
 		.leg_time{
@@ -143,7 +149,7 @@
 				}
 				
 			});
-			$('#body').append('<p>To record a team time select one or multiple teams and then click the LEG COMPLETE button. To clear a leg time (in the event of a mistake) select one or multiple teams and click the CLEAR TIME button. </p>');
+			$('#body').append('<p>To record a team time select one or multiple teams and then click the RECORD TIME (AUTO) or RECORD TIME (MANUAL) button. To clear a leg time (in the event of a mistake) select one or multiple teams and click the CLEAR TIME button. </p>');
 		}
 		else{
 			$('#body').append('<p>To begin using this application, you need to add some teams or import teams from the cloud. If someone has already set up some teams using another device, click the "IMPORT CLOUD DATA TO DEVICE" button on the IMPORT/EXPORT screen. Otherwise, create some new teams using the TEAMS screen.</p>');
@@ -189,6 +195,78 @@
 			check_time();
 		}
 		start_clock();
+
+		$('#record_leg_manual').click(function(){
+			teams = window.localStorage.getItem('teams');
+			teams = JSON.parse(window.localStorage.getItem('teams'));
+			if ($('#leg option:selected').val() != "Transition Station #"){
+				leg = parseInt($('#leg option:selected').val());
+			}
+
+			if($('#leg option:selected').val() != "Transition Station #" && $('.team_box.selected').length > 0){
+				$("body").append("<div id='set_time_box' style='position:absolute;top:-50vh; left:12.5vw; width: 75vw; height: 25vh; background:lightgray; border:5px solid gray; border-radius: 5px;'><center><div style='vertical-align:center;'><label for='#user_date' style='margin-right:2vw;font-size: 3vw; font-family:`Roboto-Thin`;'>Date:</label><input id='user_date' style='margin-top:4vh;' type='date'><br><label for='#user_time' style='margin-right:2vw;font-size: 3vw; font-family:`Roboto-Thin`;'>Time:</label><input id='user_time' style='margin-top:2vh;' type='time' step='1'><br><button style='display: inline-block; margin-top:2vw; font-family: Roboto-Bold;' id='set_team_leg_time'>SET</button><button style='display: inline-block; margin:2vw; font-family: Roboto-Bold;' id='cancel_set_time'>CANCEL</button></div></center></div>");
+
+				//animate slide in
+				$('#set_time_box').animate({
+					top: '35vh',
+					left: '12.5vw'
+				}, 500, function(){});
+
+				//Cancel button clicked
+				$('#cancel_set_time').click(function(){
+					$('#set_time_box').animate({
+						top: '-50vh',
+						opacity: '.25'
+					}, 500, function(){});
+					window.setTimeout(function(){
+						$('#set_time_box').remove();
+					}, 500);
+				});
+
+				//Set button clicked
+				$('#set_team_leg_time').click(function(){
+					var date = new Date($('#user_date').val()+'T'+$('#user_time').val());
+					var time = date.toLocaleString();
+					var bib;
+					//setting leg time for the team based on user input
+					for(var i=0; i < $('.team_box.selected').length; i++){
+						$('.team_box.selected').children()[i].children[1].innerHTML = time;
+						bib = $($('.team_box.selected')[i]).attr('id');
+						//SAVE TIME TO LOCALSTORAGE
+						for(var j=0; j < teams.length; j++){
+							if(teams[j].bib_number != ""){
+									if(parseInt(teams[j].bib_number) == bib){
+										if(teams[j].leg_time == undefined){
+											teams[j].leg_time = [];
+										}
+											teams[j].leg_time[leg] = time;
+
+									}
+							}
+						}
+					}
+					for(var i=0; i < $('.team_box.selected').length; i++){
+						$('.team_box.selected').removeClass('selected');
+					}
+
+					window.localStorage.setItem('teams', JSON.stringify(teams));
+
+					//animate slide out
+					$('#set_time_box').animate({
+						top: '-50vh',
+						opacity: '.25'
+					}, 500, function(){});
+					window.setTimeout(function(){
+						$('#set_time_box').remove();
+					}, 500);
+				});
+				
+			}
+			else{
+				alert("You must select a 'transition station #' and a team before you can record a leg time.")
+			}
+
+		}); 
 
 		$('#record_leg').click(function(){
 			teams = window.localStorage.getItem('teams');

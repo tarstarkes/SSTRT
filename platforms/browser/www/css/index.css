@@ -1,3 +1,15 @@
+@font-face{
+	font-family: 'Roboto';
+	src: url('../fonts/Roboto/Roboto-Regular.ttf') format("opentype");
+}
+@font-face{
+	font-family: 'Roboto-Thin';
+	src: url('../fonts/Roboto/Roboto-Thin.ttf') format("opentype");
+}
+@font-face{
+	font-family: 'Roboto-Bold';
+	src: url('../fonts/Roboto/Roboto-Bold.ttf') format("opentype");
+}
 body{
 	margin: 0;
 	height:100%;
@@ -27,15 +39,20 @@ body{
 	height: 3vh;
 }
 #header h3{
+	font-family: 'Roboto-Thin';
 	font-size: 3vw;
+	vertical-align: middle;
 	margin: 0;
-	padding: 1vh;
+	padding: .5vh;
 	color: white;
+}
+#clock{
+	font-family: 'Roboto-Thin';
 }
 #body{
 	padding-left:2vw;
 	padding-right:2vw;
-	height: 88.5vh;
+	height: calc(90vh - 2vw);
 	overflow-y: scroll;
 }
 #body p{
@@ -51,6 +68,15 @@ body{
 	border: none;
 	font-size: 3vw;
 	padding:2vw;
+}
+#record_leg{
+	background: #339933;
+}
+#record_leg_manual{
+	background: #cc7a00;
+}
+#clear_leg{
+	background: #959595;
 }
 .inline{
 	display: inline-block;
