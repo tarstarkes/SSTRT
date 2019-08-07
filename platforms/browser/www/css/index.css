@@ -122,13 +122,14 @@ p.team_bib_number {
     padding:.5vw !important;
 }
 p.team_title {
-    font-size: 2.5vw;
+    font-size: 1.75vw;
+    font-family: Roboto-Bold;
     padding-bottom: 0 !important;
 }
 p#tst_label{
 	font-family: Roboto-Bold;
 	font-size: 1.5vw;
-	padding-bottom:0;
+	padding-top: 0 !important;
 	margin-bottom:0;
 }
 p#tst{

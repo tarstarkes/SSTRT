@@ -360,7 +360,7 @@
 				legs_export(t[i], object);
 			},
 			error: function(error){
-				alert('failed to export data: '+error.message);
+				console.log('failed to export data: '+error.message);
 			}});
 		}
 
@@ -378,6 +378,7 @@
 			else{
 				check_leg();
 			}
+
 		}
 		//END TEAM EXPORT ---------------------------------------------
 
@@ -429,7 +430,7 @@
 					setTimeout(function(e){
 						$('#load_bar').hide();
 					}, 500)
-					console.log("Export Operation Successful!");
+					console.log("Full Export Operation Successful!");
 				},
 				error: function(error){
 					alert('Failed to export data: '+error.message);
@@ -536,7 +537,7 @@
 								t = [];
 							}
 							console.log(object);
-							t.push({'team_name': object.attributes.team_name, 'bib_number': object.attributes.bib, 'team_start_time': object.attribute.team_start_time});
+							t.push({'team_name': object.attributes.team_name, 'bib_number': object.attributes.bib, 'team_start_time': object.attributes.team_start_time});
 							window.localStorage.setItem('teams', JSON.stringify(t));
 							import_legs(object, j);
 							increment_total_import_callbacks();
