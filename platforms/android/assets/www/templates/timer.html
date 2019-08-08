@@ -4,6 +4,7 @@
 	</center>
 </div>
 <div id="body">
+	</script>
 	<center>
 		<div id="clock">
 			<div style="background: #f2f2f2; font-family:Roboto-Bold; padding: 2vw; margin-top:2vw;">
@@ -73,18 +74,19 @@
 		<button id="clear_leg" class="ui_button" style="margin-top:2vw; padding: 4vw;font-size: 5vw" onclick="click_feedback(this);"><img class="button_icon" src="img/icons/png/006-reset.png"/><p style="font-size:8pt">CLEAR TIME</p></button>
 	</div>
 	</center>
-	<style>
-		.leg_time{
-			font-size: 3vw;
-		}
-		#leg{
-			font-size: 5vw;
-		}
-		#race_duration,
-		#race_duration_title{
-			font-size: 4vw;
-		}
-	</style>
+</div>
+<style>
+	.leg_time{
+		font-size: 3vw;
+	}
+	#leg{
+		font-size: 5vw;
+	}
+	#race_duration,
+	#race_duration_title{
+		font-size: 4vw;
+	}
+</style>
 <script>
 	$(document).ready(function(){
 		race_object = JSON.parse(window.localStorage.getItem('race'));
@@ -169,10 +171,10 @@
 
 				start_time = Date.parse(start_time);
 				if (datenow > start_time){
-					duration = datenow - start_time
+					duration = datenow - start_time;
 				}
 				else{
-					duration = start_time - datenow
+					duration = start_time - datenow;
 				}
 
 			    var seconds = parseInt((duration/1000)%60);

@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<meta http-equiv="Content-Security-Policy" content="default-src 'self' data:* gap://* tel:* 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'" />
 	<script type="text/javascript" src="./js/jquery-3.2.1.min.js"></script>
 	<script type="text/javascript" src="./js/parse.min.js"></script>
 	<link type="text/css" rel="stylesheet" href="./css/index.css">
@@ -21,123 +22,121 @@
 			<td id="imp_exp" class="menu_button"><img src="img/icons/png/003-import-export-arrows.png"/><br>IMP/EXP</td>
 		</tr>
 	</table>
-	<script>
-		$(document).on('deviceready', function(e){
-			console.log('device is ready');
-
-			function writeFile(fileEntry, dataObj=false) {
-			    // Create a FileWriter object for our FileEntry (log.txt).
-			    fileEntry.createWriter(function (fileWriter) {
-			    	console.log(fileWriter);
-			        fileWriter.onwriteend = function() {
-			            alert("File Written to Application Cache! - "+cordova.file.externalCacheDirectory);
-			        };
-
-			        fileWriter.onerror = function (e) {
-			            console.log("Failed to Write File: " + e.toString());
-			        };
-
-			        // If data object is not passed in,
-			        // create a new Blob instead.
-			        if (!dataObj) {
-			        	console.log('creating blob because blob did not exist');
-			            dataObj = new Blob(['BLOB'], { type: 'text/csv' });
-			        }
-			        else{
-			        	dataObj = new Blob([dataObj], { type: 'text/csv' });
-			        }
-			        fileWriter.write(dataObj);
-			    });
-			}
-
-			window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function (fs) {
-			   	window.file_system = fs;
-		        window.resolveLocalFileSystemURL(cordova.file.externalCacheDirectory , function(entry){
-		        	window.write_file = function write_file(filename, blob){
-				        entry.getFile(filename, { create: true, exclusive: false }, function (fileEntry) {
-
-					        // fileEntry.name == 'someFile.txt'
-					        //fileEntry.fullPath == '/someFile.txt'
-					        console.log(filename);
-					        writeFile(fileEntry, blob);
-
-					    }, function(err){
-					    	console.log('file could not be created'+err);
-					    });
-				    };
-			    },
-			    function(err){
-			    	console.log("Could not retrieve device filesystem");
-			    });
-			}, function(){console.log('fs load error')});
-		});
-		$(document).ready(function(){
-			Parse.initialize("ctdokDdZUkkDBdaKzRC5MJrx3t2hbXRQeiq2QWu4", "TitmnxPJ8jpt0WrvOsEGoZXmcgo1KAQIYCReRmWN");
-			Parse.serverURL = 'https://parseapi.back4app.com';
-
-			Parse.initialize('ctdokDdZUkkDBdaKzRC5MJrx3t2hbXRQeiq2QWu4', 'TitmnxPJ8jpt0WrvOsEGoZXmcgo1KAQIYCReRmWN', '3zf5ywzy3xeiONvk4UsYm56fRUS3zM3TzMBRjgiS');
-
-			// var Runner = Parse.Object.extend("runner");
-			// var runner = new Runner();
-			// runner.set("first_name", "Nunya");
-			// runner.set("last_name", "bidness");
-			// runner.save(null, {
-			// 	success: function(runner){
-			// 		alert("NEW OBJECT CREATED! YAY!");
-			// 	},
-			// 	error: function(runner, error){
-			// 		alert('failed to save runner object with error message: '+error.message);
-			// 	}
-			// });
-
-			//start of application
-			$.get( "./templates/timer.html", function( data ) {
-			  $('#content').html( data );
-			});
-			$('#timer').addClass('pressed');
-
-			//switch screens bottom menu
-			$('#timer').on('click', function(e){
-				$("#footer td").removeClass('pressed');
-				$('#timer').addClass('pressed');
-				$.get( "./templates/timer.html", function( data ) {
-				  $('#content').html( data );
-				});
-			});
-			$('#teams').on('click', function(e){
-				$("#footer td").removeClass('pressed');
-				$('#teams').addClass('pressed');
-				$.get( "./templates/teams.html", function( data ) {
-				  $('#content').html( data );
-				});
-			});
-			$('#results').on('click', function(e){
-				$("#footer td").removeClass('pressed');
-				$('#results').addClass('pressed');
-				$.get( "./templates/results.html", function( data ) {
-				  $('#content').html( data );
-				});
-			});
-			$('#imp_exp').on('click', function(e){
-				$("#footer td").removeClass('pressed');
-				$('#imp_exp').addClass('pressed');
-				$.get( "./templates/import_export.html", function( data ) {
-				  $('#content').html( data );
-				});
-			});
-			// $('body').on('scroll', function(e){
-			// 	e.preventDefault();
-			// })
-
-		});
-		function click_feedback(e){
-			$(e).css('opacity', '.5');
-			window.setTimeout(function(){
-				$(e).css('opacity', '1');
-			}, 100);
-		}
-
-	</script>
 </div>
 </body>
 </html>
+<script>
+	$(document).on('deviceready', function(e){
+		function writeFile(fileEntry, dataObj){
+		    // Create a FileWriter object for our FileEntry (log.txt).
+		    fileEntry.createWriter(function (fileWriter) {
+		    	console.log(fileWriter);
+		        fileWriter.onwriteend = function() {
+		            alert("File Written to Application Cache! - "+cordova.file.externalCacheDirectory);
+		        };
+
+		        fileWriter.onerror = function (e) {
+		            console.log("Failed to Write File: " + e.toString());
+		        };
+
+		        // If data object is not passed in,
+		        // create a new Blob instead.
+		        if (!dataObj) {
+		        	console.log('creating blob because blob did not exist');
+		            dataObj = new Blob(['BLOB'], { type: 'text/csv' });
+		        }
+		        else{
+		        	dataObj = new Blob([dataObj], { type: 'text/csv' });
+		        }
+		        fileWriter.write(dataObj);
+		    });
+		}
+
+		window.requestFileSystem(LocalFileSystem.PERSISTENT, 1024*1024, function(fs) {
+		   	window.file_system = fs;
+	        window.resolveLocalFileSystemURL(cordova.file.externalCacheDirectory , function(entry){
+	        	window.write_file = function write_file(filename, blob){
+			        entry.getFile(filename, { create: true, exclusive: false }, function(fileEntry) {
+
+				        // fileEntry.name == 'someFile.txt'
+				        //fileEntry.fullPath == '/someFile.txt'
+				        console.log(filename);
+				        writeFile(fileEntry, blob);
+
+				    }, function(err){
+				    	alert('file could not be created'+err);
+				    });
+			    };
+		    },
+		    function(err){
+		    	alert("Could not retrieve device filesystem");
+		    });
+		}, function(){alert('file system load error')});
+	});
+
+	$(document).ready(function(){
+		Parse.initialize("ctdokDdZUkkDBdaKzRC5MJrx3t2hbXRQeiq2QWu4", "TitmnxPJ8jpt0WrvOsEGoZXmcgo1KAQIYCReRmWN");
+		Parse.serverURL = 'https://parseapi.back4app.com';
+		Parse.initialize('ctdokDdZUkkDBdaKzRC5MJrx3t2hbXRQeiq2QWu4', 'TitmnxPJ8jpt0WrvOsEGoZXmcgo1KAQIYCReRmWN', '3zf5ywzy3xeiONvk4UsYm56fRUS3zM3TzMBRjgiS');
+
+		// var Runner = Parse.Object.extend("runner");
+		// var runner = new Runner();
+		// runner.set("first_name", "Nunya");
+		// runner.set("last_name", "bidness");
+		// runner.save(null, {
+		// 	success: function(runner){
+		// 		alert("NEW OBJECT CREATED! YAY!");
+		// 	},
+		// 	error: function(runner, error){
+		// 		alert('failed to save runner object with error message: '+error.message);
+		// 	}
+		// });
+
+		//start of application
+		$.get( "./templates/timer.html", function( data ) {
+		  	$('#content').html( data );
+		});
+		$('#timer').addClass('pressed');
+
+		//switch screens bottom menu
+		$('#timer').on('click', function(e){
+			$("#footer td").removeClass('pressed');
+			$('#timer').addClass('pressed');
+			$.get( "./templates/timer.html", function( data ) {
+			  $('#content').html( data );
+			});
+		});
+		$('#teams').on('click', function(e){
+			$("#footer td").removeClass('pressed');
+			$('#teams').addClass('pressed');
+			$.get( "./templates/teams.html", function( data ) {
+			  $('#content').html( data );
+			});
+		});
+		$('#results').on('click', function(e){
+			$("#footer td").removeClass('pressed');
+			$('#results').addClass('pressed');
+			$.get( "./templates/results.html", function( data ) {
+			  $('#content').html( data );
+			});
+		});
+		$('#imp_exp').on('click', function(e){
+			$("#footer td").removeClass('pressed');
+			$('#imp_exp').addClass('pressed');
+			$.get( "./templates/import_export.html", function( data ) {
+			  $('#content').html( data );
+			});
+		});
+		// $('body').on('scroll', function(e){
+		// 	e.preventDefault();
+		// })
+
+	});
+	function click_feedback(e){
+		$(e).css('opacity', '.5');
+		window.setTimeout(function(){
+			$(e).css('opacity', '1');
+		}, 100);
+	}
+
+</script>
