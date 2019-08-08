@@ -49,7 +49,7 @@
     <preference name="android-installLocation" value="auto" />
     <preference name="DisallowOverscroll" value="true" />
     <preference name="AndroidPersistentFileLocation" value="Internal" />
-    <preference name="iosPersistentFileLocation" value="Library" />
+    <preference name="iosPersistentFileLocation" value="Compatibility" />
     <preference name="StatusBarOverlaysWebView" value="false" />
     <preference name="StatusBarBackgroundColor" value="#000000" />
     <preference name="StatusBarStyle" value="lightcontent" />

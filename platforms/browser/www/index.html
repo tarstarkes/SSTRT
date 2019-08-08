@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta http-equiv="Content-Security-Policy" content="default-src 'self' data:* gap://* tel:* 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'" />
+	<meta http-equiv="Content-Security-Policy" content="http://cordova.apache.org default-src 'self' data:* gap://* tel:* 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'" />
 	<script type="text/javascript" src="./js/jquery-3.2.1.min.js"></script>
 	<script type="text/javascript" src="./js/parse.min.js"></script>
 	<link type="text/css" rel="stylesheet" href="./css/index.css">
@@ -52,7 +52,7 @@
 		    });
 		}
 
-		window.requestFileSystem(LocalFileSystem.PERSISTENT, 1024*1024, function(fs) {
+		window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fs) {
 		   	window.file_system = fs;
 	        window.resolveLocalFileSystemURL(cordova.file.externalCacheDirectory , function(entry){
 	        	window.write_file = function write_file(filename, blob){

@@ -62,7 +62,7 @@
     <platform name="winphone">
     </platform>
     <preference name="AndroidPersistentFileLocation" value="Internal" />
-    <preference name="iosPersistentFileLocation" value="Library" />
+    <preference name="iosPersistentFileLocation" value="Compatibility" />
     <access origin="*" />
     <allow-intent href="*" />
     <allow-navigation href="*" />
@@ -70,7 +70,8 @@
     <preference name="StatusBarBackgroundColor" value="#000000" />
     <preference name="StatusBarStyle" value="lightcontent" />
     <engine name="android" spec="~6.2.3" />
-    <plugin name="cordova-plugin-file" spec="~4.3.3" />
+    <plugin name="cordova-plugin-file" spec="~6.0.2" />
+    <!-- <plugin name="cordova-plugin-file" spec="~4.3.3" /> -->
     <!-- <plugin name="cordova-plugin-file-transfer" /> -->
     <plugin name="cordova-plugin-statusbar" spec="~2.2.3" />
     <plugin name="cordova-plugin-whitelist" spec="~1.3.2" />
