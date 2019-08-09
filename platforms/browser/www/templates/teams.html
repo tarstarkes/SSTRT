@@ -34,7 +34,7 @@
 			//logic error, there are no teams listed for the current race
 			$('#body').prepend('<p>There are currently no teams</p>');
 		}
-		$("#add_team").click(function(){
+		$("#add_team").on('click', function(){
 			//display the new team form, if clicked again, hides form
 			if($("#new_team_form").css('display') == "none"){
 				$('#new_team_form').show();
@@ -59,7 +59,7 @@
 		});
 
 		//SELECT TEAMS
-		$('.team_box').click(function(e){
+		$('.team_box').on('click', function(e){
 			if($(e.target).closest('div').css('opacity') == .5){
 				$(e.target).closest('div').removeClass('selected');
 			}
@@ -68,7 +68,7 @@
 			}
 		});
 
-		$('#delete_team').click(function(e){
+		$('#delete_team').on('click', function(e){
 			teams = JSON.parse(window.localStorage.getItem('teams'));
 			for(var j=0; j < $(".team_box.selected").length; j++){
 				console.log($(".team_box.selected").length);
@@ -85,7 +85,7 @@
 			window.localStorage.setItem('teams', JSON.stringify(teams));
 		});
 
-		$('#set_tst').click(function(){
+		$('#set_tst').on('click', function(){
 			teams = JSON.parse(window.localStorage.getItem('teams'));
 
 			if($('.team_box.selected').length > 0){
@@ -153,7 +153,7 @@
 				}, 500, function(){});
 
 				//Cancel button clicked
-				$('#cancel_set_time').click(function(){
+				$('#cancel_set_time').on('click', function(){
 					$('#set_time_box').animate({
 						top: '-50vh',
 						opacity: '.25'

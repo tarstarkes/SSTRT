@@ -109,7 +109,7 @@
 
 			show_table(string_data);
 
-			$('#file_download').click(function(){
+			$('#file_download').on('click', function(){
 				download_csv(filename, string_data);
 			});
 
@@ -258,7 +258,7 @@
 			export_to_csv(result);
 		};
 
-		$('#results').click(function(){
+		$('#results').on('click', function(){
 			var csv = get_results();
 		});
 	});

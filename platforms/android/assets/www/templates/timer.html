@@ -92,35 +92,10 @@
 		race_object = JSON.parse(window.localStorage.getItem('race'));
 		if(race_object != null && race_object.race_time != null){
 			var race = JSON.parse(window.localStorage.getItem('race'));
-			var datetime = race.race_time.split(', ');
-			//DATE
-			var date = datetime[0].split('/');
-			var month = date[0];
-			if(parseInt(month) < 10){
-				month = "0"+month;
-			}
-			var day = date[1];
-			if(parseInt(day) < 10){
-				day = "0"+day;
-			}
-			var year = date[2];
-			//TIME
-			var time = datetime[1].split(':');
-			var hour = time[0];
-			if(parseInt(hour) < 10){
-				hour = "0"+hour;
-			}
-			var minute = time[1];
-			var second = time[2].split(' ')[0];
-			var am_pm = time[2].split(' ')[1];
-			if(parseInt(hour) == 12 && am_pm == "AM"){
-				hour = "00";
-			}
-			else if(am_pm == "PM" && parseInt(hour) < 12){
-				hour = parseInt(hour) + 12;
-			}
-			final_date = year+"-"+month+"-"+day+"T"+hour+":"+minute+":"+second;
-			$('#race_time').val(final_date);
+			var date = new Date(race.race_time.replace(' at ', ', '));
+			var month = ((date.getMonth()+1) < 10) ? "0"+(date.getMonth()+1) : date.getMonth()+1;
+			var day = (date.getDate() < 10) ? "0"+(date.getDate()) : date.getDate();
+			$('#race_time').val(date.getFullYear()+"-"+month+"-"+day+"T"+date.toTimeString().split(' ')[0]);
 			check_duration();
 		}
 
@@ -147,7 +122,7 @@
 				$('#all_teams').append("<div class='team_box' id='"+t_bib+"'><center><p class='team_bib_number'>"+t_bib+"</p><p class='leg_time'>--:--</p></center></div>")
 			}
 			//SELECT TEAMS
-			$('.team_box').click(function(e){
+			$('.team_box').on('click', function(e){
 				if($(e.target).closest('div').css('opacity') == .5){
 					$(e.target).closest('div').removeClass('selected');
 				}
@@ -201,9 +176,11 @@
 		function start_clock(){
 			check_time();
 		}
-		start_clock();
+		window.setTimeout(function(){
+			start_clock();
+		}, 200);
 
-		$('#record_leg_manual').click(function(){
+		$('#record_leg_manual').on('click', function(){
 			teams = JSON.parse(window.localStorage.getItem('teams'));
 			if ($('#leg option:selected').val() != "Transition Station #"){
 				leg = parseInt($('#leg option:selected').val());
@@ -219,7 +196,7 @@
 				}, 500, function(){});
 
 				//Cancel button clicked
-				$('#cancel_set_time').click(function(){
+				$('#cancel_set_time').on('click', function(){
 					$('#set_time_box').animate({
 						top: '-50vh',
 						opacity: '.25'
@@ -230,7 +207,7 @@
 				});
 
 				//Set button clicked
-				$('#set_team_leg_time').click(function(){
+				$('#set_team_leg_time').on('click', function(){
 					var date = new Date($('#user_date').val()+'T'+$('#user_time').val());
 					var time = date.toLocaleString();
 					var bib;
@@ -274,7 +251,7 @@
 
 		});
 
-		$('#record_leg').click(function(){
+		$('#record_leg').on('click', function(){
 			teams = window.localStorage.getItem('teams');
 			teams = JSON.parse(window.localStorage.getItem('teams'));
 			if ($('#leg option:selected').val() != "Transition Station #"){
@@ -311,7 +288,7 @@
 			}
 		});
 
-		$('#clear_leg').click(function(){
+		$('#clear_leg').on('click', function(){
 			for(var i=0; i < $('.team_box.selected').length; i++){
 				$('.team_box.selected').children()[i].children[1].innerHTML = "--:--";
 			}
@@ -350,8 +327,10 @@
 		});
 
 		if(window.localStorage.getItem('current_leg') != null){
-			$('#leg option[val="'+window.localStorage.getItem('current_leg')+'"]').attr('selected', 'selected');
-			$('#leg').trigger("change");
+			// $('#leg option[val="'+window.localStorage.getItem('current_leg')+'"]').attr('selected', 'selected');
+			// $('#leg').trigger("change");
+			$('#leg').val(parseInt(window.localStorage.getItem('current_leg')));
+			$('#leg').trigger('change');
 		}
 
 	});

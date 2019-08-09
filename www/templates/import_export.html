@@ -172,7 +172,11 @@
 	$(document).ready(function(){
 		var race = JSON.parse(window.localStorage.getItem('race'));
 
-		$('#race_id').html(race.race_key);
+		//seems not to set the value on iOS, could be due to short lag between value retreival and use. 
+		//Added SetTimeout to delay line until 'race' is available.
+		window.setTimeout(function(){
+			$('#race_id').html(race.race_key);
+		}, 200);
 
 		function load_bar_width(val){
 			$($('#load_bar div')[0]).animate({
@@ -398,7 +402,7 @@
 			});
 		}
 
-		$('#export').click(function(e){
+		$('#export').on('click', function(e){
 			window.localStorage.setItem('legs_to_export', 0);
 			window.localStorage.setItem('current_legs_reported', 0);
 			var Race = Parse.Object.extend("race");
@@ -586,7 +590,7 @@
 				}
 			});
 		}
-		$('#import').click(function(){
+		$('#import').on('click', function(){
 			$('#import_key_form').animate({
 			    height: 'toggle',
 			  }, 500, function() {
@@ -630,7 +634,7 @@
 				window.localStorage.setItem('race', race);
 			}
 		}
-		$('#clear_device').click(function(e){
+		$('#clear_device').on('click', function(e){
 			yes_no = confirm("Are you sure you want to clear this device of all current data? This will not clear any data you have exported from this device.");
 			window.localStorage.removeItem('teams');
 			window.localStorage.removeItem('race');
