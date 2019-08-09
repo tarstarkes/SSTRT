@@ -40,144 +40,145 @@
 			</div>
 		</center>
 	</div>
-	<div>
+	<div style="font-family: 'Roboto-Thin'; font-size: 2vw;">
 		<p class="credit">Icons made by <a href="https://smashicons.com/">Smashicons</a>, <a href="http://www.freepik.com/">Freepik</a>, <a href="https://www.flaticon.com/authors/icomoon">Icomoon</a>, <a href="https://www.flaticon.com/authors/icon-works">Icon Works</a>, <a href="https://www.flaticon.com/authors/kirill-kazachek">Kirill Kazachek</a>, <a href="https://www.flaticon.com/authors/yannick">Yannick</a>, <a href="https://www.flaticon.com/authors/pixelmeetup">Pixelmeetup</a>, and <a href="https://www.flaticon.com/authors/google">Google</a>, <a href="https://www.flaticon.com/authors/geotatah">Geotatah</a></p>
 	</div>
-	<style>
-		@keyframes lds-gear {
-		  0% {
-		    -webkit-transform: rotate(0deg);
-		    transform: rotate(0deg);
-		  }
-		  50% {
-		    -webkit-transform: rotate(180deg);
-		    transform: rotate(180deg);
-		  }
-		  100% {
-		    -webkit-transform: rotate(360deg);
-		    transform: rotate(360deg);
-		  }
-		}
-		@-webkit-keyframes lds-gear {
-		  0% {
-		    -webkit-transform: rotate(0deg);
-		    transform: rotate(0deg);
-		  }
-		  50% {
-		    -webkit-transform: rotate(180deg);
-		    transform: rotate(180deg);
-		  }
-		  100% {
-		    -webkit-transform: rotate(360deg);
-		    transform: rotate(360deg);
-		  }
-		}
-		.lds-gear > div {
-		  -webkit-transform-origin: 100px 100px;
-		  transform-origin: 100px 100px;
-		  -webkit-animation: lds-gear 1s infinite linear;
-		  animation: lds-gear 1s infinite linear;
-		  position: relative;
-		}
-		.lds-gear > div div {
-		  position: absolute;
-		  width: 26px;
-		  height: 192px;
-		  background: #ef5902;
-		  left: 100px;
-		  top: 100px;
-		  -webkit-transform: translate(-50%, -50%);
-		  transform: translate(-50%, -50%);
-		}
-		.lds-gear > div div:nth-child(1) {
-		  width: 152px;
-		  height: 152px;
-		  border-radius: 50%;
-		}
-		.lds-gear > div div:nth-child(3) {
-		  -webkit-transform: translate(-50%, -50%) rotate(30deg);
-		  transform: translate(-50%, -50%) rotate(30deg);
-		}
-		.lds-gear > div div:nth-child(4) {
-		  -webkit-transform: translate(-50%, -50%) rotate(60deg);
-		  transform: translate(-50%, -50%) rotate(60deg);
-		}
-		.lds-gear > div div:nth-child(5) {
-		  -webkit-transform: translate(-50%, -50%) rotate(90deg);
-		  transform: translate(-50%, -50%) rotate(90deg);
-		}
-		.lds-gear > div div:nth-child(6) {
-		  -webkit-transform: translate(-50%, -50%) rotate(120deg);
-		  transform: translate(-50%, -50%) rotate(120deg);
-		}
-		.lds-gear > div div:nth-child(7) {
-		  -webkit-transform: translate(-50%, -50%) rotate(150deg);
-		  transform: translate(-50%, -50%) rotate(150deg);
-		}
-		.lds-gear > div div:nth-child(8) {
-		  width: 80px;
-		  height: 80px;
-		  background: #fff;
-		  border-radius: 50%;
-		}
-		.lds-gear {
-		  width: 59px !important;
-		  height: 59px !important;
-		  -webkit-transform: translate(-29.5px, -29.5px) scale(0.295) translate(29.5px, 29.5px);
-		  transform: translate(-29.5px, -29.5px) scale(0.295) translate(29.5px, 29.5px);
-		}
-		#clear_device,
-		#import,
-		#export{
-			display: block;
-			margin-top: 4vw;
-			margin-bottom: 4vw; 
-			padding: 4vw;
-			font-size: 5vw
-		}
-		#load_bar_label,
-		#race_id_label{
-			margin-top:4vw;
-			margin-bottom:0;
-			font-size:4vw;
-		}
-		#race_id{
-			margin-bottom:4vw;
-			font-size: 6vw;
-		}
-		#percent{
-			color: white;
-		}
-		#import_key_form{
-			background: lightgray;
-			padding:4vw;
-		}
-		#import_key_form input{
-			font-size: 6vw;
-			padding: 2vw;
-		}
-		#import_key_form button{
-			margin-top:2vw;
-			font-size: 6vw;
-			padding: 2vw;
-			background: black;
-			color: white;
-		}
-		.credit{
-			font-size: 8pt;
-		}
-	</style>
 </div>
+<style>
+	@keyframes lds-gear {
+	  0% {
+	    -webkit-transform: rotate(0deg);
+	    transform: rotate(0deg);
+	  }
+	  50% {
+	    -webkit-transform: rotate(180deg);
+	    transform: rotate(180deg);
+	  }
+	  100% {
+	    -webkit-transform: rotate(360deg);
+	    transform: rotate(360deg);
+	  }
+	}
+	@-webkit-keyframes lds-gear {
+	  0% {
+	    -webkit-transform: rotate(0deg);
+	    transform: rotate(0deg);
+	  }
+	  50% {
+	    -webkit-transform: rotate(180deg);
+	    transform: rotate(180deg);
+	  }
+	  100% {
+	    -webkit-transform: rotate(360deg);
+	    transform: rotate(360deg);
+	  }
+	}
+	.lds-gear > div {
+	  -webkit-transform-origin: 100px 100px;
+	  transform-origin: 100px 100px;
+	  -webkit-animation: lds-gear 1s infinite linear;
+	  animation: lds-gear 1s infinite linear;
+	  position: relative;
+	}
+	.lds-gear > div div {
+	  position: absolute;
+	  width: 26px;
+	  height: 192px;
+	  background: #ef5902;
+	  left: 100px;
+	  top: 100px;
+	  -webkit-transform: translate(-50%, -50%);
+	  transform: translate(-50%, -50%);
+	}
+	.lds-gear > div div:nth-child(1) {
+	  width: 152px;
+	  height: 152px;
+	  border-radius: 50%;
+	}
+	.lds-gear > div div:nth-child(3) {
+	  -webkit-transform: translate(-50%, -50%) rotate(30deg);
+	  transform: translate(-50%, -50%) rotate(30deg);
+	}
+	.lds-gear > div div:nth-child(4) {
+	  -webkit-transform: translate(-50%, -50%) rotate(60deg);
+	  transform: translate(-50%, -50%) rotate(60deg);
+	}
+	.lds-gear > div div:nth-child(5) {
+	  -webkit-transform: translate(-50%, -50%) rotate(90deg);
+	  transform: translate(-50%, -50%) rotate(90deg);
+	}
+	.lds-gear > div div:nth-child(6) {
+	  -webkit-transform: translate(-50%, -50%) rotate(120deg);
+	  transform: translate(-50%, -50%) rotate(120deg);
+	}
+	.lds-gear > div div:nth-child(7) {
+	  -webkit-transform: translate(-50%, -50%) rotate(150deg);
+	  transform: translate(-50%, -50%) rotate(150deg);
+	}
+	.lds-gear > div div:nth-child(8) {
+	  width: 80px;
+	  height: 80px;
+	  background: #fff;
+	  border-radius: 50%;
+	}
+	.lds-gear {
+	  width: 59px !important;
+	  height: 59px !important;
+	  -webkit-transform: translate(-29.5px, -29.5px) scale(0.295) translate(29.5px, 29.5px);
+	  transform: translate(-29.5px, -29.5px) scale(0.295) translate(29.5px, 29.5px);
+	}
+	#clear_device,
+	#import,
+	#export{
+		display: block;
+		margin-top: 4vw;
+		margin-bottom: 4vw; 
+		padding: 4vw;
+		font-size: 5vw
+	}
+	#load_bar_label,
+	#race_id_label{
+		margin-top:4vw;
+		margin-bottom:0;
+		font-size:4vw;
+	}
+	#race_id{
+		margin-bottom:4vw;
+		font-size: 6vw;
+	}
+	#percent{
+		color: white;
+	}
+	#import_key_form{
+		background: lightgray;
+		padding:4vw;
+	}
+	#import_key_form input{
+		font-size: 6vw;
+		padding: 2vw;
+	}
+	#import_key_form button{
+		margin-top:2vw;
+		font-size: 6vw;
+		padding: 2vw;
+		background: black;
+		color: white;
+	}
+	.credit{
+		font-size: 8pt;
+	}
+</style>
 <script>
-	$(document).ready(function(){
-		var race = JSON.parse(window.localStorage.getItem('race'));
+	var race = JSON.parse(window.localStorage.getItem('race'));
+	//seems not to set the value on iOS, could be due to short lag between value retreival and use. 
+	//Added SetTimeout to delay line until 'race' is available.
+	window.setTimeout(function(){
+		$('#race_id').html(race.race_key);
+	}, 200);
 
-		//seems not to set the value on iOS, could be due to short lag between value retreival and use. 
-		//Added SetTimeout to delay line until 'race' is available.
-		window.setTimeout(function(){
-			$('#race_id').html(race.race_key);
-		}, 200);
 
+
+	$('#body').ready(function(){
 		function load_bar_width(val){
 			$($('#load_bar div')[0]).animate({
 			    width: val,

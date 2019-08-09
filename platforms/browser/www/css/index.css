@@ -162,7 +162,8 @@ p#tst{
     -webkit-border-radius: 1vw;
     -moz-border-radius: 1vw;
     padding: 1vw;
-    text-align-last: center;
+    text-align-last: center !important;
+    text-align-last: -webkit-center !important;
 }
 #leg option{
 	width:25vw;

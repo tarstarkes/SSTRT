@@ -138,40 +138,46 @@
 		}
 
 		function check_duration(){
-			window.setTimeout(function(){
-				var datenow = Date.now();
-				start = $('#race_time').val().split(/[- :T]/);
+			if($('#race_time') != undefined){
+				if($('#racetime').val() != undefined){
+					window.setTimeout(function(){
+						var datenow = Date.now();
+						start = $('#race_time').val().split(/[- :T]/);
 
-				var start_time = new Date(start[0], start[1]-1, start[2], start[3], start[4], start[5]);
+						var start_time = new Date(start[0], start[1]-1, start[2], start[3], start[4], start[5]);
 
-				start_time = Date.parse(start_time);
-				if (datenow > start_time){
-					duration = datenow - start_time;
+						start_time = Date.parse(start_time);
+						if (datenow > start_time){
+							duration = datenow - start_time;
+						}
+						else{
+							duration = start_time - datenow;
+						}
+
+					    var seconds = parseInt((duration/1000)%60);
+					    var minutes = parseInt((duration/(1000*60))%60);
+					    var hours = parseInt((duration/(1000*60*60))%24);
+					    var days = parseInt((duration/(1000*60*60*24)));
+
+					    hours = (hours < 10) ? "0" + hours : hours;
+					    minutes = (minutes < 10) ? "0" + minutes : minutes;
+					    seconds = (seconds < 10) ? "0" + seconds : seconds;
+
+						$("#race_duration").html(days + "&nbsp&nbsp&nbsp&nbsp" + hours + "&nbsp&nbsp&nbsp&nbsp" + minutes + "&nbsp&nbsp&nbsp&nbsp" + seconds);
+						check_duration();
+					}, 500);
 				}
-				else{
-					duration = start_time - datenow;
-				}
-
-			    var seconds = parseInt((duration/1000)%60);
-			    var minutes = parseInt((duration/(1000*60))%60);
-			    var hours = parseInt((duration/(1000*60*60))%24);
-			    var days = parseInt((duration/(1000*60*60*24)));
-
-			    hours = (hours < 10) ? "0" + hours : hours;
-			    minutes = (minutes < 10) ? "0" + minutes : minutes;
-			    seconds = (seconds < 10) ? "0" + seconds : seconds;
-
-				$("#race_duration").html(days + "&nbsp&nbsp&nbsp&nbsp" + hours + "&nbsp&nbsp&nbsp&nbsp" + minutes + "&nbsp&nbsp&nbsp&nbsp" + seconds);
-				check_duration();
-			}, 500);
+			}
 		}
 
 		function check_time(){
-			window.setTimeout(function(){
-				var date = new Date(Date.now());
-				$("#clock p").html(date.toLocaleString());
-				check_time();
-			}, 100);
+			if($('#clock p') != undefined){
+				window.setTimeout(function(){
+					var date = new Date(Date.now());
+					$("#clock p").html(date.toLocaleString());
+					check_time();
+				}, 100);
+			}
 		}
 		function start_clock(){
 			check_time();
