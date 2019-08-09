@@ -162,7 +162,7 @@
 					    minutes = (minutes < 10) ? "0" + minutes : minutes;
 					    seconds = (seconds < 10) ? "0" + seconds : seconds;
 
-						document.getElementById('race_duration').innerHTML = days + "&nbsp&nbsp&nbsp&nbsp" + hours + "&nbsp&nbsp&nbsp&nbsp" + minutes + "&nbsp&nbsp&nbsp&nbsp" + seconds);
+						document.getElementById('race_duration').innerHTML = (days + "&nbsp&nbsp&nbsp&nbsp" + hours + "&nbsp&nbsp&nbsp&nbsp" + minutes + "&nbsp&nbsp&nbsp&nbsp" + seconds);
 						check_duration();
 					}, 500);
 				}
@@ -173,7 +173,7 @@
 			if($('#clock p') != undefined){
 				window.setTimeout(function(){
 					var date = new Date(Date.now());
-					document.getElementById('clock p').innerHTML = date.toLocaleString());
+					document.getElementById('clock p').innerHTML = date.toLocaleString();
 					check_time();
 				}, 100);
 			}
@@ -341,3 +341,4 @@
 	});
 
 </script>
+</div>
