@@ -318,10 +318,8 @@
 		function show_race_key(){
 			//seems not to set the value on iOS, could be due to short lag between value retreival and use. 
 			//Added SetTimeout to delay line until 'race' is available.
-			window.setTimeout(function(e){
-				var race = JSON.parse(window.localStorage.getItem('race'));
-				document.getElementById("race_id").innerHTML = race.race_key;
-			}, 500);
+			var race = JSON.parse(window.localStorage.getItem('race'));
+			document.getElementById("race_id").innerHTML = race.race_key;
 		}
 		show_race_key();
 
