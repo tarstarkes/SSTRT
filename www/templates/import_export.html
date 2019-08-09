@@ -268,49 +268,6 @@
 			});
 		}
 
-		$('#export').on('click', function(e){
-			window.localStorage.setItem('legs_to_export', 0);
-			window.localStorage.setItem('current_legs_reported', 0);
-			var Race = Parse.Object.extend("race");
-			var race = new Race();
-			var r = JSON.parse(window.localStorage.getItem('race'));
-			$('#load_bar').show();
-			//EXPORT RACE OBJECT
-			//Test 1. Do we have data to upload?
-			//Test 2. Does some/all of this data already exist on the server?
-			//Teat 3. Does the user wish to overwrite the data if there is any already saved
-			var race_query = new Parse.Query(Race);
-			race_query.equalTo("race_key", r.race_key);
-			race_query.find({
-				success: function(results){
-					var object;
-					if(results.length > 0){
-						for (var i = 0; i < results.length; i++){
-							object = results[i];
-					    }
-					    if(object.attributes.race_start_time != r.race_time){
-					    	yes_no = confirm('There is already a starting race time set for this race, would you like to overwrite it?');
-					    	export_race(r, object);
-					    }
-					}else{
-						export_race(r, race);
-					}
-					teams_export(object);
-					load_bar_width('100%');
-					setTimeout(function(e){
-						$('#load_bar').hide();
-					}, 500)
-					console.log("Full Export Operation Successful!");
-				},
-				error: function(error){
-					alert('Failed to export data: '+error.message);
-					document.getElementById('percent').innerHTML = '0%';
-					$($('#load_bar div')[0]).css('width', 0);
-					$('#load_bar').hide();
-				}
-			});
-		});
-
 		//END RACE EXPORT ---------------------------------------------
 </script>
 
@@ -484,6 +441,50 @@
 			if(yes_no == true){
 				import_data(race_key);
 			}
+		});
+
+		$('#export').on('click', function(e){
+			alert('exporting');
+			window.localStorage.setItem('legs_to_export', 0);
+			window.localStorage.setItem('current_legs_reported', 0);
+			var Race = Parse.Object.extend("race");
+			var race = new Race();
+			var r = JSON.parse(window.localStorage.getItem('race'));
+			$('#load_bar').show();
+			//EXPORT RACE OBJECT
+			//Test 1. Do we have data to upload?
+			//Test 2. Does some/all of this data already exist on the server?
+			//Teat 3. Does the user wish to overwrite the data if there is any already saved
+			var race_query = new Parse.Query(Race);
+			race_query.equalTo("race_key", r.race_key);
+			race_query.find({
+				success: function(results){
+					var object;
+					if(results.length > 0){
+						for (var i = 0; i < results.length; i++){
+							object = results[i];
+					    }
+					    if(object.attributes.race_start_time != r.race_time){
+					    	yes_no = confirm('There is already a starting race time set for this race, would you like to overwrite it?');
+					    	export_race(r, object);
+					    }
+					}else{
+						export_race(r, race);
+					}
+					teams_export(object);
+					load_bar_width('100%');
+					setTimeout(function(e){
+						$('#load_bar').hide();
+					}, 500)
+					console.log("Full Export Operation Successful!");
+				},
+				error: function(error){
+					alert('Failed to export data: '+error.message);
+					document.getElementById('percent').innerHTML = '0%';
+					$($('#load_bar div')[0]).css('width', 0);
+					$('#load_bar').hide();
+				}
+			});
 		});
 
 
