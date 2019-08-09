@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta http-equiv="Content-Security-Policy" content="default-src 'self' data:* gap://* tel:* 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'" />
+	<meta http-equiv="Content-Security-Policy" content="http://cordova.apache.org default-src 'self' data:* gap://* tel:* 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'" />
 	<script type="text/javascript" src="./js/jquery-3.2.1.min.js"></script>
 	<script type="text/javascript" src="./js/parse.min.js"></script>
 	<link type="text/css" rel="stylesheet" href="./css/index.css">
@@ -23,6 +23,8 @@
 		</tr>
 	</table>
 </div>
+</body>
+</html>
 <script>
 	$(document).on('deviceready', function(e){
 		function writeFile(fileEntry, dataObj){
@@ -52,7 +54,7 @@
 
 		window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fs) {
 		   	window.file_system = fs;
-	        window.resolveLocalFileSystemURL(cordova.file.dataDirectory, function(entry){
+	        window.resolveLocalFileSystemURL(cordova.file.externalCacheDirectory , function(entry){
 	        	window.write_file = function write_file(filename, blob){
 			        entry.getFile(filename, { create: true, exclusive: false }, function(fileEntry) {
 
@@ -67,7 +69,7 @@
 			    };
 		    },
 		    function(err){
-		    	alert("Could not retrieve device filesystem: "+err);
+		    	alert("Could not retrieve device filesystem");
 		    });
 		}, function(){alert('file system load error')});
 	});
@@ -92,7 +94,7 @@
 
 		//start of application
 		$.get( "./templates/timer.html", function( data ) {
-		  	document.getElementById('content').innerHTML = data;
+		  	$('#content').html( data );
 		});
 		$('#timer').addClass('pressed');
 
@@ -101,28 +103,28 @@
 			$("#footer td").removeClass('pressed');
 			$('#timer').addClass('pressed');
 			$.get( "./templates/timer.html", function( data ) {
-			  document.getElementById('content').innerHTML =  data;
+			  $('#content').html( data );
 			});
 		});
 		$('#teams').on('click', function(e){
 			$("#footer td").removeClass('pressed');
 			$('#teams').addClass('pressed');
 			$.get( "./templates/teams.html", function( data ) {
-			  document.getElementById('content').innerHTML = data;
+			  $('#content').html( data );
 			});
 		});
 		$('#results').on('click', function(e){
 			$("#footer td").removeClass('pressed');
 			$('#results').addClass('pressed');
 			$.get( "./templates/results.html", function( data ) {
-			  document.getElementById('content').innerHTML = data;
+			  $('#content').html( data );
 			});
 		});
 		$('#imp_exp').on('click', function(e){
 			$("#footer td").removeClass('pressed');
 			$('#imp_exp').addClass('pressed');
 			$.get( "./templates/import_export.html", function( data ) {
-			  document.getElementById('content').innerHTML = data;
+			  $('#content').html( data );
 			});
 		});
 		// $('body').on('scroll', function(e){
@@ -138,5 +140,3 @@
 	}
 
 </script>
-</body>
-</html>
