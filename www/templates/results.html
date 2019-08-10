@@ -204,10 +204,14 @@
 			result=result+newLine;
 
 			//TEAM RACE RESULTS
+			alert(team_data[1].leg_time[2]);
 			for(var x=0; x < 36;x++){
 				result = result+(x+1)+columnDelimiter
 				for(var i=0; i < team_data.length;i++){
-					if(team_data[i].leg_time[x+1] != undefined){
+					if(team_data[i].leg_time == undefined){
+						team_data[i].leg_time = [];
+					}
+					if(team_data[i] != null && team_data[i].leg_time[(x+1)] != undefined){
 						time_format = $('#time_format')[0].checked
 						if(time_format == true){
 							if(team_data[i].team_start_time != null){
@@ -236,6 +240,9 @@
 			//FINAL RACE RESULTS
 			result = result+"Final,"
 			for(var i=0; i < team_data.length;i++){
+				if(team_data[i].leg_time == undefined){
+					team_data[i].leg_time = [];
+				}
 				if(team_data[i].leg_time[36] != undefined){
 					if(team_data[i].team_start_time != null){	
 						result = result+get_time_diff(team_data[i].leg_time[36], team_data[i].team_start_time);
