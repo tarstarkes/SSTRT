@@ -78,6 +78,9 @@
 			$('#race_data').html(table_string);
 			$('#race_data').show();
 		}
+		function onErrorLoadFs(){
+			console.log('Error occurred writing file');
+		}
 		function export_to_csv(results){
 			var race = JSON.parse(window.localStorage.getItem('race'))
 			var filename = "Results"+race.race_key+'.csv';
@@ -110,7 +113,23 @@
 			show_table(string_data);
 
 			$('#file_download').on('click', function(){
-				download_csv(filename, string_data);
+				window.resolveLocalFileSystemURL(cordova.file.dataDirectory, function (dirEntry){
+					console.log('file system open: '+dirEntry.name);
+
+					fileEntry.createWriter(function (fileWriter){
+						dataObj = new Blob(string_data, { type: 'text/plain' });
+						fileWriter.seek(fileWriter.length);
+
+						fileWriter.onerror = function(err){
+							alert('Failed to write file: '+err.toString());
+						}
+
+						fileWriter.write(dataObj);
+
+					});
+					alert('File Downloaded '+dirEntry.fullPath);
+					//download_csv(filename, string_data);
+				}, onErrorLoadFs());
 			});
 
 		}
@@ -204,7 +223,6 @@
 			result=result+newLine;
 
 			//TEAM RACE RESULTS
-			alert(team_data[1].leg_time[2]);
 			for(var x=0; x < 36;x++){
 				result = result+(x+1)+columnDelimiter
 				for(var i=0; i < team_data.length;i++){

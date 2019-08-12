@@ -137,9 +137,9 @@
 		}
 
 		function check_duration(){
-			if($('#race_time') != undefined){
-				if($('#race_time').val() != undefined){
-					window.setTimeout(function(){
+			window.setTimeout(function(){
+				if($('#race_time') != undefined){
+					if($('#race_time').val() != undefined){
 						var datenow = Date.now();
 						start = $('#race_time').val().split(/[- :T]/);
 
@@ -164,9 +164,9 @@
 
 						$("#race_duration").html(days + "&nbsp&nbsp&nbsp&nbsp" + hours + "&nbsp&nbsp&nbsp&nbsp" + minutes + "&nbsp&nbsp&nbsp&nbsp" + seconds);
 						check_duration();
-					}, 500);
+					}
 				}
-			}
+			}, 500);
 		}
 
 		function check_time(){
