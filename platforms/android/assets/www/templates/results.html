@@ -100,6 +100,13 @@
 			//download_csv(filename, string_data);			
 		}
 
+		function createFile(direEntry, filename, string_data){
+			dirEntry.getFile(filename, {create: true, exclusive: false}, function(fileEntry){
+				write_to_file(fileEntry, string_data);
+				alert('Writing File...');
+			}, onErrorLoadFs());
+		}
+
 		function export_to_csv(results){
 			var race = JSON.parse(window.localStorage.getItem('race'))
 			var filename = "Results"+race.race_key+'.csv';
@@ -132,11 +139,9 @@
 			show_table(string_data);
 
 			$('#file_download').on('click', function(){
-				var x = window.resolveLocalFileSystemURL(cordova.file.dataDirectory, function(dirEntry){
-					alert('TESTING');
+				window.resolveLocalFileSystemURL(cordova.file.dataDirectory, function(dirEntry){
+					createFile(dirEntry, filename, string_data);
 				}, onErrorLoadFs);
-				alert(x);
-
 			});
 
 		}
