@@ -107,7 +107,7 @@
 			dirEntry.getFile(filename, {create: true, exclusive: false}, function(fileEntry){
 				write_to_file(fileEntry, string_data);
 				console.log("directory secured, writing file...");
-			}, onErrorLoadFs());
+			}, onErrorLoadFs;
 		}
 
 		function export_to_csv(results){
@@ -142,10 +142,10 @@
 			show_table(string_data);
 
 			$('#file_download').on('click', function(){
-				window.resolveLocalFileSystemURL(cordova.file.dataDirectory, function(dirEntry){
+				window.resolveLocalFileSystemURL("file:///storage/self/primary/documents/", function(dirEntry){
 					createFile(dirEntry, filename, string_data);
 					console.log("creating file...");
-				}, onErrorLoadFs());
+				}, onErrorLoadFs;
 			});
 
 		}

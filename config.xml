@@ -58,6 +58,7 @@
         <icon qualifier="xhdpi" src="xhdpi.png" />
         <icon qualifier="xxhdpi" src="xxhdpi.png" />
         <icon qualifier="xxxhdpi" src="xxxhdpi.png" />
+        <icon src="1024x1024.png"/>
     </platform>
     <platform name="winphone">
     </platform>
