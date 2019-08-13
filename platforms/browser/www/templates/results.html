@@ -100,7 +100,7 @@
 			//download_csv(filename, string_data);			
 		}
 
-		function createFile(direEntry, filename, string_data){
+		function createFile(dirEntry, filename, string_data){
 			dirEntry.getFile(filename, {create: true, exclusive: false}, function(fileEntry){
 				write_to_file(fileEntry, string_data);
 				alert('Writing File...');
