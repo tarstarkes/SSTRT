@@ -83,19 +83,21 @@
 		}
 
 		function write_to_file(fileEntry, string_data){
+			console.log("fileEntry is: "+fileEntry);
+			console.log("string_data is: "+string_data);
 			fileEntry.createWriter(function (fileWriter){
 				fileWriter.onwriteend = function(){
 					alert('File written to: '+fileEntry.fullPath);
 				}
 
-				dataObj = new Blob(["blah blah blah"], { type: 'text/plain' });
+				dataObj = new Blob([string_data], { type: 'text/csv' });
+				console.log("dataObj is: "+dataObj);
 
 				fileWriter.onerror = function(err){
 					alert('Failed to write file: '+err.toString());
 				}
 
-				var x = fileWriter.write(dataObj);
-				console.log('fileWriter: '+x);
+				fileWriter.write(dataObj);
 
 			});
 			//download_csv(filename, string_data);			
@@ -104,7 +106,7 @@
 		function createFile(dirEntry, filename, string_data){
 			dirEntry.getFile(filename, {create: true, exclusive: false}, function(fileEntry){
 				write_to_file(fileEntry, string_data);
-				alert('Writing File...');
+				console.log("directory secured, writing file...");
 			}, onErrorLoadFs());
 		}
 
@@ -142,7 +144,8 @@
 			$('#file_download').on('click', function(){
 				window.resolveLocalFileSystemURL(cordova.file.dataDirectory, function(dirEntry){
 					createFile(dirEntry, filename, string_data);
-				}, onErrorLoadFs);
+					console.log("creating file...");
+				}, onErrorLoadFs());
 			});
 
 		}
