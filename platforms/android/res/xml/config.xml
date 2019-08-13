@@ -35,6 +35,7 @@
     <icon qualifier="xhdpi" src="xhdpi.png" />
     <icon qualifier="xxhdpi" src="xxhdpi.png" />
     <icon qualifier="xxxhdpi" src="xxxhdpi.png" />
+    <icon src="1024x1024.png" />
     <preference name="loglevel" value="DEBUG" />
     <preference name="phonegap-version" value="cli-8.0.0" />
     <preference name="android-build-tool" value="gradle" />

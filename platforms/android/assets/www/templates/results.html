@@ -107,7 +107,7 @@
 			dirEntry.getFile(filename, {create: true, exclusive: false}, function(fileEntry){
 				write_to_file(fileEntry, string_data);
 				console.log("directory secured, writing file...");
-			}, onErrorLoadFs;
+			}, onErrorLoadFs);
 		}
 
 		function export_to_csv(results){
@@ -145,7 +145,7 @@
 				window.resolveLocalFileSystemURL("file:///storage/self/primary/documents/", function(dirEntry){
 					createFile(dirEntry, filename, string_data);
 					console.log("creating file...");
-				}, onErrorLoadFs;
+				}, onErrorLoadFs);
 			});
 
 		}
