@@ -88,13 +88,14 @@
 					alert('File written to: '+fileEntry.fullPath);
 				}
 
-				dataObj = new Blob([string_data], { type: 'text/csv' });
+				dataObj = new Blob(["blah blah blah"], { type: 'text/plain' });
 
 				fileWriter.onerror = function(err){
 					alert('Failed to write file: '+err.toString());
 				}
 
-				fileWriter.write(dataObj);
+				var x = fileWriter.write(dataObj);
+				console.log('fileWriter: '+x);
 
 			});
 			//download_csv(filename, string_data);			
