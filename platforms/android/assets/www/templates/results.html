@@ -132,9 +132,10 @@
 			show_table(string_data);
 
 			$('#file_download').on('click', function(){
-				window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fs){
-					fs.root.getFile(filename, {create: true, exclusive: false}, function(fileEntry){
-						write_to_file(fileEntry, string_data);
+				window.requestFileSystem(LocalFileSystem.PERSISTENT, 5*1024*1024, function(fs){
+					fs.root.getFile("sstrt-simple-log.txt", {create: true, exclusive: false}, function(fileEntry){
+						//write_to_file(fileEntry, string_data);
+						alert('log file created');
 					});
 				}, onErrorLoadFs());
 
